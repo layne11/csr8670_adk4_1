@@ -1,0 +1,20 @@
+
+VARIANTS :=  all  all_removable_mic
+
+# Include DEBUG
+CFLAGS_debug := -DDEBUG_PRINT_ENABLED
+
+# Include all CVC variants and stereo mode
+CFLAGS_all := -DCVC_ALL
+
+# Include all variants with debug
+CFLAGS_all_debug := -DCVC_ALL -DDEBUG_PRINT_ENABLED
+
+# Include all CVC variants and stereo mode and ANC
+CFLAGS_all_anc := -DANC -DCVC_ALL
+
+# Include all variants and ANC with debug
+CFLAGS_all_anc_debug := -DANC -DCVC_ALL -DDEBUG_PRINT_ENABLED
+
+# include all variants and changes required for removable support
+CFLAGS_all_removable_mic := -DCVC_ALL -DREMOVABLE_MIC

@@ -1,0 +1,44 @@
+// This file contains keys that are needed for multi-channel I2S on the H13596v1 plug-in board.
+// It should be merged after the appropriate configuration files for the board in use have been merged.
+
+// By default it sends Primary L&R to I2S_1, Secondary L&R to IS2_2, Aux L&R to the DAC,
+// and uses the speaker outputs of the I2S amplifiers rather than the headphone outputs.
+
+// The user is responsible for setting up the following via the configuration tool:
+// - Enable "Force Re-Sampling of Tones" in "Audio Plugin Features"
+// - Disable "Amplifier Power Down By PIO" in "Audio Plugin Features"
+// - To use the headphone output of the I2S chips see USR 36 - CONFIG_I2S_INIT_DATA *
+
+// USR 35 - CONFIG_I2S_INIT_CONFIGURATION
+&02AD = 0001 0110 3c0a 0000 0232 0008 0030 00ff 0000 0000 0040 0000
+
+// USR 36 - CONFIG_I2S_INIT_DATA
+//
+// Startup Commands
+//  0x001b = 0000   Select factory oscillator trim
+//  0x0004 = 0003   Set mode to 16-bit I2S
+//  0x000e = 0093   Set volume ramp to minimum delay (ramping is done on host)
+//  0x0005 = 0000   Exit all-channel shutdown *(Change this to 0010 to enable headphone output)
+//  0x0007 = 0030   Master volume unmute (0dB)
+//
+// Shutdown Commands
+//  0x0005 = 0040   Enter all-channel shutdown *(Change this to 0050 to enable headphone output)
+//
+// All commands sent to both I2S amplifier addresses alternately:
+//  I2S_1 = 0x0054
+//  I2S_2 = 0x0056
+//
+// See TAS5715 data sheet for further details of the commands.
+// They are stored in sequence as groups of 5 words, in the format:
+//  Length (including addresses), Volume offset, I2C address, Register address, Data
+//
+&02AE = 0003 0000 0054 001b 0000   0003 0000 0056 001b 0000   0003 0000 0054 0004 0003   0003 0000 0056 0004 0003   0003 0000 0054 000e 0093   0003 0000 0056 000e 0093   0003 0000 0054 0005 0000   0003 0000 0056 0005 0000   0003 0000 0054 0007 0030   0003 0000 0056 0007 0030   0003 0000 0054 0005 0040   0003 0000 0056 0005 0040
+
+// USR 43 - CONFIG_MULTI_CHANNEL_AUDIO
+&02B5 = 0023 0025 0029 0005 0000 0000 0000 0000 0000 0000 0000 0000 0000
+
+// I2C SCL PIO Mapping
+&25f9 = 0000
+
+// I2C SDA PIO Mapping
+&25fa = 0001

@@ -1,0 +1,269 @@
+; Installation inf for the CSR Casira Bluetooth Module
+;
+; Copyright © 2006-2011 Cambridge Silicon Radio Ltd.
+;
+
+
+[Version]
+Signature="$Windows NT$"
+Class=USB
+ClassGUID={36fc9e60-c465-11cf-8056-444553540000}
+Provider=%CSR%
+DriverVer=02/03/2011,2.4.0.0
+CatalogFile=CSRBlueCoreUSB.cat
+
+
+
+[Manufacturer]
+%MfgName%=CSR, NTx86.5.1,NTamd64...1
+
+[SourceDisksNames]
+1 = %CSR.Disk.Name%,,,
+
+[SourceDisksFiles]
+csrbc.sys = 1
+csrbc2k.sys = 1
+
+[DestinationDirs]
+DefaultDestDir = 10,System32\Drivers
+CSRBC.NTamd64...1 = 10, System32\Drivers
+CSRBC.NTx86.5.1 = 10, System32\Drivers
+CSRBC.NTx86 = 10, System32\Drivers
+
+
+;
+; Windows 2000
+;
+[CSR]
+%BlueCore.DeviceDesc%=CSRBC.Inst,        USB\VID_0A12&PID_0001 ; CSR ...sira
+%BlueCoreDFU.DeviceDesc%=CSRBC.Inst,     USB\VID_0A12&PID_ffff ; CSR ...sira DFU
+%Mitsumi.DeviceDesc%=CSRBC.Inst,         USB\VID_03ee&PID_641f ; Mitsumi
+%MitsumiDFU.DeviceDesc%=CSRBC.Inst,      USB\VID_03ee&PID_ffff ; Mitsumi DFU
+%ALPS.DeviceDesc%=CSRBC.Inst,            USB\VID_044e&PID_3001 ; ALPS
+%ALPSDFU.DeviceDesc%=CSRBC.Inst,         USB\VID_044e&PID_ffff ; ALPS DFU
+%Maxell.DeviceDesc%=CSRBC.Inst,          USB\VID_0858&PID_3102 ; Maxell
+%MaxellDFU.DeviceDesc%=CSRBC.Inst,       USB\VID_0858&PID_ffff ; Maxell DFU
+%Taiyo.DeviceDesc%=CSRBC.Inst,           USB\VID_0c24&PID_0001 ; Taiyo Yuden
+%TaiyoDFU.DeviceDesc%=CSRBC.Inst,        USB\VID_0c24&PID_ffff ; Taiyo Yuden DFU
+%APPLE.DeviceDesc%=CSRBC.Inst,           USB\VID_05ac&PID_8203 ; APPLE
+%APPLEDFU.DeviceDesc%=CSRBC.Inst,        USB\VID_05ac&PID_ffff ; APPLE DFU
+%IBM.DeviceDesc%=CSRBC.Inst,             USB\VID_1668&PID_2441 ; IBM
+%IBMDFU.DeviceDesc%=CSRBC.Inst,          USB\VID_1668&PID_3441 ; IBM DFU
+%BLUETHUMB.DeviceDesc%=CSRBC.Inst,       USB\VID_049F&PID_0086 ; BLUETHUMB USB Device VID&PID
+%BLUETHUMBDFU.DeviceDesc%=CSRBC.Inst,    USB\VID_049F&PID_0036 ; BLUETHUMB Device VID&PID DFU
+%DELL.DeviceDesc%=CSRBC.Inst,            USB\VID_413c&PID_8000 ; DELL USB Device VID&PID
+%DELLU2.DeviceDesc%=CSRBC.Inst,          USB\VID_413c&PID_8103 ; DELL U2 USB Device VID&PID
+%DELLDFU.DeviceDesc%=CSRBC.Inst,         USB\VID_413c&PID_8010 ; DELL Device VID&PID DFU
+%DELLU2DFU.DeviceDesc%=CSRBC.Inst,       USB\VID_413c&PID_8106 ; DELL U2 USB Device VID&PID
+%DELLEASTFOLD.DeviceDesc%=CSRBC.Inst,    USB\VID_413c&PID_8120 ; DELL EASTFOLD USB Device VID&PID
+%DELLEASTFOLDDFU.DeviceDesc%=CSRBC.Inst, USB\VID_413c&PID_8122 ; DELL EASTFOLD USB Device VID&PID DFU
+%MOTION.DeviceDesc%=CSRBC.Inst,          USB\VID_10ab&PID_1002 ; MOTION BC02 USB Device VID&PID
+%MOTIONDFU.DeviceDesc%=CSRBC.Inst,       USB\VID_10ab&PID_1003 ; MOTION BC02 Device VID&PID DFU
+%MOTION2.DeviceDesc%=CSRBC.Inst,         USB\VID_10ab&PID_1005 ; MOTION BC04 USB Device VID&PID
+%MOTION2DFU.DeviceDesc%=CSRBC.Inst,      USB\VID_10ab&PID_1006 ; MOTION BC04 Device VID&PID DFU
+%TACHIKOMA.DeviceDesc%=CSRBC.Inst,       USB\VID_054c&PID_0267 ; Tachikoma Device VID&PID
+%TACHIKOMADFU.DeviceDesc%=CSRBC.Inst,    USB\VID_054c&PID_02aa ; Tachikoma Device DFU VID&PID
+%BATOH.DeviceDesc%=CSRBC.Inst,           USB\VID_054c&PID_0268 ; Batoh HID Device VID&PID
+%BATOHDFU.DeviceDesc%=CSRBC.Inst,        USB\VID_054c&PID_02ab ; Batoh Device DFU VID&PID
+%BATOH.DeviceDesc%=CSRBC.Inst,           USB\VID_054c&PID_02C6 ; Batoh HCI Device VID&PID
+%BATOHDFU.DeviceDesc%=CSRBC.Inst,        USB\VID_054c&PID_0297 ; Batoh Device awaiting DFU VID&PID
+%BlueCore.DeviceDesc%=CSRBC.Inst,        USB\VID_0A12&PID_1040 ; Babel in HCI mode
+%IntelCentrino.DeviceDesc%=CSRBC.Inst,   USB\VID_8086&PID_0189 ; INTEL Centrino
+%IntelCentrino.DeviceDesc%=CSRBC.Inst,   USB\VID_8087&PID_07DA ; INTEL Centrino
+
+[CSRBC.Inst.NTx86]
+CopyFiles=CSRBC.NTx86
+AddReg=CSRBC.AddReg.NTx86
+
+[CSRBC.Inst.NTx86.Services]
+Addservice = CSRBC, 0x00000002, CSRBC.AddService.NTx86
+
+[CSRBC.AddService.NTx86]
+DisplayName    = %CSRBC.SvcDesc%
+ServiceType    = 1                  ; SERVICE_KERNEL_DRIVER
+StartType      = 3                  ; SERVICE_DEMAND_START
+ErrorControl   = 1                  ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %10%\System32\Drivers\csrbc2k.sys
+LoadOrderGroup = Base
+AddReg=CSRBC_Service.AddReg.NTx86
+
+[CSRBC_Service.AddReg.NTx86]
+HKR,"Parameters","FDName",0x00000,"CSR"
+
+[CSRBC.AddReg.NTx86]
+HKR,,DevLoader,,"*ntkern"
+HKR,,NTMPDriver,,"csrbc2k.sys"
+
+[CSRBC.NTx86]
+csrbc2k.sys
+
+
+;
+; Windows XP and later
+;
+[CSR.NTx86.5.1]
+%BlueCore.DeviceDesc%=CSRBC.Inst.NTx86.5.1,        USB\VID_0A12&PID_0001 ; CSR ...sira
+%BlueCoreDFU.DeviceDesc%=CSRBC.Inst.NTx86.5.1,     USB\VID_0A12&PID_ffff ; CSR ...sira DFU
+%Mitsumi.DeviceDesc%=CSRBC.Inst.NTx86.5.1,         USB\VID_03ee&PID_641f ; Mitsumi
+%MitsumiDFU.DeviceDesc%=CSRBC.Inst.NTx86.5.1,      USB\VID_03ee&PID_ffff ; Mitsumi DFU
+%ALPS.DeviceDesc%=CSRBC.Inst.NTx86.5.1,            USB\VID_044e&PID_3001 ; ALPS
+%ALPSDFU.DeviceDesc%=CSRBC.Inst.NTx86.5.1,         USB\VID_044e&PID_ffff ; ALPS DFU
+%Maxell.DeviceDesc%=CSRBC.Inst.NTx86.5.1,          USB\VID_0858&PID_3102 ; Maxell
+%MaxellDFU.DeviceDesc%=CSRBC.Inst.NTx86.5.1,       USB\VID_0858&PID_ffff ; Maxell DFU
+%Taiyo.DeviceDesc%=CSRBC.Inst.NTx86.5.1,           USB\VID_0c24&PID_0001 ; Taiyo Yuden
+%TaiyoDFU.DeviceDesc%=CSRBC.Inst.NTx86.5.1,        USB\VID_0c24&PID_ffff ; Taiyo Yuden DFU
+%APPLE.DeviceDesc%=CSRBC.Inst.NTx86.5.1,           USB\VID_05ac&PID_8203 ; APPLE
+%APPLEDFU.DeviceDesc%=CSRBC.Inst.NTx86.5.1,        USB\VID_05ac&PID_ffff ; APPLE DFU
+%IBM.DeviceDesc%=CSRBC.Inst.NTx86.5.1,             USB\VID_1668&PID_2441 ; IBM
+%IBMDFU.DeviceDesc%=CSRBC.Inst.NTx86.5.1,          USB\VID_1668&PID_3441 ; IBM DFU
+%BLUETHUMB.DeviceDesc%=CSRBC.Inst.NTx86.5.1,       USB\VID_049F&PID_0086 ; BLUETHUMB USB Device VID&PID
+%BLUETHUMBDFU.DeviceDesc%=CSRBC.Inst.NTx86.5.1,    USB\VID_049F&PID_0036 ; BLUETHUMB Device VID&PID DFU
+%DELL.DeviceDesc%=CSRBC.Inst.NTx86.5.1,            USB\VID_413c&PID_8000 ; DELL USB Device VID&PID
+%DELLU2.DeviceDesc%=CSRBC.Inst.NTx86.5.1,          USB\VID_413c&PID_8103 ; DELL U2 USB Device VID&PID
+%DELLDFU.DeviceDesc%=CSRBC.Inst.NTx86.5.1,         USB\VID_413c&PID_8010 ; DELL Device VID&PID DFU
+%DELLU2DFU.DeviceDesc%=CSRBC.Inst.NTx86.5.1,       USB\VID_413c&PID_8106 ; DELL U2 USB Device VID&PID
+%DELLEASTFOLD.DeviceDesc%=CSRBC.Inst.NTx86.5.1,    USB\VID_413c&PID_8120 ; DELL EASTFOLD USB Device VID&PID
+%DELLEASTFOLDDFU.DeviceDesc%=CSRBC.Inst.NTx86.5.1, USB\VID_413c&PID_8122 ; DELL EASTFOLD USB Device VID&PID DFU
+%MOTION.DeviceDesc%=CSRBC.Inst.NTx86.5.1,          USB\VID_10ab&PID_1002 ; MOTION BC02 USB Device VID&PID
+%MOTIONDFU.DeviceDesc%=CSRBC.Inst.NTx86.5.1,       USB\VID_10ab&PID_1003 ; MOTION BC02 Device VID&PID DFU
+%MOTION2.DeviceDesc%=CSRBC.Inst.NTx86.5.1,         USB\VID_10ab&PID_1005 ; MOTION BC04 USB Device VID&PID
+%MOTION2DFU.DeviceDesc%=CSRBC.Inst.NTx86.5.1,      USB\VID_10ab&PID_1006 ; MOTION BC04 Device VID&PID DFU
+%TACHIKOMA.DeviceDesc%=CSRBC.Inst.NTx86.5.1,       USB\VID_054c&PID_0267 ; Tachikoma Device VID&PID
+%TACHIKOMADFU.DeviceDesc%=CSRBC.Inst.NTx86.5.1,    USB\VID_054c&PID_02aa ; Tachikoma Device DFU VID&PID
+%BATOH.DeviceDesc%=CSRBC.Inst.NTx86.5.1,           USB\VID_054c&PID_0268 ; Batoh Device VID&PID
+%BATOHDFU.DeviceDesc%=CSRBC.Inst.NTx86.5.1,        USB\VID_054c&PID_02ab ; Batoh Device DFU VID&PID
+%BATOH.DeviceDesc%=CSRBC.Inst.NTx86.5.1,           USB\VID_054c&PID_02C6 ; Batoh HCI Device VID&PID
+%BATOHDFU.DeviceDesc%=CSRBC.Inst.NTx86.5.1,        USB\VID_054c&PID_0297 ; Batoh Device awaiting DFU VID&PID
+%BlueCore.DeviceDesc%=CSRBC.Inst.NTx86.5.1,        USB\VID_0A12&PID_1040 ; Babel in HCI mode
+%IntelCentrino.DeviceDesc%=CSRBC.Inst.NTx86.5.1,   USB\VID_8086&PID_0189 ; INTEL Centrino
+%IntelCentrino.DeviceDesc%=CSRBC.Inst.NTx86.5.1,   USB\VID_8087&PID_07DA ; INTEL Centrino
+
+[CSRBC.Inst.NTx86.5.1]
+CopyFiles=CSRBC.NTx86.5.1
+AddReg=CSRBC.AddReg.NTx86.5.1
+
+[CSRBC.Inst.NTx86.5.1.Services]
+Addservice = CSRBC, 0x00000002, CSRBC.AddService.NTx86.5.1
+
+[CSRBC.AddService.NTx86.5.1]
+DisplayName    = %CSRBC.SvcDesc%
+ServiceType    = 1                  ; SERVICE_KERNEL_DRIVER
+StartType      = 3                  ; SERVICE_DEMAND_START
+ErrorControl   = 1                  ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %10%\System32\Drivers\csrbc.sys
+LoadOrderGroup = Base
+AddReg=CSRBC_Service.AddReg.NTx86.5.1
+
+[CSRBC_Service.AddReg.NTx86.5.1]
+HKR,"Parameters","FDName",0x00000,"CSR"
+
+[CSRBC.AddReg.NTx86.5.1]
+HKR,,DevLoader,,"*ntkern"
+HKR,,NTMPDriver,,"csrbc.sys"
+
+[CSRBC.NTx86.5.1]
+csrbc.sys
+
+;
+; 64-bit Windows XP and later
+;
+[CSR.NTamd64...1]
+%BlueCore.DeviceDesc%=CSRBC.Inst.NTamd64...1,        USB\VID_0A12&PID_0001 ; CSR ...sira
+%BlueCoreDFU.DeviceDesc%=CSRBC.Inst.NTamd64...1,     USB\VID_0A12&PID_ffff ; CSR ...sira DFU
+%Mitsumi.DeviceDesc%=CSRBC.Inst.NTamd64...1,         USB\VID_03ee&PID_641f ; Mitsumi
+%MitsumiDFU.DeviceDesc%=CSRBC.Inst.NTamd64...1,      USB\VID_03ee&PID_ffff ; Mitsumi DFU
+%ALPS.DeviceDesc%=CSRBC.Inst.NTamd64...1,            USB\VID_044e&PID_3001 ; ALPS
+%ALPSDFU.DeviceDesc%=CSRBC.Inst.NTamd64...1,         USB\VID_044e&PID_ffff ; ALPS DFU
+%Maxell.DeviceDesc%=CSRBC.Inst.NTamd64...1,          USB\VID_0858&PID_3102 ; Maxell
+%MaxellDFU.DeviceDesc%=CSRBC.Inst.NTamd64...1,       USB\VID_0858&PID_ffff ; Maxell DFU
+%Taiyo.DeviceDesc%=CSRBC.Inst.NTamd64...1,           USB\VID_0c24&PID_0001 ; Taiyo Yuden
+%TaiyoDFU.DeviceDesc%=CSRBC.Inst.NTamd64...1,        USB\VID_0c24&PID_ffff ; Taiyo Yuden DFU
+%APPLE.DeviceDesc%=CSRBC.Inst.NTamd64...1,           USB\VID_05ac&PID_8203 ; APPLE
+%APPLEDFU.DeviceDesc%=CSRBC.Inst.NTamd64...1,        USB\VID_05ac&PID_ffff ; APPLE DFU
+%IBM.DeviceDesc%=CSRBC.Inst.NTamd64...1,             USB\VID_1668&PID_2441 ; IBM
+%IBMDFU.DeviceDesc%=CSRBC.Inst.NTamd64...1,          USB\VID_1668&PID_3441 ; IBM DFU
+%BLUETHUMB.DeviceDesc%=CSRBC.Inst.NTamd64...1,       USB\VID_049F&PID_0086 ; BLUETHUMB USB Device VID&PID
+%BLUETHUMBDFU.DeviceDesc%=CSRBC.Inst.NTamd64...1,    USB\VID_049F&PID_0036 ; BLUETHUMB Device VID&PID DFU
+%DELL.DeviceDesc%=CSRBC.Inst.NTamd64...1,            USB\VID_413c&PID_8000 ; DELL USB Device VID&PID
+%DELLU2.DeviceDesc%=CSRBC.Inst.NTamd64...1,          USB\VID_413c&PID_8103 ; DELL U2 USB Device VID&PID
+%DELLDFU.DeviceDesc%=CSRBC.Inst.NTamd64...1,         USB\VID_413c&PID_8010 ; DELL Device VID&PID DFU
+%DELLU2DFU.DeviceDesc%=CSRBC.Inst.NTamd64...1,       USB\VID_413c&PID_8106 ; DELL U2 USB Device VID&PID
+%DELLEASTFOLD.DeviceDesc%=CSRBC.Inst.NTamd64...1,    USB\VID_413c&PID_8120 ; DELL EASTFOLD USB Device VID&PID
+%DELLEASTFOLDDFU.DeviceDesc%=CSRBC.Inst.NTamd64...1, USB\VID_413c&PID_8122 ; DELL EASTFOLD USB Device VID&PID DFU
+%MOTION.DeviceDesc%=CSRBC.Inst.NTamd64...1,          USB\VID_10ab&PID_1002 ; MOTION BC02 USB Device VID&PID
+%MOTIONDFU.DeviceDesc%=CSRBC.Inst.NTamd64...1,       USB\VID_10ab&PID_1003 ; MOTION BC02 Device VID&PID DFU
+%MOTION2.DeviceDesc%=CSRBC.Inst.NTamd64...1,         USB\VID_10ab&PID_1005 ; MOTION BC04 USB Device VID&PID
+%MOTION2DFU.DeviceDesc%=CSRBC.Inst.NTamd64...1,      USB\VID_10ab&PID_1006 ; MOTION BC04 Device VID&PID DFU
+%TACHIKOMA.DeviceDesc%=CSRBC.Inst.NTamd64...1,       USB\VID_054c&PID_0267 ; Tachikoma Device VID&PID
+%TACHIKOMADFU.DeviceDesc%=CSRBC.Inst.NTamd64...1,    USB\VID_054c&PID_02aa ; Tachikoma Device DFU VID&PID
+%BATOH.DeviceDesc%=CSRBC.Inst.NTamd64...1,           USB\VID_054c&PID_0268 ; Batoh Device VID&PID
+%BATOHDFU.DeviceDesc%=CSRBC.Inst.NTamd64...1,        USB\VID_054c&PID_02ab ; Batoh Device DFU VID&PID
+%BATOH.DeviceDesc%=CSRBC.Inst.NTamd64...1,           USB\VID_054c&PID_02C6 ; Batoh HCI Device VID&PID
+%BATOHDFU.DeviceDesc%=CSRBC.Inst.NTamd64...1,        USB\VID_054c&PID_0297 ; Batoh Device awaiting DFU VID&PID
+%BlueCore.DeviceDesc%=CSRBC.Inst.NTamd64...1,        USB\VID_0A12&PID_1040 ; Babel in HCI mode
+%IntelCentrino.DeviceDesc%=CSRBC.Inst.NTamd64...1,   USB\VID_8086&PID_0189 ; INTEL Centrino
+%IntelCentrino.DeviceDesc%=CSRBC.Inst.NTamd64...1,   USB\VID_8087&PID_07DA ; INTEL Centrino
+
+[CSRBC.Inst.NTamd64...1]
+CopyFiles=CSRBC.NTamd64...1
+AddReg=CSRBC.AddReg.NTamd64...1
+
+[CSRBC.Inst.NTamd64...1.Services]
+Addservice = CSRBC, 0x00000002, CSRBC.AddService.NTamd64...1
+
+[CSRBC.AddService.NTamd64...1]
+DisplayName    = %CSRBC.SvcDesc%
+ServiceType    = 1                  ; SERVICE_KERNEL_DRIVER
+StartType      = 3                  ; SERVICE_DEMAND_START
+ErrorControl   = 1                  ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %10%\System32\Drivers\csrbc.sys
+LoadOrderGroup = Base
+AddReg=CSRBC_Service.AddReg.NTamd64...1
+
+[CSRBC_Service.AddReg.NTamd64...1]
+HKR,"Parameters","FDName",0x00000,"CSR"
+
+[CSRBC.AddReg.NTamd64...1]
+HKR,,DevLoader,,"*ntkern"
+HKR,,NTMPDriver,,"csrbc.sys"
+
+[CSRBC.NTamd64...1]
+csrbc.sys
+
+[Strings]
+CSR="Cambridge Silicon Radio Ltd."
+MfgName="CSR"
+BlueCore.DeviceDesc="CSR BlueCore Bluetooth"
+BlueCoreSniffer.DeviceDesc="CSR BlueCore Bluetooth Sniffer"
+BlueCoreDFU.DeviceDesc="CSR BlueCore in DFU mode"
+Mitsumi.DeviceDesc="Mitsumi Dongle with CSR BlueCore Bluetooth"
+MitsumiDFU.DeviceDesc="Mitsumi Dongle with CSR BlueCore in DFU mode"
+ALPS.DeviceDesc="ALPS module with CSR BlueCore Bluetooth"
+ALPSDFU.DeviceDesc="ALPS module with CSR BlueCore in DFU mode"
+CSRBC.SvcDesc="CSRBC.Sys CSR test driver"
+CSR.Disk.Name="CSR Bluetooth Installation Disk"
+Maxell.DeviceDesc="Maxell module with CSR BlueCore Bluetooth"
+MaxellDFU.DeviceDesc="Maxell module with CSR BlueCore in DFU mode"
+Taiyo.DeviceDesc="Taiyo Yuden Bluetooth module with CSR BlueCore"
+TaiyoDFU.DeviceDesc="Taiyo Yuden Bluetooth module with CSR BlueCore in DFU mode"
+APPLE.DeviceDesc="APPLE module with CSR BC02 Bluetooth"
+APPLEDFU.DeviceDesc="APPLE module with CSR BC02 in DFU mode"
+IBM.DeviceDesc="IBM module with CSR BC02 Bluetooth - CSR Driver"
+IBMDFU.DeviceDesc="IBM module with CSR BC02 in DFU mode - CSR Driver"
+BLUETHUMB.DeviceDesc="Bluetooth by hp - CSR Driver"
+BLUETHUMBDFU.DeviceDesc="Bluetooth by hp in DFU - CSR Driver"
+DELL.DeviceDesc="DELL - CSR Driver"
+DELLU2.DeviceDesc="DELL U2 - CSR Driver"
+DELLDFU.DeviceDesc="DELL in DFU - CSR Driver"
+DELLU2DFU.DeviceDesc="DELL U2 in DFU - CSR Driver"
+DELLEASTFOLD.DeviceDesc="DELL Eastfold - CSR Driver"
+DELLEASTFOLDDFU.DeviceDesc="DELL Eastfold in DFU - CSR Driver"
+MOTION.DeviceDesc="MOTION BC02 - CSR Driver"
+MOTIONDFU.DeviceDesc="MOTION BC02 in DFU - CSR Driver"
+MOTION2.DeviceDesc="MOTION BC04 - CSR Driver"
+MOTION2DFU.DeviceDesc="MOTION BC04 in DFU - CSR Driver"
+TACHIKOMA.DeviceDesc="Tachikoma Device"
+BATOH.DeviceDesc="Batoh Device"
+TACHIKOMADFU.DeviceDesc="Tachikoma Device in DFU mode"
+BATOHDFU.DeviceDesc="Batoh Device in DFU mode"
+IntelCentrino.DeviceDesc="Intel(R) Centrino(R) Wireless (Bluetooth Adapter)"

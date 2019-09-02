@@ -1,0 +1,7 @@
+asm_files = portability.asm
+
+header_files = portability_macros.h
+
+$(eval $(call header_rules,$(header_files)))
+$(eval $(call rules,$(asm_files)))
+

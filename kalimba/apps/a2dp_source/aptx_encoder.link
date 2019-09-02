@@ -1,0 +1,10 @@
+/* Linkscript for the a2dp_source application (aptX variant) */
+
+/* Same application segment assignments as the sbc app */
+#include "sbc_encoder.link"
+
+/* Application segments: put infrequently run modules into flash.code region */
+
+/* Library segment overrides: precede statement with "override" qualifier
+   to override a segment defined by a library */
+

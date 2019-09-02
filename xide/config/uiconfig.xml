@@ -1,0 +1,646 @@
+<ui title="xIDE Common">
+    <actions>
+        <action name="fileNew" icon="filenew.png" accel="Ctrl+N">
+            <text>New</text>
+            <menutext>&amp;New...</menutext>
+        </action>
+        <action name="fileOpen" icon="fileopen.png" accel="Ctrl+O">
+            <text>Open</text>
+            <menutext>&amp;Open...</menutext>
+        </action>
+        <action name="fileClose">
+            <text>Close</text>
+            <menutext>&amp;Close</menutext>
+            <enable signal="viewHasFocus" />
+        </action>
+        <action name="fileRevert">
+            <text>Revert to Saved</text>
+            <menutext>&amp;Revert</menutext>
+            <enable signal="textViewHasFocus" />
+        </action>
+        <action name="fileCloseAll">
+            <text>Close All</text>
+            <menutext>Close All</menutext>
+        </action>
+        <action name="fileSave" icon="filesave.png" accel="Ctrl+S">
+            <text>Save</text>
+            <menutext>&amp;Save</menutext>
+            <enable signal="textViewHasFocus" />
+        </action>
+        <action name="fileSaveAs">
+            <text>Save As</text>
+            <menutext>Save &amp;As...</menutext>
+            <enable signal="textViewHasFocus" />
+        </action>
+        <action name="fileSaveAll" icon="filesaveall.png" accel="Ctrl+Shift+S">
+            <text>Save All</text>
+            <menutext>Save A&amp;ll</menutext>
+        </action>
+        <action name="filePrint" icon="fileprint.png" accel="Ctrl+P">
+            <text>Print</text>
+            <menutext>&amp;Print...</menutext>
+            <enable signal="viewHasFocus" />
+        </action>
+        <action name="fileExit">
+            <text>Exit</text>
+            <menutext>E&amp;xit</menutext>
+        </action>
+        <action name="fileProperties">
+            <text>File Properties</text>
+            <menutext>&amp;Properties</menutext>
+            <enable signal="projectEditingAvailable" />
+        </action>
+        <action name="editUndo" icon="editundo.png" accel="Ctrl+Z">
+            <text>Undo</text>
+            <menutext>&amp;Undo</menutext>
+            <enable signal="undoAvailable" />
+        </action>
+        <action name="editRedo" icon="editredo.png" accel="Ctrl+Y">
+            <text>Redo</text>
+            <menutext>&amp;Redo</menutext>
+            <enable signal="redoAvailable" />
+        </action>
+        <action name="editCut" icon="editcut.png" accel="Ctrl+X">
+            <text>Cut</text>
+            <menutext>Cu&amp;t</menutext>
+            <enable signal="cutAvailable" />
+        </action>
+        <action name="editCopy" icon="editcopy.png" accel="Ctrl+C">
+            <text>Copy</text>
+            <menutext>&amp;Copy</menutext>
+            <enable signal="copyAvailable" />
+        </action>
+        <action name="editPaste" icon="editpaste.png" accel="Ctrl+V">
+            <text>Paste</text>
+            <menutext>&amp;Paste</menutext>
+            <enable signal="pasteAvailable" />
+        </action>
+        <action name="editRemove" accel="Del">
+            <text>Delete</text>
+            <menutext>&amp;Delete</menutext>
+            <enable signal="cutAvailable" />
+        </action>
+        <action name="editInsertFile">
+            <text>Insert File</text>
+            <menutext>I&amp;nsert File...</menutext>
+            <enable signal="viewHasFocus" />
+            <enable signal="textViewHasFocus" />
+        </action>
+        <action name="editComment">
+            <text>Comment Block</text>
+            <menutext>C&amp;omment</menutext>
+            <enable signal="textViewHasFocus" />
+        </action>
+        <action name="editUncomment">
+            <text>Uncomment Block</text>
+            <menutext>&amp;Uncomment</menutext>
+            <enable signal="textViewHasFocus" />
+        </action>
+        <action name="editIndent">
+            <text>Format Selection</text>
+            <menutext>Format &amp;Selection</menutext>
+            <enable signal="textViewHasFocus" />
+        </action>
+        <action name="editUnindent">
+            <text>Unindent Block</text>
+            <menutext>U&amp;nindent</menutext>
+            <enable signal="textViewHasFocus" />
+        </action>
+        <action name="editFind" icon="editfind.png" accel="Ctrl+F">
+            <text>Find</text>
+            <menutext>&amp;Find...</menutext>
+            <enable signal="textNavigationAvailable" />
+        </action>
+        <action name="editReplace" accel="Ctrl+H">
+            <text>Replace</text>
+            <menutext>R&amp;eplace...</menutext>
+            <enable signal="textViewHasFocus" />
+        </action>
+        <action name="editFindInFiles" icon="editfindinfiles.png" accel="Ctrl+Shift+F">
+            <text>Find in Files</text>
+            <menutext>F&amp;ind in Files...</menutext>
+        </action>
+        <action name="editFindNext" accel="F3">
+            <text>Find Next</text>
+            <menutext>Find &amp;Next</menutext>
+            <enable signal="findInProgress" />
+        </action>
+        <action name="editFindPrev" accel="Shift+F3">
+            <text>Find Previous</text>
+            <menutext>Find &amp;Previous</menutext>
+            <enable signal="findInProgress" />
+        </action>
+        <action name="editSelectAll" accel="Ctrl+A">
+            <text>Select All</text>
+            <menutext>Select A&amp;ll</menutext>
+            <enable signal="viewHasFocus" />
+        </action>
+        <action name="editLookupCurrentLine">
+            <text>Go To &amp;Current Error/Tag</text>
+            <menutext>Go To &amp;Current Error/Tag</menutext>
+        </action>
+        <action name="editLookupNextLine" accel="F4">
+            <text>Go To &amp;Next Error/Tag</text>
+            <menutext>Go To &amp;Next Error/Tag</menutext>
+        </action>
+        <action name="editLookupPrevLine" accel="Shift+F4">
+            <text>Go To &amp;Previous Error/Tag</text>
+            <menutext>Go To &amp;Previous Error/Tag</menutext>
+        </action>
+        <action name="viewGotoLine" accel="Ctrl+G">
+            <text>Go To Line</text>
+            <menutext>&amp;Go To Line...</menutext>
+            <enable signal="textNavigationAvailable" />
+        </action>
+        <action name="viewCommand" accel="Ctrl+0">
+            <text>Show Command Line Window</text>
+            <menutext>&amp;Command Line Window</menutext>
+        </action>
+        <action name="viewNavigator" toggle="on" accel="Ctrl+1">
+            <text>Toggle Navigator</text>
+            <menutext>&amp;Navigator</menutext>
+        </action>
+        <action name="viewOutput" toggle="on" accel="Ctrl+2">
+            <text>Toggle Output Window</text>
+            <menutext>&amp;Output Window</menutext>
+        </action>
+        <action name="viewToggleFileToolBar" toggle="on">
+            <text>File</text>
+            <menutext>File</menutext>
+        </action>
+        <action name="viewToggleEditToolBar" toggle="on">
+            <text>Edit</text>
+            <menutext>Edit</menutext>
+        </action>
+        <action name="viewToggleBuildToolBar" toggle="on">
+            <text>Build</text>
+            <menutext>Build</menutext>
+        </action>
+        <action name="viewToggleDebugToolBar" toggle="on">
+            <text>Debug</text>
+            <menutext>Debug</menutext>
+        </action>
+        <action name="viewToggleHelpToolBar" toggle="on">
+            <text>Help</text>
+            <menutext>Help</menutext>
+        </action>
+        <action name="viewToggleMacrosToolBar" toggle="on">
+            <text>Macros</text>
+            <menutext>Macros</menutext>
+        </action>
+        <action name="projectNew">
+            <text>New Project</text>
+            <menutext>&amp;New...</menutext>
+            <enable signal="projectOpenAvailable" />
+        </action>
+        <action name="projectOpen">
+            <text>Open Workspace</text>
+            <menutext>&amp;Open Workspace...</menutext>
+            <enable signal="projectOpenAvailable" />
+		</action>
+		<action name="projectClose">
+			<text>Close Workspace</text>
+			<menutext>&amp;Close Workspace</menutext>
+			<enable signal="workspaceEditingAvailable" />
+		</action>
+		<action name="projectSave">
+			<text>Save Workspace</text>
+			<menutext>&amp;Save Workspace</menutext>
+			<enable signal="workspaceEditingAvailable" />
+		</action>
+		<action name="projectInsertFiles">
+			<text>Insert Files</text>
+			<menutext>Add &amp;Files to Project...</menutext>
+			<enable signal="projectEditingAvailable" />
+		</action>
+		<action name="projectInsertFilesAlt">
+			<text>Insert Files</text>
+			<menutext>Add &amp;Files to Project...</menutext>
+			<enable signal="projectEditingAvailable" />
+		</action>
+		<action name="projectInsertProject">
+			<text>Insert Project into Workspace</text>
+			<menutext>&amp;Insert Project into Workspace</menutext>
+			<enable signal="workspaceEditingAvailable" />
+		</action>
+		<action name="projectProperties">
+			<text>Project Properties</text>
+			<menutext>&amp;Properties...</menutext>
+			<enable signal="projectEditingAvailable" />
+		</action>
+		<action name="projectPropertiesAlt">
+			<text>Project Properties</text>
+			<menutext>&amp;Properties...</menutext>
+			<enable signal="projectEditingAvailable" />
+		</action>
+		<action name="buildCompileFile" icon="buildcompilefile.png" accel="Ctrl+F7">
+			<text>Compile File</text>
+			<menutext>&amp;Compile %1</menutext>
+            <enable signal="compileAvailable"/>
+        </action>
+        <action name="buildBuild" icon="buildbuild.png" accel="F7">
+            <text>Build Active Project</text>
+            <menutext>&amp;Build Active Project</menutext>
+            <enable signal="buildAvailable"/>
+        </action>
+        <action name="buildRebuild">
+            <text>Rebuild Active Project</text>
+            <menutext>&amp;Rebuild Active Project</menutext>
+            <enable signal="buildAvailable"/>
+        </action>
+        <action name="buildClean">
+            <text>Clean Active Project</text>
+            <menutext>Cl&amp;ean Active Project</menutext>
+            <enable signal="buildAvailable"/>
+        </action>
+        <action name="buildBuildAlt" icon="buildbuild.png">
+            <text>Build</text>
+            <menutext>&amp;Build</menutext>
+            <enable signal="buildAvailable"/>
+        </action>
+        <action name="buildRebuildAlt">
+            <text>Rebuild All</text>
+            <menutext>&amp;Rebuild All</menutext>
+            <enable signal="buildAvailable"/>
+        </action>
+        <action name="buildCleanAlt">
+            <text>Clean</text>
+            <menutext>Cl&amp;ean</menutext>
+            <enable signal="buildAvailable"/>
+        </action>
+        <action name="buildStopBuild" icon="buildstopbuild.png">
+            <text>Stop Build</text>
+            <menutext>Sto&amp;p Build</menutext>
+            <enable signal="projectBuilding"/>
+        </action>
+        <action name="buildBatchBuild">
+            <text>Batch Build</text>
+            <menutext>Batch B&amp;uild...</menutext>
+            <enable signal="buildAvailable"/>
+        </action>
+        <action name="buildConfigurationsNew">
+            <text>New Configuration</text>
+            <menutext>&amp;New...</menutext>
+            <enable signal="projectEditingAvailable" />
+        </action>
+        <action name="buildConfigurationsEdit">
+            <text>Edit Configurations</text>
+            <menutext>&amp;Edit...</menutext>
+            <enable signal="projectEditingAvailable" />
+        </action>
+        <action name="debugRun" icon="debugrun.png" accel="F5">
+            <text>Run</text>
+            <menutext>Run</menutext>
+            <enable signal="runAvailable"/>
+        </action>
+        <action name="debugAttach" icon="debugattach.png" accel="Ctrl+F5">
+            <text>Attach...</text>
+            <menutext>Attach...</menutext>
+            <enable signal="attachAvailable"/>
+        </action>
+        <action name="debugRunToCursor" icon="debugruntocursor.png" accel="Ctrl+F10">
+            <text>Run To Cursor</text>
+            <menutext>Run To Cursor</menutext>
+            <enable signal="runAvailable"/>
+        </action>
+        <action name="debugStepOver" icon="debugstepover.png" accel="F10">
+            <text>Step Over</text>
+            <menutext>Step Over</menutext>
+            <enable signal="runAvailable"/>
+        </action>
+        <action name="debugStepInto" icon="debugstepinto.png" accel="F11">
+            <text>Step Into</text>
+            <menutext>Step Into</menutext>
+            <enable signal="runAvailable"/>
+        </action>
+        <action name="debugStepOut" icon="debugstepout.png" accel="Shift+F11">
+            <text>Step Out</text>
+            <menutext>Step Out</menutext>
+            <enable signal="stepOutAvailable"/>
+        </action>
+        <action name="debugPause" icon="debugpause.png" accel="Pause">
+            <text>Pause</text>
+            <menutext>Pause</menutext>
+            <enable signal="pauseAvailable"/>
+        </action>
+        <action name="debugStop" icon="debugstop.png" accel="Shift+F5">
+            <text>Stop Debugging</text>
+            <menutext>Stop Debugging</menutext>
+            <enable signal="stopAvailable"/>
+		</action>
+		<action name="debugRestart" icon="debugrestart.png" accel="Ctrl+Shift+F5">
+			<text>Restart</text>
+			<menutext>Restart</menutext>
+            <enable signal="restartAvailable"/>
+        </action>
+        <action name="debugShowNext" icon="debugshownext.png">
+            <text>Show Next Statement</text>
+            <menutext>Show Next Statement</menutext>
+            <enable signal="showNextAvailable"/>
+        </action>
+        <action name="debugSetNext" icon="debugsetnext.png">
+            <text>Set Next Statement</text>
+            <menutext>Set Next Statement</menutext>
+            <enable signal="setNextAvailable"/>
+        </action>
+        <action name="debugToggleBreakpoint" accel="F9">
+            <text>Toggle Breakpoint</text>
+            <menutext>&amp;Toggle Breakpoint</menutext>
+        </action>
+        <action name="debugToggleRegisterWindow" toggle="off" accel="Ctrl+3">
+            <text>Registers</text>
+            <menutext>&amp;Registers</menutext>
+        </action>
+        <action name="debugTogglePeripheralWindow" toggle="off" accel="Ctrl+6">
+            <text>Peripherals</text>
+            <menutext>&amp;Peripherals</menutext>
+        </action>
+        <action name="debugToggleWatchWindow" toggle="off" accel="Ctrl+4">
+            <text>Watch</text>
+            <menutext>&amp;Watch</menutext>
+        </action>
+        <action name="debugToggleMemoryWindow" toggle="off" accel="Ctrl+5">
+            <text>Memory</text>
+            <menutext>&amp;Memory</menutext>
+        </action>
+        <action name="debugToggleBreakpointsWindow" toggle="off" accel="Ctrl+7">
+            <text>Breakpoints</text>
+            <menutext>&amp;Breakpoints</menutext>
+        </action>
+        <action name="debugViewDisassembly" icon="debugviewdisassembly.png">
+            <text>View Disassembly</text>
+            <menutext>&amp;View Disassembly</menutext>
+            <enable signal="runAvailable"/>
+        </action>
+        <action name="toolsMacroNew">
+            <text>New Macro</text>
+            <menutext>&amp;New...</menutext>
+        </action>
+        <action name="toolsMacroEdit">
+            <text>Edit Macro</text>
+            <menutext>&amp;Edit...</menutext>
+        </action>
+        <action name="toolsCustomise">
+            <text>Customise</text>
+            <menutext>&amp;Customise</menutext>
+        </action>
+        <action name="toolsOptions">
+            <text>Options</text>
+            <menutext>&amp;Options...</menutext>
+        </action>
+        <action name="toolsConfigureSif">
+            <text>Configure SIF</text>
+            <menutext>&amp;Configure SIF...</menutext>
+        </action>
+        <action name="toolsAutoDetectSif">
+            <text>Auto-detect SIF</text>
+            <menutext>&amp;Auto-detect SIF...</menutext>
+        </action>
+        <action name="windowNew">
+            <text>New Window</text>
+            <menutext>&amp;New Window</menutext>
+            <enable signal="viewHasFocus" />
+        </action>
+        <action name="windowSplit">
+            <text>Split Window</text>
+            <menutext>S&amp;plit</menutext>
+            <enable signal="viewHasFocus" />
+        </action>
+        <action name="windowClose" accel="Ctrl+F4">
+            <text>Close Window</text>
+            <menutext>C&amp;lose</menutext>
+            <enable signal="viewHasFocus" />
+        </action>
+        <action name="windowCloseAll">
+            <text>Close All Windows</text>
+            <menutext>Close A&amp;ll</menutext>
+        </action>
+        <action name="windowCascade">
+            <text>Cascade</text>
+            <menutext>&amp;Cascade</menutext>
+        </action>
+        <action name="windowTile">
+            <text>Tile</text>
+            <menutext>&amp;Tile</menutext>
+        </action>
+        <action name="windowNext" accel="Ctrl+Tab">
+            <enable signal="viewHasFocus" />
+        </action>
+        <action name="windowPrev" accel="Ctrl+Shift+Tab">
+            <enable signal="viewHasFocus" />
+        </action>
+        <action name="helpBack" icon="helpback.png">
+            <text>Back</text>
+            <menutext>&amp;Back</menutext>
+            <enable signal="backAvailable" />
+        </action>
+        <action name="helpForward" icon="helpforward.png">
+            <text>Forward</text>
+            <menutext>&amp;Forward</menutext>
+            <enable signal="forwardAvailable" />
+        </action>
+        <action name="whatsThis" icon="whatsthis.png" accel="Shift+F1">
+            <text>What's This?</text>
+            <menutext>What's This?</menutext>
+        </action>
+        <action name="helpAbout">
+            <text>About</text>
+            <menutext>&amp;About xIDE...</menutext>
+        </action>
+    </actions>
+    <menus>
+        <menu name="fileMenu" displayname="&amp;File">
+            <action name="fileNew" />
+            <action name="fileOpen" />
+            <menu name="fileRecentFilesMenu" displayname="Open Recent &amp;Files"></menu>
+            <action name="fileClose" />
+            <action name="fileCloseAll" />
+            <separator />
+            <action name="fileRevert" />
+            <separator />
+            <action name="fileSave" />
+            <action name="fileSaveAs" />
+            <action name="fileSaveAll" />
+            <separator />
+            <action name="filePrint" />
+            <separator />
+            <action name="fileExit" />
+        </menu>
+        <menu name="editMenu" displayname="&amp;Edit">
+            <action name="editUndo" />
+            <action name="editRedo" />
+            <separator />
+            <action name="editCut" />
+            <action name="editCopy" />
+            <action name="editPaste" />
+            <action name="editRemove" />
+            <separator />
+
+            <action name="editInsertFile" />
+            <action name="editIndent" />
+
+            <separator />
+            <action name="editFind" />
+            <action name="editReplace" />
+            <action name="editFindInFiles" />
+            <action name="editFindNext" />
+            <action name="editFindPrev" />
+            <action name="editLookupNextLine" />
+            <action name="editLookupPrevLine" />
+            <separator />
+            <action name="editSelectAll" />
+        </menu>
+        <menu name="viewMenu" displayname="&amp;View">
+            <action name="viewGotoLine" />
+            <separator />
+            <action name="debugViewDisassembly" />
+            <separator />
+            <action name="viewCommand" />
+            <action name="viewNavigator" />
+            <action name="viewOutput" />
+            <menu name="debugWindowsMenu" displayname="&amp;Debug Windows">
+                <action name="debugToggleRegisterWindow" />
+                <action name="debugToggleWatchWindow" />
+                <action name="debugToggleMemoryWindow" />
+                <action name="debugTogglePeripheralWindow" />
+                <action name="debugToggleBreakpointsWindow" />
+            </menu>
+			<menu name="viewToolbarsMenu" displayname="&amp;Toolbars">
+				<action name="viewToggleFileToolBar" />
+				<action name="viewToggleEditToolBar" />
+				<action name="viewToggleBuildToolBar" />
+				<action name="viewToggleDebugToolBar" />
+				<action name="viewToggleHelpToolBar" />
+				<action name="viewToggleMacrosToolBar" />
+			</menu>
+		</menu>
+		<menu name="projectMenu" displayname="&amp;Project">
+			<action name="projectNew" />
+			<separator />
+			<action name="projectOpen" />
+			<menu name="projectRecentWorkspacesMenu" displayname="Open Recent &amp;Workspaces"></menu>
+            <action name="projectSave" />
+            <action name="projectClose" />
+            <separator />
+            <action name="projectInsertFiles" />
+            <action name="projectInsertProject" />
+            <separator />
+            <action name="projectProperties" />
+        </menu>
+        <menu name="buildMenu" displayname="&amp;Build">
+            <action name="buildCompileFile" />
+            <action name="buildBuild" />
+            <action name="buildRebuild" />
+            <action name="buildClean" />
+            <separator />
+            <action name="buildStopBuild" />
+            <separator />
+            <action name="buildBatchBuild" />
+            <menu name="buildConfigurationsMenu" displayname="Con&amp;figurations">
+                <action name="buildConfigurationsNew" />
+                <action name="buildConfigurationsEdit" />
+                <separator />
+            </menu>
+        </menu>
+        <menu name="debugMenu" displayname="&amp;Debug">
+            <action name="debugRun" />
+            <action name="debugRunToCursor" />
+            <separator />
+            <action name="debugStepOver" />
+            <action name="debugStepInto" />
+            <action name="debugStepOut" />
+            <separator />
+			<action name="debugAttach" />
+			<separator />
+			<action name="debugPause" />
+			<action name="debugRestart" />
+			<action name="debugStop" />
+            <separator />
+            <action name="debugShowNext" />
+            <action name="debugSetNext" />
+        </menu>
+        <menu name="toolsMenu" displayname="&amp;Tools">
+            <menu name="toolMacroMenu" displayname="&amp;Macros">
+                <action name="toolsMacroEdit" />
+                <separator />
+            </menu>
+            <separator />
+            <action name="toolsOptions" />
+            <action name="toolsConfigureSif" />
+            <action name="toolsAutoDetectSif" />
+        </menu>
+        <menu name="windowMenu" displayname="&amp;Window">
+            <action name="windowNew" />
+            <action name="windowSplit" />
+            <action name="windowClose" />
+            <action name="windowCloseAll" />
+            <separator />
+            <action name="windowCascade" />
+            <action name="windowTile" />
+        </menu>
+        <menu name="helpMenu" displayname="&amp;Help">
+            <action name="helpBack" />
+            <action name="helpForward" />
+            <action name="helpPrevious" />
+            <action name="helpNext" />
+            <separator />
+        <!-- !!! whatsThis not implemented
+            <action name="whatsThis" />
+            <separator />
+        -->
+            <action name="helpAbout" />
+        </menu>
+    </menus>
+    <toolbars>
+        <toolbar name="fileToolbar" displayname="File">
+            <action name="fileNew" />
+            <separator />
+            <action name="fileOpen" />
+            <action name="fileSave" />
+            <action name="fileSaveAll" />
+        </toolbar>
+        <toolbar name="editToolbar" displayname="Edit">
+            <action name="editUndo" />
+            <action name="editRedo" />
+            <separator />
+            <action name="editCut" />
+            <action name="editCopy" />
+            <action name="editPaste" />
+            <separator />
+            <action name="editFind" />
+            <separator />
+            <action name="editFindInFiles" />
+        </toolbar>
+        <toolbar name="buildToolbar" displayname="Build">
+            <action name="buildCompileFile" />
+            <action name="buildBuild" />
+            <separator />
+            <action name="buildStopBuild" />
+        </toolbar>
+        <toolbar name="debugToolbar" displayname="Debug">
+            <action name="debugShowNext" />
+            <action name="debugRunToCursor" />
+                        <action name="debugStepOver" />
+            <action name="debugStepInto" />
+            <action name="debugStepOut" />
+            <separator />
+			<action name="debugRun" />
+            <action name="debugPause" />
+			<action name="debugStop" />
+			<action name="debugRestart" />
+            <separator />
+            <action name="debugAttach" />
+            <action name="debugSetNext" />
+        </toolbar>
+        <toolbar name="helpToolbar" displayname="Help">
+                <!-- whatsThis not implemented
+            <action name="whatsThis" />
+            <separator />
+                -->
+            <action name="helpBack" />
+            <action name="helpForward" />
+        </toolbar>
+        <toolbar name="macroToolbar" displayname="Macros">
+        </toolbar>
+    </toolbars>
+</ui>

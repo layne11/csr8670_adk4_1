@@ -1,0 +1,6 @@
+SUPPORTED_DSP_CORES += gemini
+KALASM3_CORES       += gemini
+gemini_kalasm3_flags = -DGEMINI -DKAL_ARCH3 -DKALASM3 -g -mchip=gemini
+gemini_link_flags    =  -DGEMINI
+gemini_elf2kap_flags = -b
+gemini_arch_dir      = gemini

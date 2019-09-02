@@ -1,0 +1,31 @@
+[00000000.0001] Kalimba plugin built on Sep 16 2016
+[00000000.0002] KalEnv constructor called
+[00000000.0319] KalEnv destructed
+[00000000.0356] KalEnv constructor called
+[00000000.0470] KalEnv destructed
+[00000000.0472] KalEnv constructor called
+[00000000.0567] KalEnv destructed
+[00000000.1020] KalEnv constructor called
+[00000000.1160] KalEnv destructed
+[00000000.1196] KalEnv constructor called
+[00000000.1340] KalEnv destructed
+[00000000.1342] KalEnv constructor called
+[00000000.1431] KalEnv destructed
+[00000000.1608] KalEnv constructor called
+[00000000.1722] KalEnv destructed
+[00000000.1764] KalEnv constructor called
+[00000000.1874] KalEnv destructed
+[00000000.1875] KalEnv constructor called
+[00000000.1991] KalEnv destructed
+[00000000.2156] KalEnv constructor called
+[00000000.2277] KalEnv destructed
+[00000000.2310] KalEnv constructor called
+[00000000.2450] KalEnv destructed
+[00000000.2451] KalEnv constructor called
+[00000000.2580] KalEnv destructed
+[00000000.2696] KalEnv constructor called
+[00000000.2823] KalEnv destructed
+[00000000.2857] KalEnv constructor called
+[00000000.2984] KalEnv destructed
+[00000000.2985] KalEnv constructor called
+[00000000.3108] KalEnv destructed

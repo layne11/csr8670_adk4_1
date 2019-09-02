@@ -1,0 +1,1 @@
+file="C:\devp4\dev_desktop\depot\bg\main\tools\SampleAudioPrompts\8kHz_16bit\601_Prompts_Your_Headset_Is_Connected_8k.wav",compression=ADPCM,rate=8000,channels=Mono

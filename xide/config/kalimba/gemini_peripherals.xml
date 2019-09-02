@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<chip name="Gemini" defaultFormat="H" supportedFormats="SUHBF">
+
+<peripheral name="Interrupt Controller">
+   <register region="DM2" addr="fffe11" name="INT_GBL_ENABLE"                     read="1"     write="1"     width="1" />
+   <register region="DM2" addr="fffe12" name="INT_ENABLE"                         read="1"     write="1"     width="1" />
+   <register region="DM2" addr="fffe14" name="INT_SOURCES_EN"                     read="1"     write="1"     width="10"/>
+   <register region="DM2" addr="fffe15" name="INT_PRIORITIES"                     read="1"     write="1"     width="20"/>
+   <register region="DM2" addr="fffe17" name="INT_ACK"                            read="1"     write="1"     width="1" />
+   <register region="DM2" addr="fffe18" name="INT_SOURCE"                         read="1"     write="0"     width="6" />
+   <register region="DM2" addr="fffe16" name="INT_LOAD_INFO"                      read="1"     write="1"     width="15"/>
+   <register region="DM2" addr="fffe19" name="INT_SAVE_INFO"                      read="1"     write="0"     width="15"/>
+   <register region="DM2" addr="fffe1a" name="INT_ADDR"                           read="1"     write="1"     width="24"/>
+   <register region="DM2" addr="fffe13" name="INT_CLK_SWITCH_EN"                  read="1"     write="1"     width="1" />
+   <register region="DM2" addr="fffe4e" name="INT_CLOCK_DIVIDE_RATE"              read="1"     write="1"     width="16"/>
+</peripheral>
+
+
+<peripheral name="Interrupt Events">
+   <register region="DM2" addr="fffe00" name="INT_SW_ERROR_EVENT_TRIGGER"         read="avoid" write="avoid" width="0" />
+   <register region="DM2" addr="fffe57" name="INT_SW0_EVENT"                      read="1"     write="1"     width="1" />
+   <register region="DM2" addr="fffe58" name="INT_SW1_EVENT"                      read="1"     write="1"     width="1" />
+   <register region="DM2" addr="fffe59" name="INT_SW2_EVENT"                      read="1"     write="1"     width="1" />
+   <register region="DM2" addr="fffe5a" name="INT_SW3_EVENT"                      read="1"     write="1"     width="1" />
+   <register region="DM2" addr="fffe1b" name="DSP2MCU_EVENT_DATA"                 read="1"     write="1"     width="16"/>
+   <register region="DM2" addr="fffe1d" name="MCU2DSP_EVENT_DATA"                 read="1"     write="0"     width="16"/>
+</peripheral>
+
+
+<peripheral name="Timers">
+   <register region="DM2" addr="fffe71" name="TIMER_TIME"                         read="1"     write="0"     width="24"/>
+   <register region="DM2" addr="fffe72" name="TIMER_TIME_MS"                      read="1"     write="0"     width="8" />
+   <register region="DM2" addr="fffe1f" name="TIMER1_EN"                          read="1"     write="1"     width="1" />
+   <register region="DM2" addr="fffe20" name="TIMER2_EN"                          read="1"     write="1"     width="1" />
+   <register region="DM2" addr="fffe21" name="TIMER1_TRIGGER"                     read="1"     write="1"     width="24"/>
+   <register region="DM2" addr="fffe22" name="TIMER2_TRIGGER"                     read="1"     write="1"     width="24"/>
+</peripheral>
+
+
+<peripheral name="MMU Ports">
+   <register region="DM2" addr="fffe2b" name="READ_PORT0_DATA"                    read="avoid" write="0"     width="24"/>
+   <register region="DM2" addr="fffe2c" name="READ_PORT1_DATA"                    read="avoid" write="0"     width="24"/>
+   <register region="DM2" addr="fffe2d" name="READ_PORT2_DATA"                    read="avoid" write="0"     width="24"/>
+   <register region="DM2" addr="fffe2e" name="READ_PORT3_DATA"                    read="avoid" write="0"     width="24"/>
+   <register region="DM2" addr="fffe2f" name="READ_PORT4_DATA"                    read="avoid" write="0"     width="24"/>
+   <register region="DM2" addr="fffe30" name="READ_PORT5_DATA"                    read="avoid" write="0"     width="24"/>
+   <register region="DM2" addr="fffe31" name="READ_PORT6_DATA"                    read="avoid" write="0"     width="24"/>
+   <register region="DM2" addr="fffe32" name="READ_PORT7_DATA"                    read="avoid" write="0"     width="24"/>
+   <register region="DM2" addr="fffe7b" name="READ_PORT0_CONFIG"                  read="1"     write="1"     width="4" />
+   <register region="DM2" addr="fffe7c" name="READ_PORT1_CONFIG"                  read="1"     write="1"     width="4" />
+   <register region="DM2" addr="fffe7d" name="READ_PORT2_CONFIG"                  read="1"     write="1"     width="4" />
+   <register region="DM2" addr="fffe7e" name="READ_PORT3_CONFIG"                  read="1"     write="1"     width="4" />
+   <register region="DM2" addr="fffe7f" name="READ_PORT4_CONFIG"                  read="1"     write="1"     width="4" />
+   <register region="DM2" addr="fffe80" name="READ_PORT5_CONFIG"                  read="1"     write="1"     width="4" />
+   <register region="DM2" addr="fffe81" name="READ_PORT6_CONFIG"                  read="1"     write="1"     width="4" />
+   <register region="DM2" addr="fffe82" name="READ_PORT7_CONFIG"                  read="1"     write="1"     width="4" />
+   <register region="DM2" addr="fffe23" name="WRITE_PORT0_DATA"                   read="0"     write="avoid" width="24"/>
+   <register region="DM2" addr="fffe24" name="WRITE_PORT1_DATA"                   read="0"     write="avoid" width="24"/>
+   <register region="DM2" addr="fffe25" name="WRITE_PORT2_DATA"                   read="0"     write="avoid" width="24"/>
+   <register region="DM2" addr="fffe26" name="WRITE_PORT3_DATA"                   read="0"     write="avoid" width="24"/>
+   <register region="DM2" addr="fffe27" name="WRITE_PORT4_DATA"                   read="0"     write="avoid" width="24"/>
+   <register region="DM2" addr="fffe28" name="WRITE_PORT5_DATA"                   read="0"     write="avoid" width="24"/>
+   <register region="DM2" addr="fffe29" name="WRITE_PORT6_DATA"                   read="0"     write="avoid" width="24"/>
+   <register region="DM2" addr="fffe2a" name="WRITE_PORT7_DATA"                   read="0"     write="avoid" width="24"/>
+   <register region="DM2" addr="fffe73" name="WRITE_PORT0_CONFIG"                 read="1"     write="1"     width="4" />
+   <register region="DM2" addr="fffe74" name="WRITE_PORT1_CONFIG"                 read="1"     write="1"     width="4" />
+   <register region="DM2" addr="fffe75" name="WRITE_PORT2_CONFIG"                 read="1"     write="1"     width="4" />
+   <register region="DM2" addr="fffe76" name="WRITE_PORT3_CONFIG"                 read="1"     write="1"     width="4" />
+   <register region="DM2" addr="fffe77" name="WRITE_PORT4_CONFIG"                 read="1"     write="1"     width="4" />
+   <register region="DM2" addr="fffe78" name="WRITE_PORT5_CONFIG"                 read="1"     write="1"     width="4" />
+   <register region="DM2" addr="fffe79" name="WRITE_PORT6_CONFIG"                 read="1"     write="1"     width="4" />
+   <register region="DM2" addr="fffe7a" name="WRITE_PORT7_CONFIG"                 read="1"     write="1"     width="4" />
+   <register region="DM2" addr="fffe33" name="PORT_BUFFER_SET"                    read="avoid" write="avoid" width="0" />
+</peripheral>
+
+
+<peripheral name="Core Control/State">
+   <register region="DM2" addr="fffe40" name="MM_DOLOOP_START"                    read="1"     write="1"     width="24"/>
+   <register region="DM2" addr="fffe41" name="MM_DOLOOP_END"                      read="1"     write="1"     width="24"/>
+   <register region="DM2" addr="fffe42" name="MM_QUOTIENT"                        read="1"     write="1"     width="24"/>
+   <register region="DM2" addr="fffe43" name="MM_REM"                             read="1"     write="1"     width="24"/>
+   <register region="DM2" addr="fffe44" name="MM_RINTLINK"                        read="1"     write="1"     width="24"/>
+   <register region="DM2" addr="fffe89" name="BITREVERSE_VAL"                     read="1"     write="1"     width="24"/>
+   <register region="DM2" addr="fffe8a" name="BITREVERSE_DATA"                    read="1"     write="0"     width="24"/>
+   <register region="DM2" addr="fffe8b" name="BITREVERSE_DATA16"                  read="1"     write="0"     width="24"/>
+   <register region="DM2" addr="fffe8c" name="BITREVERSE_ADDR"                    read="1"     write="0"     width="24"/>
+   <register region="DM2" addr="fffe93" name="ARITHMETIC_MODE"                    read="1"     write="1"     width="5" />
+</peripheral>
+
+
+<peripheral name="PIOs">
+   <register region="DM2" addr="fffe4f" name="PIO_IN"                             read="1"     write="0"     width="24"/>
+   <register region="DM2" addr="fffe51" name="PIO_OUT"                            read="1"     write="1"     width="24"/>
+   <register region="DM2" addr="fffe53" name="PIO_DIR"                            read="1"     write="1"     width="24"/>
+   <register region="DM2" addr="fffe50" name="PIO2_IN"                            read="1"     write="0"     width="8" />
+   <register region="DM2" addr="fffe52" name="PIO2_OUT"                           read="1"     write="1"     width="8" />
+   <register region="DM2" addr="fffe54" name="PIO2_DIR"                           read="1"     write="1"     width="8" />
+   <register region="DM2" addr="fffe55" name="PIO_EVENT_EN_MASK"                  read="1"     write="1"     width="24"/>
+   <register region="DM2" addr="fffe56" name="PIO2_EVENT_EN_MASK"                 read="1"     write="1"     width="8" />
+</peripheral>
+
+
+<peripheral name="PM Flash Window Config">
+   <register region="DM2" addr="fffe65" name="PM_WIN_ENABLE"                      read="1"     write="1"     width="1" />
+   <register region="DM2" addr="fffe64" name="NOSIGNX_PMWIN"                      read="1"     write="1"     width="1" />
+   <register region="DM2" addr="fffe83" name="PM_FLASHWIN_START_ADDR"             read="1"     write="1"     width="23"/>
+   <register region="DM2" addr="fffe84" name="PM_FLASHWIN_SIZE"                   read="1"     write="1"     width="24"/>
+   <register region="DM2" addr="fffee0" name="PM_FLASHWIN_CACHE_SIZE"             read="1"     write="1"     width="1" />
+</peripheral>
+
+
+<peripheral name="DM Flash Window Config">
+   <register region="DM2" addr="fffe5b" name="FLASH_WINDOW1_START_ADDR"           read="1"     write="1"     width="23"/>
+   <register region="DM2" addr="fffe5c" name="FLASH_WINDOW2_START_ADDR"           read="1"     write="1"     width="23"/>
+   <register region="DM2" addr="fffe5d" name="FLASH_WINDOW3_START_ADDR"           read="1"     write="1"     width="23"/>
+   <register region="DM2" addr="fffe61" name="FLASHWIN1_CONFIG"                   read="1"     write="1"     width="2" />
+   <register region="DM2" addr="fffe62" name="FLASHWIN2_CONFIG"                   read="1"     write="1"     width="2" />
+   <register region="DM2" addr="fffe63" name="FLASHWIN3_CONFIG"                   read="1"     write="1"     width="2" />
+</peripheral>
+
+
+<peripheral name="MCU Window Config">
+   <register region="DM2" addr="fffe5f" name="NOSIGNX_MCUWIN1"                    read="1"     write="1"     width="1" />
+   <register region="DM2" addr="fffe60" name="NOSIGNX_MCUWIN2"                    read="1"     write="1"     width="1" />
+</peripheral>
+
+
+<peripheral name="Stack Config">
+   <register region="DM2" addr="fffe66" name="STACK_START_ADDR"                   read="1"     write="1"     width="24"/>
+   <register region="DM2" addr="fffe67" name="STACK_END_ADDR"                     read="1"     write="1"     width="24"/>
+   <register region="DM2" addr="fffe68" name="STACK_POINTER"                      read="1"     write="1"     width="24"/>
+   <register region="DM2" addr="fffe69" name="STACK_OVERFLOW_PC"                  read="1"     write="0"     width="24"/>
+   <register region="DM2" addr="fffe6a" name="FRAME_POINTER"                      read="1"     write="1"     width="24"/>
+</peripheral>
+
+
+<peripheral name="Profiling">
+   <register region="DM2" addr="fffe6b" name="NUM_RUN_CLKS_MS"                    read="1"     write="1"     width="8" />
+   <register region="DM2" addr="fffe6c" name="NUM_RUN_CLKS_LS"                    read="1"     write="1"     width="24"/>
+   <register region="DM2" addr="fffe6d" name="NUM_INSTRS_MS"                      read="1"     write="1"     width="8" />
+   <register region="DM2" addr="fffe6e" name="NUM_INSTRS_LS"                      read="1"     write="1"     width="24"/>
+   <register region="DM2" addr="fffe6f" name="NUM_STALLS_MS"                      read="1"     write="1"     width="8" />
+   <register region="DM2" addr="fffe70" name="NUM_STALLS_LS"                      read="1"     write="1"     width="24"/>
+   <register region="DM2" addr="fffe9f" name="DBG_COUNTERS_EN"                    read="1"     write="1"     width="1" />
+</peripheral>
+
+
+<peripheral name="Miscellaneous">
+   <register region="DM2" addr="fffe4d" name="CLOCK_DIVIDE_RATE"                  read="1"     write="1"     width="16"/>
+   <register region="DM2" addr="fffe94" name="FORCE_FAST_MMU"                     read="1"     write="1"     width="1" />
+   <register region="DM2" addr="fffe1e" name="DOLOOP_CACHE_EN"                    read="1"     write="1"     width="1" />
+   <register region="DM2" addr="fffe1c" name="PC_STATUS"                          read="1"     write="0"     width="24"/>
+</peripheral>
+
+
+<peripheral name="ROM Patches">
+   <register region="DM2" addr="fffeb0" name="DSP_ROM_PATCH0_ADDR"                read="1"     write="1"     width="23"/>
+   <register region="DM2" addr="fffec0" name="DSP_ROM_PATCH0_BRANCH"              read="1"     write="1"     width="14"/>
+   <register region="DM2" addr="fffeb1" name="DSP_ROM_PATCH1_ADDR"                read="1"     write="1"     width="23"/>
+   <register region="DM2" addr="fffec1" name="DSP_ROM_PATCH1_BRANCH"              read="1"     write="1"     width="14"/>
+   <register region="DM2" addr="fffeb2" name="DSP_ROM_PATCH2_ADDR"                read="1"     write="1"     width="23"/>
+   <register region="DM2" addr="fffec2" name="DSP_ROM_PATCH2_BRANCH"              read="1"     write="1"     width="14"/>
+   <register region="DM2" addr="fffeb3" name="DSP_ROM_PATCH3_ADDR"                read="1"     write="1"     width="23"/>
+   <register region="DM2" addr="fffec3" name="DSP_ROM_PATCH3_BRANCH"              read="1"     write="1"     width="14"/>
+   <register region="DM2" addr="fffeb4" name="DSP_ROM_PATCH4_ADDR"                read="1"     write="1"     width="23"/>
+   <register region="DM2" addr="fffec4" name="DSP_ROM_PATCH4_BRANCH"              read="1"     write="1"     width="14"/>
+   <register region="DM2" addr="fffeb5" name="DSP_ROM_PATCH5_ADDR"                read="1"     write="1"     width="23"/>
+   <register region="DM2" addr="fffec5" name="DSP_ROM_PATCH5_BRANCH"              read="1"     write="1"     width="14"/>
+   <register region="DM2" addr="fffeb6" name="DSP_ROM_PATCH6_ADDR"                read="1"     write="1"     width="23"/>
+   <register region="DM2" addr="fffec6" name="DSP_ROM_PATCH6_BRANCH"              read="1"     write="1"     width="14"/>
+   <register region="DM2" addr="fffeb7" name="DSP_ROM_PATCH7_ADDR"                read="1"     write="1"     width="23"/>
+   <register region="DM2" addr="fffec7" name="DSP_ROM_PATCH7_BRANCH"              read="1"     write="1"     width="14"/>
+   <register region="DM2" addr="fffeb8" name="DSP_ROM_PATCH8_ADDR"                read="1"     write="1"     width="23"/>
+   <register region="DM2" addr="fffec8" name="DSP_ROM_PATCH8_BRANCH"              read="1"     write="1"     width="14"/>
+   <register region="DM2" addr="fffeb9" name="DSP_ROM_PATCH9_ADDR"                read="1"     write="1"     width="23"/>
+   <register region="DM2" addr="fffec9" name="DSP_ROM_PATCH9_BRANCH"              read="1"     write="1"     width="14"/>
+   <register region="DM2" addr="fffeba" name="DSP_ROM_PATCH10_ADDR"               read="1"     write="1"     width="23"/>
+   <register region="DM2" addr="fffeca" name="DSP_ROM_PATCH10_BRANCH"             read="1"     write="1"     width="14"/>
+   <register region="DM2" addr="fffebb" name="DSP_ROM_PATCH11_ADDR"               read="1"     write="1"     width="23"/>
+   <register region="DM2" addr="fffecb" name="DSP_ROM_PATCH11_BRANCH"             read="1"     write="1"     width="14"/>
+   <register region="DM2" addr="fffebc" name="DSP_ROM_PATCH12_ADDR"               read="1"     write="1"     width="23"/>
+   <register region="DM2" addr="fffecc" name="DSP_ROM_PATCH12_BRANCH"             read="1"     write="1"     width="14"/>
+   <register region="DM2" addr="fffebd" name="DSP_ROM_PATCH13_ADDR"               read="1"     write="1"     width="23"/>
+   <register region="DM2" addr="fffecd" name="DSP_ROM_PATCH13_BRANCH"             read="1"     write="1"     width="14"/>
+   <register region="DM2" addr="fffebe" name="DSP_ROM_PATCH14_ADDR"               read="1"     write="1"     width="23"/>
+   <register region="DM2" addr="fffece" name="DSP_ROM_PATCH14_BRANCH"             read="1"     write="1"     width="14"/>
+   <register region="DM2" addr="fffebf" name="DSP_ROM_PATCH15_ADDR"               read="1"     write="1"     width="23"/>
+   <register region="DM2" addr="fffecf" name="DSP_ROM_PATCH15_BRANCH"             read="1"     write="1"     width="14"/>
+</peripheral>
+</chip>

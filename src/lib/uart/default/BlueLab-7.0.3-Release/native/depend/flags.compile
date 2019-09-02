@@ -1,0 +1,17 @@
+-g
+-O
+-fno-builtin-memcpy
+-ansi
+-pedantic
+-Wall
+-Wmissing-prototypes
+-Wstrict-prototypes
+-Wsign-compare
+-Wredundant-decls
+-Werror
+-IE:\ivt_work_ycc\prj\extern\8670_solution_debug_svn\8670_SVN\tools/include/firmware
+-IE:\ivt_work_ycc\prj\extern\8670_solution_debug_svn\8670_SVN\tools/include/standard
+-IE:\ivt_work_ycc\prj\extern\8670_solution_debug_svn\8670_SVN\tools/include/profiles/BlueLab-7.0.3-Release
+-Wp,-MD,uart/default/BlueLab-7.0.3-Release/native/depend/
+-Wp,-MQ,uart/default/BlueLab-7.0.3-Release/native/dummy.force
+-IE:/ivt_work_ycc/prj/extern/8670_solution_debug_svn/8670_SVN/src/lib/uart

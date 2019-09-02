@@ -1,0 +1,26 @@
+<project buildenvironment="{84faf732-1340-4049-9094-244167adf571}"
+		 buildenvironmentname="vm"
+		 buildenvironmentoption=""
+		 executionenvironment="{2b2c6868-a56e-4266-962a-cddf1c979343}"
+		 executionenvironmentname="vm"
+		 executionenvironmentoption="" >
+ <folder name="C Files" >
+  <extension name="c" />
+  <file path="main.c" />
+ </folder>
+ <folder name="Header Files" >
+  <extension name="h" />
+ </folder>
+ <properties currentconfiguration="Release" >
+  <configuration name="Release" >
+   <property key="buildtransport" >0</property>
+   <property key="debugtransport" >[SPI|LPT1|No]</property>
+   <property key="firmware" >0</property>
+   <property key="defines" ></property>
+   <property key="libs" ></property>
+   <property key="output" ></property>
+   <property key="stacksize" ></property>
+   <property key="buildMatch">(file):(line):</property>
+  </configuration>
+ </properties>
+</project>

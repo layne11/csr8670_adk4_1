@@ -1,0 +1,3 @@
+---- EventUsrBleStartBonding Matches (2 in 2 files) ----
+Main.c (e:\work_layne\layne\csr_adk\apps\sink):        case EventUsrBleStartBonding:
+Sink_events.h (e:\work_layne\layne\csr_adk\apps\sink):/*0x40D0*/    EventUsrBleStartBonding,

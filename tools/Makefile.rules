@@ -1,0 +1,168 @@
+#-*-Makefile-*-
+# Makefile with rules for BlueLab applications and libraries
+
+############################################################
+# The variable without which none of this will work
+#
+# BLUELAB (default from environment)
+#  Specifies the directory containing your BlueLab installation. This
+# is normally picked up from the BLUELAB environment variable set by
+# the BlueLab installer, so you'll only need to change it when
+# switching between BlueLab installations.
+
+
+############################################################
+# Local variables (all lower case)
+
+BL=$(patsubst %/,%,$(dir $(BLUELAB)))
+GCC_VER=3.3.3
+
+lib_dir    = $(BLUELAB)/lib/$(2)/$(1)
+firmware_inc_dir = $(BLUELAB)/include/firmware
+standard_inc_dir = $(BLUELAB)/include/standard
+profiles_inc_dir = $(BLUELAB)/include/profiles/$(1)
+tool_dir   = $(BLUELAB)/lib/gcc-lib/$($(1)_tool_path)/$(GCC_VER)
+gcc        = $(BLUELAB)/bin/$($(1)_tool_basename)-gcc-$(GCC_VER) -B$(call tool_dir,$(1))\\ $($(1)_compile_flags)
+cpre       = $(call gcc,vm) -E -x c
+
+
+appquery   	= $(BLUELAB)/bin/appquery
+ar         	= $(BLUELAB)/bin/xap-local-xap-ar
+copyfile	= $(BLUELAB)/bin/copyfile
+del        	= $(BLUELAB)/bin/remove
+mkdir      	= $(BLUELAB)/bin/createpath
+pwd        	= $(BLUELAB)/bin/workingdirectory
+packfile   	= $(BLUELAB)/bin/packfile
+nvscmd     	= $(BLUELAB)/bin/nvscmd
+pscli      	= $(BLUELAB)/bin/pscli
+vmbuilder  	= $(BLUELAB)/bin/vmbuilder
+genparse   	= $(BLUELAB)/bin/genparse
+buttonparse	= $(BLUELAB)/bin/buttonparsepro
+ledparse   	= $(BLUELAB)/bin/ledparse
+recordflags	= $(BLUELAB)/bin/recordflags
+kalpac     	= $(BLUELAB)/bin/kalpac2
+kalasm     	= $(BLUELAB)/bin/kalasm2.exe
+elf2kap    	= $(BLUELAB)/bin/elf2kap.exe
+kas	   		= $(BLUELAB)/bin/kas.exe
+kar	   		= $(BLUELAB)/bin/kar.exe
+link       	= $(BLUELAB)/bin/klink.exe
+kmap       	= $(BLUELAB)/bin/kmapper.exe
+doxygen    	= $(BLUELAB)/doc/doxygen
+cat        	= $(BLUELAB)/bin/cat.exe
+gattdbgen  	= $(BLUELAB)/bin/gattdbgen.exe
+
+# CSR internal utility, not shipped
+lint       = //Appserver03/bcsw/tools/pclint/8.00/lint-nt
+
+optimise  = -g -O -fno-builtin-memcpy
+warnings  = -ansi -pedantic -Wall -Wmissing-prototypes -Wstrict-prototypes -Wsign-compare -Wredundant-decls -Werror
+includes  = -I$(firmware_inc_dir) -I$(standard_inc_dir) -I$(call profiles_inc_dir,$(LIBRARY_VERSION))
+# This could just be -MD -MF$(dir $@)depend/$(notdir $*)
+# except gcc2.95.3 doesn't understand -MF
+depend    = -Wp,-MD,$(dir $@)depend/$(notdir $*) -Wp,-MQ,$@
+
+compileflags = $(optimise) $(warnings) $(includes) $(depend)
+ifeq ($(GENERATE_MAP),1)
+	linkflags = $(optimise) $(LINKFLAGS)
+else
+	linkflags = $(optimise) $(LINKFLAGS) -Xlinker --no-map
+endif
+lintflags = -u -b -w3 bluelab.lnt
+kalasmflags = -I$(BL)/kalimba -Fg$(BL)/kalimba/groups.asm -Fd$(BL)/kalimba/default.asm
+kalasm3flags = -I$(BL)/kalimba -I$(BL)/kalimba/architecture
+klinkflags = --relax --gc-sections
+# Function to work out where the dependency files are for a list of .o's
+dependencies = $(foreach o,$(1),$(dir $(o))depend/$(basename $(notdir $(o))))
+
+# Give the tails of any items starting with the string
+tails =$(patsubst $(1)%,%,$(filter $(1)%,$(2)))
+# Pull a named value of a name=value list
+lookup=$(call tails,$(strip $(1))=,$(2))
+lookup_or_first=$(firstword $(call tails,$(strip $(1))=,$(2)) $(2))
+
+
+############################################################
+# Rules for building things
+
+	# flags, model
+define docompile
+	@$(mkdir) $(dir $@)depend/
+	$(call gcc,$(2)) $(compileflags) $(1) -c $< -o $@
+endef
+define docompile_s
+	$(call gcc,$(2)) $(compileflags) $(1) -S $< -o $@
+endef
+
+define dogattdbi
+	$(gattdbgen) -i $^
+endef
+	# library name
+define dogattdbi_pre
+	$(cpre) $(DEFS) $(includes) -MD -MF $1/$*.dbi.d -MT $1/$*.dbi_ $< -o $1/$*.dbi_
+endef
+
+%.a :
+	$(ar) cr $@ $^
+
+%.c %.h : %.parse
+	$(genparse) $* $^
+
+%.c %.h : %.button_
+	$(buttonparse) $^ $*
+
+%.button_ : %.button depend/flags.compile
+	$(cpre) $(DEFS) $*.button -o $@
+
+
+%.c %.h : %.led_
+	$(ledparse) $^ $*
+%.led_ : %.led depend/flags.compile
+	$(cpre) $(DEFS) $*.led -o $@
+
+
+%.psr_ : %.psr depend/flags.compile
+	$(cpre) $(DEFS) $*.psr -o $@
+
+%.processed.ptn : %.ptn depend/flags.compile
+	$(cpre) $(DEFS) $*.ptn -o $@
+
+
+%.c %.h : %.db_
+	$(gattdbgen) $^
+
+%.db_ depend/%.db.d: %.db depend/flags.compile
+	$(cpre) $(DEFS) $(includes) -MD -MF depend/$*.db.d -MT $*.db_ $< -o $*.db_
+
+############################################################
+# Map the reported chip name to the 'hardware' name used 
+# internally within the SDK makefiles.
+#
+# use lookup_or_first function to retrieve the hardware name.
+CHIP_NAMES = 	unknown \
+				gdn=gordon \
+				gem=gemini \
+				dal=dale \
+				rck=rick
+
+############################################################
+# Lookup for the hardware default execution mode: vm, native or assisted.
+
+HW_DEFAULT = unknown \
+			 gemini=vm \
+			 dale=assisted \
+			 gordon=assisted \
+			 rick=assisted
+
+############################################################
+# Add special rules definitions for execution modes and DSP cores
+
+exclude := herbie
+include $(wildcard $(BLUELAB)/Makefile.mode.*)
+include $(foreach d, $(exclude), $(filter-out $(BLUELAB)/Makefile.dsp.$(d), $(wildcard $(BLUELAB)/Makefile.dsp.*)))
+
+############################################################
+# If LIBRARY_VERSION is blank (which is the property default from xIDE) replace it with the default value
+# which is programmatically constructed from the version MODULE_DEFINEd in devHost/make/modules_bluelab.
+LIBRARY_VERSION:=$(if $(LIBRARY_VERSION),$(LIBRARY_VERSION),BlueLab-7.1-Release)
+
+# vim: set ft=make:

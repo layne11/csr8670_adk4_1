@@ -1,0 +1,16 @@
+asm_files = faststream.asm
+
+header_files = faststream_library.h \
+faststream.h
+
+
+$(eval $(call header_rules,$(header_files)))
+
+$(eval $(call rules,$(asm_files)))
+
+# one line per variant...
+$(eval $(call rules_variant,debug,$(FL_DEBUG),$(asm_files)))
+
+$(eval $(call rules_variant,external,           -DSBC_USE_EXTERNAL_MEMORY            ,$(asm_files)))
+#$(eval $(call rules_variant,external_patch_libs,-DSBC_USE_EXTERNAL_MEMORY $(FL_PATCH),$(asm_files)))
+

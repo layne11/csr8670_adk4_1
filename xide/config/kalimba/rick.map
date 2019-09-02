@@ -1,0 +1,19 @@
+<memory>
+    <mapping side="pm"  addr="000000" size="008000" type="ram"       name="PM RAM"                        tag="CODE"></mapping>
+    <mapping side="pm"  addr="008000" size="004000" type="ram"       name="PM RAM/Cache"                  tag="CODE"></mapping>
+    <mapping side="pm"  addr="00C000" size="FF4000" type="rom"       name="PM NVMEM Window"               tag="CODE"></mapping>
+
+    <mapping side="dm1" addr="000000" size="008000" type="ram"       name="DM1 RAM"                       tag="DATA"></mapping>
+    <mapping side="dm1" addr="020000" size="003000" type="ram"       name="DM1 Mapped PM MS 16 bits"      tag="DATA16"></mapping>
+    <mapping side="dm1" addr="030000" size="003000" type="ram"       name="DM1 Mapped PM LS 16 bits"      tag="DATA16"></mapping>
+    <mapping side="dm1" addr="040000" size="003000" type="ram"       name="DM1 Mapped PM 24 bits"         tag="DATA"></mapping>
+
+    <mapping side="dm2" addr="FF3000" size="008000" type="ram"       name="DM2 RAM"                       tag="DATA"></mapping>
+    <mapping side="dm2" addr="FFB000" size="001000" type="rom"       name="DM2 NVMEM Window 1 (small)"    tag="DATA"></mapping>
+    <mapping side="dm2" addr="FFC000" size="001000" type="rom"       name="DM2 NVMEM Window 2 (small)"    tag="DATA"></mapping>
+    <mapping side="dm2" addr="FFD000" size="001000" type="rom"       name="DM2 NVMEM Window 3 (small)"    tag="DATA"></mapping>
+    <mapping side="dm2" addr="D00000" size="100000" type="rom"       name="DM2 NVMEM Window 1 (large)"    tag="DATA"></mapping>
+    <mapping side="dm2" addr="E00000" size="100000" type="rom"       name="DM2 NVMEM Window 2 (large)"    tag="DATA"></mapping>
+    <mapping side="dm2" addr="F00000" size="0D0000" type="rom"       name="DM2 NVMEM Window 3 (large)"    tag="DATA"></mapping>
+    <mapping side="dm2" addr="FFFE00" size="000200" type="registers" name="DM2 Mem-mapped registers"      tag="DATA"></mapping>
+</memory>

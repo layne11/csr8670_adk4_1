@@ -1,0 +1,40 @@
+asm_files = frame_process.asm \
+frame_sync_utils.asm \
+sco_decode.asm \
+frame_sync_sidetone_mix_operator.asm \
+frame_sync_dac_sync.asm \
+frame_sync_sco_copy_operator.asm \
+frame_sync_buffer.asm \
+frame_sync_rate_detect.asm \
+frame_sync_aux_mix_operator.asm \
+frame_sync_sidetone_filter_operator.asm \
+frame_sync_hw_warp_operator.asm \
+frame_sync_sw_warp_operator.asm \
+usbio.asm
+
+header_files = frame_codec.h \
+frame_sync_library.h \
+frame_sync_dac_sync_operator.h \
+frame_sync_sco_copy_operator.h \
+frame_sync_sidetone_mix_operator.h \
+frame_sync_aux_mix_operator.h \
+frame_sync_sidetone_filter_operator.h \
+frame_sync_stream_macros.h \
+frame_sync_buffer.h \
+frame_sync_rate_detect.h \
+frame_sync_tsksched.h \
+frame_sync_hw_warp_operator.h \
+frame_sync_sw_warp_operator.h \
+usbio.h
+
+$(eval $(call header_rules,$(header_files)))
+
+$(eval $(call rules,$(asm_files)))
+
+# one line per variant...
+$(eval $(call rules_variant,debug,$(FL_DEBUG) -DFRAME_SYNC_DEBUG,$(asm_files)))
+
+# some base register variants
+$(foreach hw,$(KAL_BASE_REG_CORES), \
+  $(eval $(call rules_variant_core,base_regs,$(FL_BASE_REG),$(asm_files),$(hw))) \
+)

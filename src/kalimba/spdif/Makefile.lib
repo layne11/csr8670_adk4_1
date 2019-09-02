@@ -1,0 +1,22 @@
+asm_files = \
+     firmware_interface.asm \
+     spdif_stream_decode.asm \
+     spdif_frame_copy.asm \
+     output_interface_control.asm \
+     latency_measurement.asm \
+     report_events.asm
+
+header_files = spdif_frame_copy.h  spdif.h  spdif_library.h  spdif_stream_decode.h
+
+$(eval $(call header_rules,$(header_files)))
+
+$(eval $(call rules,$(asm_files)))
+
+# one line per variant...
+$(eval $(call rules_variant,debug,$(FL_DEBUG),$(asm_files)))
+$(eval $(call rules_variant,sink, -DSPDIF_OUTPUT_INTERFACE_CONTROL -DSPDIF_LATENCY_MEASUREMENT -DSPDIF_REPORT_EVENTS ,$(asm_files)))
+$(eval $(call rules_variant,sink_debug,$(FL_DEBUG) -DSPDIF_OUTPUT_INTERFACE_CONTROL -DSPDIF_LATENCY_MEASUREMENT -DSPDIF_REPORT_EVENTS ,$(asm_files)))
+$(eval $(call rules_variant,source_app, -DSPDIF_REPORT_EVENTS -DSPDIF_PCM_SUPPORT_ONLY,$(asm_files)))
+$(eval $(call rules_variant,source_app_debug,$(FL_DEBUG) -DSPDIF_REPORT_EVENTS -DSPDIF_PCM_SUPPORT_ONLY,$(asm_files)))
+$(eval $(call rules_variant,sink_multi_channel, -DSPDIF_LATENCY_MEASUREMENT -DSPDIF_REPORT_EVENTS ,$(asm_files)))
+$(eval $(call rules_variant,sink_multi_channel_debug,$(FL_DEBUG) -DSPDIF_LATENCY_MEASUREMENT -DSPDIF_REPORT_EVENTS ,$(asm_files)))

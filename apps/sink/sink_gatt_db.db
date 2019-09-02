@@ -1,0 +1,35 @@
+#include "gatt_server_db.dbi"
+#include "gatt_gap_server_db.dbi"
+/*#include "gatt_tmp_server_db.dbi"*/
+#ifdef GATT_BATTERY_SERVER
+#include "gatt_battery_server_db.dbi"
+#endif
+#ifdef GATT_TPS_SERVER
+#include "gatt_transmit_power_server_db.dbi"
+#endif
+#ifdef GATT_IAS_SERVER
+#include "gatt_imm_alert_server_db.dbi"
+#endif
+#ifdef GATT_LLS_SERVER
+#include "gatt_link_loss_server_db.dbi"
+#endif
+#ifdef GATT_HRS_SERVER
+#include "gatt_heart_rate_server_db.dbi"
+#endif
+#ifdef GATT_DIS_SERVER
+#include "gatt_device_info_server_db.dbi"
+#endif
+#if defined GATT_GAIA_SERVER && defined ENABLE_GAIA
+#include "gaia_db.dbi"
+#endif
+
+#ifdef GATT_BATTERY_SERVER
+ADD_BATTERY_SERVICE(1)
+#ifdef GATT_BATTERY_SERVER_REMOTE
+ADD_BATTERY_SERVICE(2)
+#endif
+#ifdef GATT_BATTERY_SERVER_PEER
+ADD_BATTERY_SERVICE(3)
+#endif
+#endif
+

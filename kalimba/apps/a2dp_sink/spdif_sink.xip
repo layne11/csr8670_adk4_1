@@ -1,0 +1,61 @@
+<project buildenvironment="{6907f3f0-0ed4-11d8-be02-0050dadfe87d}" buildenvironmentname="Kalimba Command Line" executionenvironmentoption="BC03MM binutils" buildenvironmentoption="" executionenvironmentname="Kalimba SPI" executionenvironment="{2ca81310-0ecd-11d8-be02-0050dadfe87d}" >
+ <folder name="Header Files" >
+  <file path="music_example.h" />
+  <file path="mips_profile.h" />
+  <file path="codec_decoder.h" />
+  <file path="default_eq_coefs.h" />
+  <file path="multichannel_output.h" />
+  <file path="multichannel_output_macros.h" />
+ </folder>
+ <file path="spdif_sink.asm" />
+ <file path="codec_resample.asm" />
+ <file path="codec_rate_adj.asm" />
+ <file path="music_example_system.asm" />
+ <file path="mips_profile.asm" />
+ <file path="spi_message.asm" />
+ <file path="vm_message.asm" />
+ <file path="usb_config.asm" />
+ <file path="music_example_config.asm" />
+ <file path="subwoofer.asm" />
+ <file path="user_eq.asm" />
+ <file path="multichannel_output.asm" />
+ <file path="sr_adjustment.asm" />
+ <file path="codec_tones.asm" />
+ <file path="util.asm" />
+ <file path="bass_boost.asm" />
+ <file path="bass_plus.asm" />
+ <file path="melod_expansion.asm" />
+ <file path="n3dv.asm" />
+ <properties currentconfiguration="Multi_Channel_Soundbar" >
+  <configuration name="Multi_Channel_Soundbar" >
+   <property key="BUILDENV" >0</property>
+   <property key="LIB_SET" >sdk</property>
+   <property key="audiocbuffersize" >1500</property>
+   <property key="bootstrap" >1</property>
+   <property key="codeccbuffersize" >4096</property>
+   <property key="debugmode" >1</property>
+   <property key="debugtransport" >[SPITRANS=USB SPIPORT=1]</property>
+   <property key="defines" >SPDIF_ENABLE, AC3_ENABLEx, AAC_ENABLEx, MP3_ENABLEx, WIRELESS_SUB_ENABLE, MULTI_CHANNEL_DISABLEx</property>
+   <property key="goodworkingbufferlevel" >0.65</property>
+   <property key="hardware" >0</property>
+   <property key="image" >image</property>
+   <property key="libs" >core, cbops, spdif_sink_multi_channel, codec, frame_sync, audio_proc, spi_comm, math, cvc_modules</property>
+   <property key="output" ></property>
+  </configuration>
+  <configuration name="Soundbar" >
+   <property key="BUILDENV" >0</property>
+   <property key="LIB_SET" >sdk</property>
+   <property key="audiocbuffersize" >1500</property>
+   <property key="bootstrap" >1</property>
+   <property key="codeccbuffersize" >4096</property>
+   <property key="debugmode" >1</property>
+   <property key="debugtransport" >[SPITRANS=USB SPIPORT=1]</property>
+   <property key="defines" >SPDIF_ENABLE, AC3_ENABLEx, AAC_ENABLEx, MP3_ENABLEx, WIRELESS_SUB_ENABLE, MULTI_CHANNEL_DISABLE</property>
+   <property key="goodworkingbufferlevel" >0.65</property>
+   <property key="hardware" >0</property>
+   <property key="image" >image</property>
+   <property key="libs" >core, cbops, spdif_sink, codec, frame_sync, audio_proc, spi_comm, math, cvc_modules</property>
+   <property key="output" ></property>
+  </configuration>
+ </properties>
+</project>

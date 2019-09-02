@@ -1,0 +1,17 @@
+asm_files = relay.asm\
+			stream_relay_common.asm
+
+header_files = stream_relay_library.h
+
+
+$(eval $(call header_rules,$(header_files)))
+
+$(eval $(call rules,$(asm_files)))
+
+# one line per variant...
+$(eval $(call rules_variant,debug,$(FL_DEBUG),$(asm_files)))
+
+
+
+
+

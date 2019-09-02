@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<properties envId="{............}">
+    <!-- M-1156 Allow .asm files to be excluded from a build -->
+    <propertygroup name="General">
+        <appliesto selector="asm"/>
+        <property type="boolean" key="includeinbuild" name="Include in build" defaultvalue="1">
+            <description>
+            <![CDATA[
+                Select 'Yes' to include this file in the build.
+            ]]>
+            </description>
+        </property>
+    </propertygroup>
+
+    <propertygroup name="General">
+        <appliesto selector="py"/>
+
+        <property type="boolean" key="runAtProjectLoad" name="Run when project is loaded" defaultvalue="0">
+            <description>
+            <![CDATA[
+                Set to yes to run the python script file when the project is loaded.
+            ]]>
+            </description>
+        </property>
+
+        <property type="boolean" key="runAtProjectClose" name="Run when project is closed" defaultvalue="0">
+            <description>
+            <![CDATA[
+                Set to yes to run the python script file when the project is closed.
+            ]]>
+            </description>
+        </property>
+    </propertygroup>
+
+    <propertygroup name="General">
+        <appliesto selector="project"/>
+
+        <property type="file" key="output" name="Output name" defaultvalue="">
+            <description>
+            <![CDATA[
+                Specify the name that you want to give the output file.
+                <p>If you leave this blank, then the project name will be used.
+            ]]>
+            </description>
+        </property>
+
+        <property type="text" key="defines" format="" name="Extra defines" defaultvalue="">
+            <description>
+            <![CDATA[
+                Specify additional preprocessor symbols to define here. These are passed
+                to kalasm2 using the -D command line option.
+                <p>Multiple symbols can be separated with a comma.
+            ]]>
+            </description>
+        </property>
+
+        <property type="text" key="libs" name="Libraries" defaultvalue="">
+            <description>
+            <![CDATA[
+                Specify the libraries to be combined with the assembler code.
+                <p>Multiple libraries can be separated with a comma.
+            ]]>
+            </description>
+        </property>
+
+        <property type ="list" key="hardware" internalkey="HARDWARE" format="passthrough" name="DSP hardware" defaultvalue="0">
+            <option fake="">Query chip</option>
+            <option internalval="gemini">CSR8510</option>
+            <option internalval="dale">CSR8640</option>
+            <option internalval="gordon">CSR8670</option>
+            <option internalval="rick">CSR8675/CSR8676</option>
+            <description>
+            <![CDATA[
+                Specify the method used to set the BlueCore DSP that will be targeted by the tool chain.
+                <p>
+                "Query chip" results in BlueLab automatically detecting the DSP present by detecting the BlueCore 
+                variant that is currently connected. If no BlueCore (or a BlueCore without a DSP) is connected the 
+                tool chain will refuse to build DSP applications.
+                <p>
+                Choosing a particular BlueCore Hardware will force the tool chain to build for that target BlueCore 
+                DSP.
+            ]]>
+            </description>
+        </property>
+
+        <property type="list" key="BUILDENV" format="define" name="Build Environment" defaultvalue="0">
+            <option internalval="KALASM3">Kalasm3 and binutils</option>
+            <description>
+            <![CDATA[
+                <P>Specify which toolchain to use.  Kalasm3 is the latest version of the assembler, intended for targeting newer CSR products.</P>
+            ]]>
+            </description>
+        </property>
+
+
+        <property type ="list" key="bootstrap" internalkey="BOOTSTRAP" format="passthrough" name="Bootstrap mode" defaultvalue="0">
+            <option fake="">Off</option>
+            <option internalval="1">On</option>
+            <description>
+            <![CDATA[
+                This option controls whether or not your Kalimba application
+                loads under the control of the DSP, by using a bootstrap program.
+                This can result in a shorter initial loading time.
+
+                Please note that this option only has an effect on BlueCore 5
+                chips and beyond. It has no effect on BlueCore 3 chips.
+            ]]>
+            </description>
+        </property>
+        <property type="text" key="LIB_SET" name="Library set" defaultvalue="sdk">
+              <description>
+                <![CDATA[
+                Select the library set to use, defaults to sdk
+                ]]>
+              </description>
+            </property>
+    </propertygroup>
+</properties>

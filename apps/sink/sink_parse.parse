@@ -1,0 +1,94 @@
+######################################################################################
+#
+# This file contains all AT commands as specified in the BlueCable specs. 
+#
+######################################################################################
+ 
+# ------------------------------------------------------------------------------------
+# AT Commands
+#
+# Format specified in spec AT<cmd>=<value><cr>
+#-------------------------------------------------------------------------------------
+
+# used by application
+
+prefix Uart
+
+#general at comand definition
+{ AT+GVER\r\n } : handleGetVersion
+{ AT+GBDADDR\r\n } : handleGetLocalAddr
+{ AT+SBDADDR=%s:addr\r\n } : handleSetLocalAddr
+{ AT+GLDNAME\r\n } : handleGetLocalDevName
+{ AT+SLDNAME=%s:DevName\r\n } : handleSetLocalDevName
+{ AT+GPIN\r\n } : handleGetPin
+{ AT+SPIN\r\n } : handleSetPin
+{ AT+GCLASS\r\n } : handleGetDevClass
+{ AT+SCLASS=%s:cls\r\n } : handleSetDevClass
+{ AT+INQU=%d:start\r\n } : handleDiscoverNearDev
+{ AT+PAIR=%s:addr\r\n } : handlePairDev
+{ AT+SCAN=%s:mode\r\n } : handleSetScanMode
+{ AT+ENTERPAIR\r\n } : handleEnterPair
+{ AT+GUART\r\n } : handleGetUartBaudrate
+{ AT+SUART=%s:baudrate\r\n } : handleSetUartBaudrate
+
+#hfp at comand definition
+{ AT+HFGSTA\r\n } : handleHfpGetStatus
+{ AT+HFCONN=%s:addr\r\n } : handleHfpConn
+{ AT+HFDISC\r\n } : handleHfpDisc
+{ AT+HFANSWER\r\n } : handleHfpAnswer
+{ AT+HFHANGUP\r\n } : handleHfpHangUp
+{ AT+HFDIAL=%s:num\r\n } : handleHfpDial
+{ AT+HFMUTE=%d:mute\r\n } : handleHfpMute
+{ AT+HFTWRAH\r\n } : handleThreeWayReleaseAllHeld
+{ AT+HFTWAWRA\r\n } : handleThreeWayAcceptWaitingReleaseActive   
+{ AT+HFTWAWHA\r\n } : handleThreeWayAcceptWaitingHoldActive
+{ AT+HFTWAHTW\r\n } : handleThreeWayAddHeldTo3Way
+
+#a2dp at comand definition
+{ AT+A2DPGSTA\r\n } : handleA2dpGetStatus
+{ AT+A2DPCONN=%s:addr\r\n } : handleA2dpConn
+{ AT+A2DPDISC\r\n } : handleA2dpDisc
+
+#avrcp at comand definition
+{ AT+AVRCPGSTA\r\n } : handleAvrcpGetStatus
+{ AT+AVRCPPLAY\r\n } : handleAvrcpPlay
+{ AT+AVRCPPAUSE\r\n } : handleAvrcpPause
+{ AT+AVRCPSTOP\r\n } : handleAvrcpStop
+{ AT+AVRCPNEXT\r\n } : handleAvrcpNext
+{ AT+AVRCPPREV\r\n } : handleAvrcpPrev
+{ AT+AVRCPVOLUP\r\n } : handleAvrcpVolUp
+{ AT+AVRCPVOLDOWN\r\n } : handleAvrcpVolDown
+
+#pbap at comand definition
+{ AT+PBAPGSTA\r\n } : handlePbapGetStatus
+{ AT+PBAPCONN=%s:addr\r\n } : handlePbapConn
+{ AT+PBAPDISC\r\n } : handlePbapDisc
+{ AT+PBAPSTYPE=%d:type\r\n } : handlePbapSetType
+{ AT+PBAPGPB\r\n } : handlePbapGetPhoneBook
+
+#map at comand definition
+{ AT+MAPGSTA\r\n} : handleMapGetStatus
+{ AT+MAPCONN=%s:addr\r\n } : handleMapConn
+{ AT+MAPDISC\r\n } : handleMapDisc
+{ AT+MAPGMSG\r\n } : handleMapGetMessage
+
+#hid at comand definition
+{ AT+HIDGSTA\r\n } : handleHidGetStatus
+{ AT+HIDCONN=%s:addr\r\n } : handleHidConn
+{ AT+HIDDISC\r\n } : handleHidDisc
+{ AT+HIDKRPT=%s:data\r\n } : handleHidKeyboardReport
+{ AT+HIDMRPT=%s:data\r\n } : handleHidMouseReport
+
+#spp at comand definition
+{ AT+SPPGSTA\r\n } : handleSppGetStatus
+{ AT+SPPCONN=%s:addr\r\n } : handleSppConn
+{ AT+SPPDISC\r\n } : handleSppDisc
+{ AT+SPPSEND=%s:data\r\n } : handleSppSendData
+
+#gatt at comand definition
+{ AT+GATTGSTA\r\n } : handleGattGetStatus
+{ AT+GATTCONN=%s:addr\r\n } : handleGattConn
+{ AT+GATTDISC\r\n } : handleGattDisc
+{ AT+GATTSEND\r\n } : handleGattSendData
+
+

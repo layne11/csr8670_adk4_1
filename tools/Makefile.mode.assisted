@@ -1,0 +1,6 @@
+SUPPORTED_EXECUTION_MODES += assisted
+assisted_stack_usage_supported = yes
+assisted_compile_flags         = -mpu -mleaf-optim -mno-function-sizeof -mworkaround-b96516
+assisted_tool_basename         = xap-local-xap
+assisted_tool_path             = xap-local-xap-assisted
+assisted_link_flags            = -Wl,-I$(BLUELAB)/lib/gcc-lib/xap-local-xap/3.3.3/ -Xlinker -pass -Xlinker 250

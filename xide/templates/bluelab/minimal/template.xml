@@ -1,0 +1,5 @@
+<template type="project">
+    <displayname>Minimal VM Project</displayname>
+    <description>A minimal Virtual Machine project</description>
+    <icon default="icon.png"/>
+</template>

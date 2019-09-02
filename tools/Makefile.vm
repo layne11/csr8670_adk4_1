@@ -1,0 +1,338 @@
+# -*-Makefile-*-
+# Makefile with rules for BlueLab applications
+
+############################################################
+# The variable without which none of this will work
+#
+# BLUELAB (default from environment)
+#  Specifies the directory containing your BlueLab installation. This
+# is normally picked up from the BLUELAB environment variable set by
+# the BlueLab installer, so you'll only need to change it when
+# switching between BlueLab installations.
+#
+############################################################
+# Variables set by an application project
+#
+# INPUTS
+#  The input files from the app. Currently .C, .button .led and .parse files
+#
+# OUTPUT
+#  The basename of the VM application, if any.
+#
+# OBJS
+#  The object files to be built into a VM application if $(OUTPUT) is
+#  set. Generated from the .c .button and .led files from INPUTS
+#
+# LIBS
+#  The libraries to link in (as -lconnection -lgrendel)
+#
+# STACKSIZE (default 0 meaning automatic)
+#  The default size of the application's stack
+#
+#############################################################
+# Complicated internal CSR options which you can ignore
+#
+# HARDWARE
+#  The chip variant you are using; you can set this and let
+# the makefile find the value for FIRMWAREIMAGE. If you don't
+# set this or FIRMWAREIMAGE, the makefile will query the 
+# chip attached via SPI.
+#
+# FIRMWAREIMAGE
+#  The complete path and name (less extension) for the firmware to
+# use. You normally allow this to be set from a combination of
+# $(BLUELAB), $(HARDWARE) and $(FIRMWARE). If you set this,
+# the value of HARDWARE is ignored.
+#
+# FLASHSIZE
+#  Number of kbits of flash on the device; you can explicitly set
+# this, or let the makefile query the attached device for you.
+#
+# DEBUGTRANSPORT
+# SPI transport in a form suitable for passing to pscli's -trans option
+#
+
+include $(BLUELAB)/Makefile.rules
+
+SPI?=-trans '$(DEBUGTRANSPORT)'
+
+# Convert the comma seperators into spaces
+comma := ,
+space :=
+space +=
+SQIF_PARTITIONS := $(subst $(comma),$(space),$(SQIF_PARTITIONS))
+prefer = $(if $(strip $(1)),$(1),$(warning Unable to query BlueCore over SPI. Check you settings under xIDEs debug->Transport menu.))
+query_chip = $(if $(HARDWARE)$(FIRMWAREIMAGE),$(if $(FLASHSIZE),no,yes),yes)
+
+ifneq (clean,$(MAKECMDGOALS))
+  # Allow for the execution mode to be overridden
+  EXEC_MODE := $(if $(OVERRIDE_EXECUTION_MODE),$(OVERRIDE_EXECUTION_MODE),$(EXECUTION_MODE))
+  
+  ifeq (yes,$(query_chip))
+    # Execute nvscmd to find out what hardware we are talking to
+    shape := $(shell $(nvscmd) $(SPI) identify -machine -quiet -norun)
+    ifeq (hw_default,$(EXEC_MODE))
+      ifeq (,$(HARDWARE))
+        HARDWARE := $(call lookup_or_first,$(call prefer,$(call lookup,CHIP_NAME,$(shape))),$(CHIP_NAMES))
+      endif
+    endif
+  endif
+
+  ifeq (hw_default,$(EXEC_MODE))
+    EXEC_MODE := $(call lookup_or_first,$(HARDWARE),$(HW_DEFAULT))
+
+    ifeq (unknown,$(EXEC_MODE))
+      $(warning Could not find default Execution Mode for $(HARDWARE) - defaulting to 'Assisted Native')
+      EXEC_MODE := assisted
+    else
+      $(info BlueCore chip is $(HARDWARE), default execution mode is $(EXEC_MODE))
+    endif
+  endif 
+  
+  # Check that the execution mode is supported
+  ifeq (,$(filter $(EXEC_MODE),$(SUPPORTED_EXECUTION_MODES)))
+    $(error '$(EXEC_MODE)' execution mode is not supported by this installation.)
+  endif
+
+endif
+
+# If the user asked for a stack size of zero (meaning auto), but
+# stackusage won't work, just pick 100 for now.
+
+ifeq (no:0,$(strip $($(EXEC_MODE)_stack_usage_supported)):$(strip $(if $(STACKSIZE),$(STACKSIZE),0)))
+  $(warning Automatic stack size calculation not yet supported for '$(EXEC_MODE)' mode. Assuming size of 100.)
+  ADJUSTED_STACKSIZE=100
+else
+  ADJUSTED_STACKSIZE=$(STACKSIZE)
+endif
+
+# Just in case the project doesn't specify this
+FIRMWARE?=unified
+
+OUTDIR := $(if $(OUTDIR),$(OUTDIR)/,)
+# Ignore OUTDIR for now, since it may well contain spaces, which kill us
+# (see B-11507, M-856)
+IMAGE  := image
+
+# Pass extra flags down into the rules
+
+COMPILEFLAGS := $(DEFS)
+LINKFLAGS    := $(if $(BUILD_ID),-Xlinker -b$(BUILD_ID)) -Xlinker -s$(ADJUSTED_STACKSIZE) $(if $(PANIC_ON_PANIC),-Xlinker -p) $(LIBS)
+
+BLUELAB_FIRMWARE_DIR = firmware/$(EXEC_MODE)
+
+#We are only interested in .c, .button, .db and .parse files
+INTERESTING := $(filter %.c %.button %.led %.parse %.db,$(INPUTS))
+OBJS        := $(sort $(addsuffix .o,$(basename $(INTERESTING))))
+
+build :: $(OUTPUT).app
+
+ifeq (merge,$(BUILD_MERGE))
+  build :: merge.xpv
+endif
+
+lib_dirs  := $(patsubst -L%,%,$(filter -L%,$(linkflags))) $(call lib_dir,$(EXEC_MODE),$(LIBRARY_VERSION))
+lib_names := $(patsubst -l%,lib%.a,$(filter -l%,$(linkflags))) $(filter %.a, linkflags)
+lib_deps  := $(wildcard $(sort $(foreach d,$(lib_dirs),$(foreach n,$(lib_names),$(d)/$(n)))))
+
+$(OUTPUT).app :: $(OBJS) depend/flags.link $(lib_deps)
+	$(call gcc,$(EXEC_MODE)) $(linkflags) $($(EXEC_MODE)_link_flags) -L$(call lib_dir,$(EXEC_MODE),$(LIBRARY_VERSION)) $(OBJS) -o $@
+
+# Basenames of all button files we are actually using
+autogen := $(sort $(basename $(wildcard *.button *.led *.parse *.db) $(filter %.button %.led %.parse %.db,$(INPUTS))))
+
+# GATT DB dependency file
+GATT_DB_FILE := $(filter %.db, $(INPUTS))
+ifneq (,$(GATT_DB_FILE))
+  -include depend/$(GATT_DB_FILE).d
+endif
+
+# B-8564 Directories of header files we auto-generate
+autogenincludes := $(sort $(foreach x,$(filter %.button %.led %.parse %.db,$(INPUTS)),-I$(dir $(x))))
+
+clean :: $(addsuffix .db_,$(basename $(filter %.db,$(INPUTS))))
+	@$(gattdbgen) -c $^
+	$(del) $(IMAGE)/vm.app merge.xpv merge.xdv $(sqif_fs)
+	$(del) $(OUTPUT).app $(OUTPUT).dbg $(OUTPUT).sym $(OUTPUT).xap $(OUTPUT).psr_ $(OUTPUT).map
+	$(del) image.fs $(call dependencies,$(OBJS))
+	$(del) $(OBJS) $(addsuffix .c,$(autogen)) $(addsuffix .h,$(autogen)) $(addsuffix .button_,$(autogen)) $(addsuffix .led_,$(autogen)) $(addsuffix .db_,$(autogen))
+
+# Make sure all the autogeneration of button and parser headers happens first
+$(OBJS) : | $(addsuffix .h,$(autogen))
+
+%.o : %.c depend/flags.compile
+	$(call docompile,$(COMPILEFLAGS) $(autogenincludes),$(EXEC_MODE))
+
+# Record various flags
+# Use -include to make these happen every time before anything else
+
+dummy.force depend/flags.compile depend/flags.link :
+	@$(mkdir) depend
+	@$(recordflags) depend/flags.compile $(compileflags) $(COMPILEFLAGS) $(EXEC_MODE)
+	@$(recordflags) depend/flags.link $(linkflags) $(EXEC_MODE)
+
+-include dummy.force
+
+clean ::
+	$(del) depend/flags.compile depend/flags.link depend/flags.firmware depend/image.lst depend/$(addsuffix .db.d,$(autogen))
+
+# Files with automatic dependency rules
+ifneq (,$(OBJS))
+  -include $(call dependencies,$(OBJS))
+endif
+
+# Lint magic for internal CSR use only
+
+export BLUELAB
+
+lint : $(patsubst %.o,%.c,$(OBJS))
+	$(lint) -i../../../tools/pclint $(lintflags) $^
+
+ifneq (,$(filter flash merge% image,$(MAKECMDGOALS) $(BUILD_MERGE)))
+  ifneq (clean,$(MAKECMDGOALS))
+    # Rules related to flashing onto the device
+    # Suppress these unless 'flash' was specified on the command-line
+
+    ifeq (yes,$(query_chip))
+      # Execute nvscmd to find out what hardware we are talking to
+      insist          = $(if $(strip $(1)),$(1),$(error Unable to query BlueCore over SPI. Check your settings under xIDEs Debug->Transport menu.))
+      hardware       := $(call insist,$(call lookup,CHIP_NAME,$(shape)))
+    endif 
+    # USE_ROM is set by the Storage type project property. If the value
+    # is SQIF then we do not want to program the internal flash, but the
+    # firmware image is still for flash, not rom, and hence USE_ROM is reset
+    # back to empty.
+    ifeq (SQIF,$(USE_ROM))
+      USE_ROM := 
+      flash_rule = merge.xpv
+    else
+      flash_rule = flash_internal
+    endif
+
+    ifeq (,$(FIRMWAREIMAGE))
+      ifeq (,$(HARDWARE))
+        # Now work out which firmware we have, unless the user overrode it
+        HARDWARE := $(call lookup_or_first,$(hardware),$(CHIP_NAMES))
+        ifeq (,$(HARDWARE))
+          $(error Unable to automatically identify the version of BlueCore you are using)
+        endif
+      endif
+
+      # If the user explicitly set FIRMWAREIMAGE, we'll use that.
+      # Otherwise take the first hardware name as the default and use that, unless
+      # we can find a firmware file for one of the :variant names of that hardware
+      # platform. (The assumption is that BlueLab will ship with the default variant
+      # and customers with special chip variants will get special firmware builds
+      # which will take priority when dropped into the firmware directory.)
+  
+      CANDIDATES	  := $(patsubst %,$(BL)/$(BLUELAB_FIRMWARE_DIR)/$(FIRMWARE)/%$(USE_ROM)/stack_unsigned.xdv,$(HARDWARE))
+      FIRMWAREIMAGE := $(basename $(firstword $(wildcard $(wordlist 2,99,$(CANDIDATES))) $(firstword $(CANDIDATES))))
+    endif
+
+    ifeq (,$(wildcard $(FIRMWAREIMAGE).xuv))
+      ifeq (,$(wildcard $(FIRMWAREIMAGE).xdv))
+        $(error Unable to find suitable $(FIRMWARE) firmware for the $(firstword $(HARDWARE))$(USE_ROM) hardware you are using)
+      endif
+      ifeq (,$(wildcard $(FIRMWAREIMAGE).xpv))
+        $(error Unable to find suitable $(FIRMWARE) firmware for the $(firstword $(HARDWARE))$(USE_ROM) hardware you are using)
+      endif
+      
+      FW_INPUT_FILES = $(FIRMWAREIMAGE).xpv $(FIRMWAREIMAGE).xdv
+      FW_P = $(FIRMWAREIMAGE).xpv
+      FW_D = $(FIRMWAREIMAGE).xdv
+    else
+      FW_INPUT_FILES = $(FIRMWAREIMAGE).xuv
+      FW_P = $(FIRMWAREIMAGE).xuv
+      FW_D = $(FIRMWAREIMAGE).xuv
+    endif
+
+    detected_kbits := $(call insist,$(call lookup,INT_FLASH_KBITS,$(shape)))
+    ifeq (,$(FLASHSIZE))
+      # Use the detected flash size, unless we override it for the named hardware
+      forced_kbits = pugwash=6144
+      flash_kbits := $(firstword $(call lookup,$(firstword $(HARDWARE)),$(forced_kbits)) $(detected_kbits))
+    else
+      trimmed_kbits := gordon@16384=16064 rick@16384=16064
+      flash_kbits := $(firstword $(call lookup,$(firstword $(HARDWARE))@$(FLASHSIZE),$(trimmed_kbits)) $(FLASHSIZE))
+    endif
+
+    # Now look at the firmware to see if the application should go in the FS
+    traps := $(shell $(appquery) $(FW_D))
+    ifeq (,$(traps))
+      $(error Unable to determine if your firmware supports putting the application in the filesystem))
+    else
+      ifeq (,$(filter FILE, $(traps)))
+        app_or_fs = $(OUTPUT).app
+        placement =
+      else
+        app_or_fs = image.fs
+        placement = -size $(flash_kbits)
+      endif
+    endif
+
+    # Export dsp_arch so project makefiles can copy .kap files as needed
+    # First get to the hardware name (kalimba or elvis or '')
+    dsp_arch := $(strip $(call lookup,$(call tails,DSP_REVISION_,$(traps)),$(DSP_REVISIONS)))
+    # Now map the chip name to the directory to look in
+    dsp_arch := $(if $(dsp_arch),$($(dsp_arch)_arch_dir),none)
+
+    # Select whether to flash SQIF partitions or not
+    sqif_rule := $(if $(wildcard $(OUTPUT).ptn),flash_sqif)
+
+    flash : $(flash_rule) keys $(sqif_rule)
+
+    flash_internal : merge.xuv keys
+	$(nvscmd) $(SPI) burn merge.xuv -nvstype int
+
+    output_psr := $(patsubst %,%_,$(wildcard $(OUTPUT).psr))
+
+    # Set keys before flashing, there might not be any firmware so ignore errors
+    keys :: build $(output_psr)
+	-$(pscli) $(SPI) @$(TRANSPORT) $(if $(shell $(appquery) $(OUTPUT).app BLUESTACK),@hci_onchip,@hci_external) $(addprefix -m ,$(output_psr))
+
+    merge.x%v : $(FW_INPUT_FILES) $(app_or_fs) depend/flags.merge
+	$(vmbuilder) $(placement) $@ $(FW_P) $(app_or_fs)
+
+    ifneq (,$(required_kap_files))
+      image.fs : $(foreach k, $(required_kap_files), $(IMAGE)/$(k)/$(k).kap)
+
+      $(foreach k, $(required_kap_files), $(IMAGE)/$(k)/$(k).kap) :
+	$(error Build $@ first, using the $(basename $(notdir $@)).xip project)
+    endif
+
+    image.fs : $(IMAGE)/vm.app $(shell $(packfile) $(IMAGE) -list) depend/image.lst
+	@$(recordflags) depend/image.lst $(shell $(packfile) $(IMAGE) -list)
+	$(packfile) $(IMAGE) $@
+
+    $(IMAGE)/vm.app : $(OUTPUT).app
+	$(mkdir) $(IMAGE)
+	$(copyfile) $^ $@
+
+    # Record more flags
+
+    dummy.force.2 depend/flags.merge depend/image.lst depend/dsp.arch :
+	@$(recordflags) depend/flags.merge $(placement) $(FIRMWAREIMAGE) $(app_or_fs)
+	@$(recordflags) depend/image.lst $(shell $(packfile) $(IMAGE) -list)
+	@$(recordflags) depend/dsp.arch $(dsp_arch)
+
+    -include dummy.force.2
+
+  endif # clean target not specified
+endif # flash, merge or image target specified
+
+# SQIF rules
+sqif_fs := $(addsuffix .xuv, $(SQIF_PARTITIONS))
+#output_ptn := $(OUTPUT).processed.ptn # Blocked by B-100743
+output_ptn := $(OUTPUT).ptn
+
+# Generate rules for creating filesystem .xuv image
+fs_xuv = $(1).xuv: $(1); $$(packfile) $$^ $$@
+$(foreach dir, $(SQIF_PARTITIONS), $(eval $(call fs_xuv, $(dir))))
+
+.PHONY: flash_sqif
+
+flash_sqif: build $(sqif_fs) $(output_ptn)
+	$(nvscmd) -norun $(SPI) burn $(output_ptn) all
+
+# vim: set ft=make:
+

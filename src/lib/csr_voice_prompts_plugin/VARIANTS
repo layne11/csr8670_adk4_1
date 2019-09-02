@@ -1,0 +1,7 @@
+VARIANTS := debug
+
+# Include DEBUG
+CFLAGS_debug := -DDEBUG_PRINT_ENABLED
+
+CFLAGS_anc:=-DANC
+CFLAGS_anc_debug:=-DANC -DDEBUG_PRINT_ENABLED

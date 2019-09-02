@@ -1,0 +1,1040 @@
+<p><font color="#119933"><pre>---- 22:53:17.554 ------------------
+DM_AM_REGISTER_REQ
+    type = 0x0300 (768)
+    phandle = 0x0000 (0)
+    flags = 0x0010 (16)
+------------------------------------
+</pre></font>
+<br/></p><p><font color="blue"><pre>---- 22:53:17.554 ------------------
+DM_AM_REGISTER_CFM
+    type = 0x0340 (832)
+    phandle = 0x0010 (16)
+    version = 0x0400 (1024)
+    patch_level = 0x0000 (0)
+------------------------------------
+</pre></font>
+<br/></p><p><font color="#119933"><pre>---- 22:53:17.659 ------------------
+RFC_INIT_REQ
+    type = 0x0600 (1536)
+    phandle = 0xffff (65535)
+------------------------------------
+</pre></font>
+<br/></p><p><font color="blue"><pre>---- 22:53:17.660 ------------------
+RFC_INIT_CFM
+    type = 0x0680 (1664)
+    phandle = 0x0010 (16)
+------------------------------------
+</pre></font>
+<br/></p><p><font color="#119933"><pre>---- 22:53:17.693 ------------------
+DM_HCI_READ_LOCAL_VER_INFO_REQ
+    op_code = 0x1001 (4097)
+    cmd_parameter_length = 0x02 (2)
+------------------------------------
+</pre></font>
+<br/></p><p><font color="blue"><pre>---- 22:53:17.693 ------------------
+DM_HCI_READ_LOCAL_VER_INFO_CFM
+    type = 0x1201 (4609)
+    phandle = 0x0010 (16)
+    status = 0x00 (0)
+    hci_version = 0x08 (8)
+    hci_revision = 0x30e7 (12519)
+    lmp_version = 0x08 (8)
+    manuf_name = 0x000a (10)
+    lmp_subversion = 0x30e7 (12519)
+------------------------------------
+</pre></font>
+<br/></p><p><font color="#119933"><pre>---- 22:53:17.708 ------------------
+DM_SET_BT_VERSION_REQ
+    type = 0x0301 (769)
+    version = 0x06 (6)
+------------------------------------
+</pre></font>
+<br/></p><p><font color="blue"><pre>---- 22:53:17.712 ------------------
+DM_SET_BT_VERSION_CFM
+    type = 0x0341 (833)
+    phandle = 0x0010 (16)
+    version = 0x06 (6)
+    status = 0x00 (0)
+------------------------------------
+</pre></font>
+<br/></p><p><font color="#119933"><pre>---- 22:53:17.737 ------------------
+DM_SM_INIT_REQ
+    type = 0x0380 (896)
+    options = 0x03c7 (967)
+    security_mode = 0x04 (4)
+    security_level_default = 0x0000 (0)
+    config = 0x0000 (0)
+    write_auth_enable = 0x000f (15)
+    mode3_enc = 0x02 (2)
+    sm_key_state =
+        ir = 0x4ec570bcb6cba27d86df4175515ca73c
+        er = 0x66d13215184241b28c2eeecc638ae929
+    sm_div_state = 0x0001 (1)
+    sm_sign_counter = 0x00000000 (0)
+    max_enc_key_size_thres = 0x00 (0)
+    min_enc_key_size_thres = 0x00 (0)
+------------------------------------
+</pre></font>
+<br/></p><p><font color="blue"><pre>---- 22:53:17.737 ------------------
+DM_SM_INIT_CFM
+    type = 0x03c0 (960)
+    phandle = 0x0010 (16)
+    security_mode = 0x04 (4)
+    security_level_default = 0x0937 (2359)
+    config = 0x0000 (0)
+    write_auth_enable = 0x000f (15)
+    mode3_enc = 0x00 (0)
+    status = 0x0000 (0)
+    sm_key_state =
+        ir = 0x4ec570bcb6cba27d86df4175515ca73c
+        er = 0x66d13215184241b28c2eeecc638ae929
+    sm_div_state = 0x0001 (1)
+    sm_sign_counter = 0x00000000 (0)
+------------------------------------
+</pre></font>
+<br/></p><p><font color="#119933"><pre>---- 22:53:17.758 ------------------
+DM_SM_ADD_DEVICE_REQ
+    type = 0x0386 (902)
+    phandle = 0x0010 (16)
+    addrt =
+        type = 0x00 (0) (Public)
+        lap = 0xec7d40 (15498560)
+        uap = 0xf8 (248)
+        nap = 0x7802 (30722)
+    privacy = 0x0001 (1)
+    reconnection_bd_addr =
+        lap = 0x000000 (0)
+        uap = 0x00 (0)
+        nap = 0x0000 (0)
+    trust = 0x0002 (2)
+    security_requirements = 0x0000 (0)
+    encryption_key_size = 0x0010 (16)
+    present = 0x8001 (32769)
+    u =
+        enc_bredr =
+            link_key_type = 0x0004 (4)
+            link_key = 0x19674223b735bcc718902736da20de93
+------------------------------------
+</pre></font>
+<br/></p><p><font color="blue"><pre>---- 22:53:17.759 ------------------
+DM_SM_ADD_DEVICE_CFM
+    type = 0x03c2 (962)
+    phandle = 0x0010 (16)
+    addrt =
+        type = 0x00 (0) (Public)
+        lap = 0xec7d40 (15498560)
+        uap = 0xf8 (248)
+        nap = 0x7802 (30722)
+    status = 0x00 (0)
+------------------------------------
+</pre></font>
+<br/></p><p><font color="#119933"><pre>---- 22:53:17.765 ------------------
+DM_SM_ADD_DEVICE_REQ
+    type = 0x0386 (902)
+    phandle = 0x0010 (16)
+    addrt =
+        type = 0x00 (0) (Public)
+        lap = 0xcf8672 (13600370)
+        uap = 0xfa (250)
+        nap = 0x30a1 (12449)
+    privacy = 0x0001 (1)
+    reconnection_bd_addr =
+        lap = 0x000000 (0)
+        uap = 0x00 (0)
+        nap = 0x0000 (0)
+    trust = 0x0002 (2)
+    security_requirements = 0x0000 (0)
+    encryption_key_size = 0x0010 (16)
+    present = 0x8001 (32769)
+    u =
+        enc_bredr =
+            link_key_type = 0x0004 (4)
+            link_key = 0x44b6a2d08803f758bfecbfd8ac02fd58
+------------------------------------
+</pre></font>
+<br/></p><p><font color="blue"><pre>---- 22:53:17.765 ------------------
+DM_SM_ADD_DEVICE_CFM
+    type = 0x03c2 (962)
+    phandle = 0x0010 (16)
+    addrt =
+        type = 0x00 (0) (Public)
+        lap = 0xcf8672 (13600370)
+        uap = 0xfa (250)
+        nap = 0x30a1 (12449)
+    status = 0x00 (0)
+------------------------------------
+</pre></font>
+<br/></p><p><font color="#119933"><pre>---- 22:53:17.786 ------------------
+DM_SET_DEFAULT_LINK_POLICY_REQ
+    type = 0x0306 (774)
+    link_policy_settings_in = 0x0005 (5)
+    link_policy_settings_out = 0x0005 (5)
+------------------------------------
+</pre></font>
+<br/></p><p><font color="blue"><pre>---- 22:53:17.787 ------------------
+DM_HCI_WRITE_DEFAULT_LINK_POLICY_SETTINGS_CFM
+    type = 0x0a0f (2575)
+    phandle = 0x0010 (16)
+    status = 0x00 (0)
+------------------------------------
+</pre></font>
+<br/></p><p><font color="#119933"><pre>---- 22:53:17.812 ------------------
+RFC_REGISTER_REQ
+    type = 0x0601 (1537)
+    phandle = 0x0000 (0)
+    flags = 0x00 (0)
+    context = 0x1000 (4096)
+    loc_serv_chan_req = 0x0a (10)
+------------------------------------
+</pre></font>
+<br/></p><p><font color="blue"><pre>---- 22:53:17.812 ------------------
+RFC_REGISTER_CFM
+    type = 0x0681 (1665)
+    phandle = 0x0010 (16)
+    loc_serv_chan = 0x0a (10)
+    accept = TRUE
+    context = 0x1000 (4096)
+------------------------------------
+</pre></font>
+<br/></p><p><font color="#119933"><pre>---- 22:53:17.818 ------------------
+DM_SYNC_REGISTER_REQ
+    type = 0x0280 (640)
+    phandle = 0x0000 (0)
+    pv_cbarg = 0x1000 (4096)
+    flags = 0x0072 (114)
+    buffer_size_sink = 0x1d41 (7489)
+    buffer_size_source = 0x000e (14)
+------------------------------------
+</pre></font>
+<br/></p><p><font color="blue"><pre>---- 22:53:17.818 ------------------
+DM_SYNC_REGISTER_CFM
+    type = 0x02c0 (704)
+    phandle = 0x0010 (16)
+    pv_cbarg = 0x1000 (4096)
+------------------------------------
+</pre></font>
+<br/></p><p><font color="#119933"><pre>---- 22:53:17.859 ------------------
+RFC_REGISTER_REQ
+    type = 0x0601 (1537)
+    phandle = 0x0000 (0)
+    flags = 0x00 (0)
+    context = 0x1400 (5120)
+    loc_serv_chan_req = 0x01 (1)
+------------------------------------
+</pre></font>
+<br/></p><p><font color="#119933"><pre>---- 22:53:17.859 ------------------
+SDS_REGISTER_REQ
+    type = 0x0800 (2048)
+    phandle = 0x0000 (0)
+    reg_ctx = 0x0000 (0)
+    num_rec_bytes = 0x0051 (81)
+    service_rec =
+        0x09, 0x00, 0x01, 0x35, 0x06, 0x19, 0x11, 0x1e, ...5....
+        0x19, 0x12, 0x03, 0x09, 0x00, 0x04, 0x35, 0x0c, ......5.
+        0x35, 0x03, 0x19, 0x01, 0x00, 0x35, 0x05, 0x19, 5....5..
+        0x00, 0x03, 0x08, 0x0a, 0x09, 0x00, 0x06, 0x35, .......5
+        0x09, 0x09, 0x65, 0x6e, 0x09, 0x00, 0x6a, 0x09, ..en..j.
+        0x01, 0x00, 0x09, 0x00, 0x09, 0x35, 0x08, 0x35, .....5.5
+        0x06, 0x19, 0x11, 0x1e, 0x09, 0x01, 0x07, 0x09, ........
+        0x01, 0x00, 0x25, 0x0f, 0x48, 0x61, 0x6e, 0x64, ..%.Hand
+        0x73, 0x2d, 0x46, 0x72, 0x65, 0x65, 0x20, 0x75, s-Free u
+        0x6e, 0x69, 0x74, 0x09, 0x03, 0x11, 0x09, 0x00, nit.....
+        0xbf                                            .
+------------------------------------
+</pre></font>
+<br/></p><p><font color="blue"><pre>---- 22:53:17.860 ------------------
+RFC_REGISTER_CFM
+    type = 0x0681 (1665)
+    phandle = 0x0010 (16)
+    loc_serv_chan = 0x01 (1)
+    accept = TRUE
+    context = 0x1400 (5120)
+------------------------------------
+</pre></font>
+<br/></p><p><font color="blue"><pre>---- 22:53:17.860 ------------------
+SDS_REGISTER_CFM
+    type = 0x0840 (2112)
+    phandle = 0x0010 (16)
+    reg_ctx = 0x0000 (0)
+    svc_rec_hndl = 0x00010000 (65536)
+    result = 0x0000 (SDS_SUCCESS)
+------------------------------------
+</pre></font>
+<br/></p><p><font color="#119933"><pre>---- 22:53:17.875 ------------------
+RFC_REGISTER_REQ
+    type = 0x0601 (1537)
+    phandle = 0x0000 (0)
+    flags = 0x00 (0)
+    context = 0x1000 (4096)
+    loc_serv_chan_req = 0x0c (12)
+------------------------------------
+</pre></font>
+<br/></p><p><font color="blue"><pre>---- 22:53:17.875 ------------------
+RFC_REGISTER_CFM
+    type = 0x0681 (1665)
+    phandle = 0x0010 (16)
+    loc_serv_chan = 0x0c (12)
+    accept = TRUE
+    context = 0x1000 (4096)
+------------------------------------
+</pre></font>
+<br/></p><p><font color="#119933"><pre>---- 22:53:17.905 ------------------
+SDS_REGISTER_REQ
+    type = 0x0800 (2048)
+    phandle = 0x0000 (0)
+    reg_ctx = 0x1203 (4611)
+    num_rec_bytes = 0x0042 (66)
+    service_rec =
+        0x09, 0x00, 0x01, 0x35, 0x03, 0x19, 0x11, 0x01, ...5....
+        0x09, 0x00, 0x04, 0x35, 0x0c, 0x35, 0x03, 0x19, ...5.5..
+        0x01, 0x00, 0x35, 0x05, 0x19, 0x00, 0x03, 0x08, ..5.....
+        0x01, 0x09, 0x00, 0x06, 0x35, 0x09, 0x09, 0x65, ....5..e
+        0x6e, 0x09, 0x00, 0x6a, 0x09, 0x01, 0x00, 0x09, n..j....
+        0x01, 0x00, 0x25, 0x0b, 0x43, 0x53, 0x52, 0x20, ..%.CSR 
+        0x47, 0x41, 0x49, 0x41, 0xe2, 0x84, 0xa2, 0x09, GAIA....
+        0x00, 0x09, 0x35, 0x06, 0x19, 0x11, 0x01, 0x09, ..5.....
+        0x01, 0x02                                      ..
+------------------------------------
+</pre></font>
+<br/></p><p><font color="blue"><pre>---- 22:53:17.906 ------------------
+SDS_REGISTER_CFM
+    type = 0x0840 (2112)
+    phandle = 0x0010 (16)
+    reg_ctx = 0x0000 (0)
+    svc_rec_hndl = 0x00010001 (65537)
+    result = 0x0000 (SDS_SUCCESS)
+------------------------------------
+</pre></font>
+<br/></p><p><font color="#119933"><pre>---- 22:53:17.971 ------------------
+ATT_REGISTER_REQ
+    type = 0x0900 (2304)
+    phandle = 0x0001 (1)
+------------------------------------
+</pre></font>
+<br/></p><p><font color="blue"><pre>---- 22:53:17.972 ------------------
+ATT_REGISTER_CFM
+    type = 0x0980 (2432)
+    phandle = 0x0010 (16)
+    result = 0x0000 (0)
+------------------------------------
+</pre></font>
+<br/></p><p><font color="#119933"><pre>---- 22:53:17.979 ------------------
+SDS_REGISTER_REQ
+    type = 0x0800 (2048)
+    phandle = 0x0000 (0)
+    reg_ctx = 0x0001 (1)
+    num_rec_bytes = 0x0030 (48)
+    service_rec =
+        0x09, 0x00, 0x01, 0x35, 0x03, 0x19, 0x11, 0x0b, ...5....
+        0x09, 0x00, 0x04, 0x35, 0x10, 0x35, 0x06, 0x19, ...5.5..
+        0x01, 0x00, 0x09, 0x00, 0x19, 0x35, 0x06, 0x19, .....5..
+        0x00, 0x19, 0x09, 0x01, 0x03, 0x09, 0x00, 0x09, ........
+        0x35, 0x08, 0x35, 0x06, 0x19, 0x11, 0x0d, 0x09, 5.5.....
+        0x01, 0x03, 0x09, 0x03, 0x11, 0x09, 0x00, 0x01  ........
+------------------------------------
+</pre></font>
+<br/></p><p><font color="blue"><pre>---- 22:53:17.979 ------------------
+SDS_REGISTER_CFM
+    type = 0x0840 (2112)
+    phandle = 0x0010 (16)
+    reg_ctx = 0x0000 (0)
+    svc_rec_hndl = 0x00010002 (65538)
+    result = 0x0000 (SDS_SUCCESS)
+------------------------------------
+</pre></font>
+<br/></p><p><font color="#119933"><pre>---- 22:53:18.011 ------------------
+DM_HCI_WRITE_SCAN_ENABLE_REQ
+    op_code = 0x0312 (786)
+    cmd_parameter_length = 0x03 (3)
+    scan_enable = 0x00 (0)
+------------------------------------
+</pre></font>
+<br/></p><p><font color="blue"><pre>---- 22:53:18.012 ------------------
+DM_HCI_WRITE_SCAN_ENABLE_CFM
+    type = 0x0e1a (3610)
+    phandle = 0x0010 (16)
+    status = 0x00 (0)
+------------------------------------
+</pre></font>
+<br/></p><p><font color="#119933"><pre>---- 22:53:18.018 ------------------
+DM_HCI_WRITE_SCAN_ENABLE_REQ
+    op_code = 0x0312 (786)
+    cmd_parameter_length = 0x03 (3)
+    scan_enable = 0x00 (0)
+------------------------------------
+</pre></font>
+<br/></p><p><font color="#119933"><pre>---- 22:53:18.018 ------------------
+DM_HCI_WRITE_CLASS_OF_DEVICE_REQ
+    op_code = 0x0c24 (3108)
+    cmd_parameter_length = 0x04 (4)
+    dev_class = 0x240414 (2360340)
+------------------------------------
+</pre></font>
+<br/></p><p><font color="blue"><pre>---- 22:53:18.019 ------------------
+DM_HCI_WRITE_SCAN_ENABLE_CFM
+    type = 0x0e1a (3610)
+    phandle = 0x0010 (16)
+    status = 0x00 (0)
+------------------------------------
+</pre></font>
+<br/></p><p><font color="#119933"><pre>---- 22:53:18.025 ------------------
+DM_SM_REGISTER_REQ
+    type = 0x0381 (897)
+    phandle = 0x0010 (16)
+    context = 0x0076 (118)
+    protocol_id = 0x0002 (2)
+    channel = 0x0001 (1)
+    outgoing_ok = TRUE
+    security_level = 0x0000 (0)
+------------------------------------
+</pre></font>
+<br/></p><p><font color="#119933"><pre>---- 22:53:18.033 ------------------
+DM_SM_INIT_REQ
+    type = 0x0380 (896)
+    options = 0x0070 (112)
+    security_mode = 0x00 (0)
+    security_level_default = 0x0000 (0)
+    config = 0x0008 (8)
+    write_auth_enable = 0x0001 (1)
+    mode3_enc = 0x00 (0)
+    sm_key_state =
+        ir = 0x00000000000000000000000000000000
+        er = 0x00000000000000000000000000000000
+    sm_div_state = 0x0000 (0)
+    sm_sign_counter = 0x00000000 (0)
+    max_enc_key_size_thres = 0x00 (0)
+    min_enc_key_size_thres = 0x00 (0)
+------------------------------------
+</pre></font>
+<br/></p><p><font color="#119933"><pre>---- 22:53:18.067 ------------------
+ATT_ADD_DB_REQ
+    type = 0x0902 (2306)
+    phandle = 0x000e (14)
+    flags = 0x0000 (0)
+    size_db = 0x0046 (70)
+    db =
+        0x0002, 0x0118, 0x3005, 0x2003,
+        0x0005, 0x2a00, 0xd000, 0x6402,
+        0x0000, 0x0002, 0x0018, 0x3005,
+        0x0207, 0x0000, 0x2a00, 0xd400,
+        0x3005, 0x0209, 0x0001, 0x2a00,
+        0xd400, 0x0010, 0xa5a5, 0x005b,
+        0x0200, 0x239b, 0xe111, 0x02d1,
+        0x0011, 0x0000, 0x3013, 0x080c,
+        0x00a5, 0xa500, 0x5b02, 0x0023,
+        0x9be1, 0x1102, 0xd101, 0x1100,
+        0x0000, 0xcd01, 0x0000, 0x3013,
+        0x020e, 0x00a5, 0xa500, 0x5b02,
+        0x0023, 0x9be1, 0x1102, 0xd102,
+        0x1100, 0x0000, 0xcc01, 0x0000,
+        0x6c00, 0x3053, 0x0a11, 0x00a5,
+        0xa500, 0x5b02, 0x0023, 0x9be1,
+        0x1102, 0xd103, 0x1100, 0x0000,
+        0xcd01, 0x0000
+------------------------------------
+</pre></font>
+<br/></p><p><font color="blue"><pre>---- 22:53:18.068 ------------------
+DM_HCI_WRITE_CLASS_OF_DEVICE_CFM
+    type = 0x0e24 (3620)
+    phandle = 0x0010 (16)
+    status = 0x00 (0)
+------------------------------------
+</pre></font>
+<br/></p><p><font color="blue"><pre>---- 22:53:18.082 ------------------
+DM_SM_REGISTER_CFM
+    type = 0x03d5 (981)
+    phandle = 0x0010 (16)
+    context = 0x0076 (118)
+    protocol_id = 0x0002 (2)
+    channel = 0x0001 (1)
+    outgoing_ok = TRUE
+    security_level = 0x0000 (0)
+------------------------------------
+</pre></font>
+<br/></p><p><font color="blue"><pre>---- 22:53:18.096 ------------------
+DM_SM_INIT_CFM
+    type = 0x03c0 (960)
+    phandle = 0x0010 (16)
+    security_mode = 0x04 (4)
+    security_level_default = 0x0937 (2359)
+    config = 0x0008 (8)
+    write_auth_enable = 0x0001 (1)
+    mode3_enc = 0x00 (0)
+    status = 0x0000 (0)
+    sm_key_state =
+        ir = 0x4ec570bcb6cba27d86df4175515ca73c
+        er = 0x66d13215184241b28c2eeecc638ae929
+    sm_div_state = 0x0001 (1)
+    sm_sign_counter = 0x00000000 (0)
+------------------------------------
+</pre></font>
+<br/></p><p><font color="blue"><pre>---- 22:53:18.096 ------------------
+ATT_ADD_DB_CFM
+    type = 0x0982 (2434)
+    phandle = 0x0010 (16)
+    result = 0x0000 (0)
+------------------------------------
+</pre></font>
+<br/></p><p><font color="#119933"><pre>---- 22:53:18.110 ------------------
+L2CA_REGISTER_REQ
+    type = 0x0500 (1280)
+    psm_local = 0x001b (27)
+    phandle = 0x0000 (0)
+    mode_mask = 0x0019 (25)
+    flags = 0x0000 (0)
+    reg_ctx = 0x8d7f (36223)
+    connection_oriented =
+        buffer_size_sink = 0x0000 (0)
+        buffer_size_source = 0x0000 (0)
+    connectionless =
+        buffer_size_sink = 0x0000 (0)
+        buffer_size_source = 0x0000 (0)
+------------------------------------
+</pre></font>
+<br/></p><p><font color="#119933"><pre>---- 22:53:18.118 ------------------
+SDS_REGISTER_REQ
+    type = 0x0800 (2048)
+    phandle = 0x0000 (0)
+    reg_ctx = 0x0000 (0)
+    num_rec_bytes = 0x0025 (37)
+    service_rec =
+        0x09, 0x00, 0x01, 0x35, 0x03, 0x19, 0x11, 0x2e, ...5....
+        0x09, 0x01, 0x00, 0x25, 0x0b, 0x50, 0x42, 0x41, ...%.PBA
+        0x50, 0x20, 0x43, 0x6c, 0x69, 0x65, 0x6e, 0x74, P Client
+        0x09, 0x00, 0x09, 0x35, 0x08, 0x35, 0x06, 0x19, ...5.5..
+        0x11, 0x30, 0x09, 0x01, 0x01                    .0...
+------------------------------------
+</pre></font>
+<br/></p><p><font color="blue"><pre>---- 22:53:18.134 ------------------
+L2CA_REGISTER_CFM
+    type = 0x0540 (1344)
+    phandle = 0x0010 (16)
+    psm_local = 0x001b (27)
+    reg_ctx = 0x8d7f (36223)
+    mode_mask = 0x0019 (25)
+    flags = 0x0000 (0)
+    result = 0x0000 (L2CA_MISC_SUCCESS)
+------------------------------------
+</pre></font>
+<br/></p><p><font color="blue"><pre>---- 22:53:18.140 ------------------
+SDS_REGISTER_CFM
+    type = 0x0840 (2112)
+    phandle = 0x0010 (16)
+    reg_ctx = 0x0000 (0)
+    svc_rec_hndl = 0x00010003 (65539)
+    result = 0x0000 (SDS_SUCCESS)
+------------------------------------
+</pre></font>
+<br/></p><p><font color="#119933"><pre>---- 22:53:18.161 ------------------
+L2CA_REGISTER_REQ
+    type = 0x0500 (1280)
+    psm_local = 0x0019 (25)
+    phandle = 0x0000 (0)
+    mode_mask = 0x0019 (25)
+    flags = 0x0000 (0)
+    reg_ctx = 0x2000 (8192)
+    connection_oriented =
+        buffer_size_sink = 0x0000 (0)
+        buffer_size_source = 0x0000 (0)
+    connectionless =
+        buffer_size_sink = 0x0000 (0)
+        buffer_size_source = 0x0000 (0)
+------------------------------------
+</pre></font>
+<br/></p><p><font color="blue"><pre>---- 22:53:18.161 ------------------
+L2CA_REGISTER_CFM
+    type = 0x0540 (1344)
+    phandle = 0x0010 (16)
+    psm_local = 0x0019 (25)
+    reg_ctx = 0x2000 (8192)
+    mode_mask = 0x0019 (25)
+    flags = 0x0000 (0)
+    result = 0x0000 (L2CA_MISC_SUCCESS)
+------------------------------------
+</pre></font>
+<br/></p><p><font color="#119933"><pre>---- 22:53:18.210 ------------------
+L2CA_REGISTER_REQ
+    type = 0x0500 (1280)
+    psm_local = 0x0017 (23)
+    phandle = 0x0000 (0)
+    mode_mask = 0x0019 (25)
+    flags = 0x0000 (0)
+    reg_ctx = 0x8d7f (36223)
+    connection_oriented =
+        buffer_size_sink = 0x0000 (0)
+        buffer_size_source = 0x0000 (0)
+    connectionless =
+        buffer_size_sink = 0x0000 (0)
+        buffer_size_source = 0x0000 (0)
+------------------------------------
+</pre></font>
+<br/></p><p><font color="blue"><pre>---- 22:53:18.210 ------------------
+L2CA_REGISTER_CFM
+    type = 0x0540 (1344)
+    phandle = 0x0010 (16)
+    psm_local = 0x0017 (23)
+    reg_ctx = 0x8d7f (36223)
+    mode_mask = 0x0019 (25)
+    flags = 0x0000 (0)
+    result = 0x0000 (L2CA_MISC_SUCCESS)
+------------------------------------
+</pre></font>
+<br/></p><p><font color="#119933"><pre>---- 22:53:18.240 ------------------
+DM_HCI_WRITE_INQUIRY_TRANSMIT_POWER_LEVEL_REQ
+    op_code = 0x0c59 (3161)
+    cmd_parameter_length = 0x03 (3)
+    tx_power = 0xba (-70)
+------------------------------------
+</pre></font>
+<br/></p><p><font color="blue"><pre>---- 22:53:18.240 ------------------
+DM_HCI_WRITE_INQUIRY_TRANSMIT_POWER_LEVEL_CFM
+    type = 0x0e59 (3673)
+    phandle = 0x0010 (16)
+    status = 0x00 (0)
+------------------------------------
+</pre></font>
+<br/></p><p><font color="#119933"><pre>---- 22:53:18.246 ------------------
+DM_HCI_WRITE_INQUIRY_MODE_REQ
+    op_code = 0x0c45 (3141)
+    cmd_parameter_length = 0x03 (3)
+    mode = 0x02 (2)
+------------------------------------
+</pre></font>
+<br/></p><p><font color="blue"><pre>---- 22:53:18.247 ------------------
+DM_HCI_WRITE_INQUIRY_MODE_CFM
+    type = 0x0e45 (3653)
+    phandle = 0x0010 (16)
+    status = 0x00 (0)
+------------------------------------
+</pre></font>
+<br/></p><p><font color="#119933"><pre>---- 22:53:18.267 ------------------
+SDS_REGISTER_REQ
+    type = 0x0800 (2048)
+    phandle = 0x0000 (0)
+    reg_ctx = 0x0048 (72)
+    num_rec_bytes = 0x0048 (72)
+    service_rec =
+        0x09, 0x00, 0x01, 0x35, 0x06, 0x19, 0x11, 0x0e, ...5....
+        0x19, 0x11, 0x0f, 0x09, 0x00, 0x04, 0x35, 0x10, ......5.
+        0x35, 0x06, 0x19, 0x01, 0x00, 0x09, 0x00, 0x17, 5.......
+        0x35, 0x06, 0x19, 0x00, 0x17, 0x09, 0x01, 0x04, 5.......
+        0x09, 0x00, 0x0d, 0x35, 0x10, 0x35, 0x06, 0x19, ...5.5..
+        0x01, 0x00, 0x09, 0x00, 0x1b, 0x35, 0x06, 0x19, .....5..
+        0x00, 0x17, 0x09, 0x01, 0x04, 0x09, 0x00, 0x09, ........
+        0x35, 0x08, 0x35, 0x06, 0x19, 0x11, 0x0e, 0x09, 5.5.....
+        0x01, 0x06, 0x09, 0x03, 0x11, 0x09, 0x00, 0x41  .......A
+------------------------------------
+</pre></font>
+<br/></p><p><font color="blue"><pre>---- 22:53:18.267 ------------------
+SDS_REGISTER_CFM
+    type = 0x0840 (2112)
+    phandle = 0x0010 (16)
+    reg_ctx = 0x0000 (0)
+    svc_rec_hndl = 0x00010004 (65540)
+    result = 0x0000 (SDS_SUCCESS)
+------------------------------------
+</pre></font>
+<br/></p><p><font color="#119933"><pre>---- 22:53:18.294 ------------------
+DM_HCI_READ_INQUIRY_RESPONSE_TX_POWER_LEVEL_REQ
+    op_code = 0x0c58 (3160)
+    cmd_parameter_length = 0x02 (2)
+------------------------------------
+</pre></font>
+<br/></p><p><font color="#119933"><pre>---- 22:53:18.295 ------------------
+SDS_REGISTER_REQ
+    type = 0x0800 (2048)
+    phandle = 0x0000 (0)
+    reg_ctx = 0x0000 (0)
+    num_rec_bytes = 0x0030 (48)
+    service_rec =
+        0x09, 0x00, 0x01, 0x35, 0x03, 0x19, 0x11, 0x0c, ...5....
+        0x09, 0x00, 0x04, 0x35, 0x10, 0x35, 0x06, 0x19, ...5.5..
+        0x01, 0x00, 0x09, 0x00, 0x17, 0x35, 0x06, 0x19, .....5..
+        0x00, 0x17, 0x09, 0x01, 0x04, 0x09, 0x00, 0x09, ........
+        0x35, 0x08, 0x35, 0x06, 0x19, 0x11, 0x0e, 0x09, 5.5.....
+        0x01, 0x06, 0x09, 0x03, 0x11, 0x09, 0x00, 0x02  ........
+------------------------------------
+</pre></font>
+<br/></p><p><font color="blue"><pre>---- 22:53:18.295 ------------------
+SDS_REGISTER_CFM
+    type = 0x0840 (2112)
+    phandle = 0x0010 (16)
+    reg_ctx = 0x0000 (0)
+    svc_rec_hndl = 0x00010005 (65541)
+    result = 0x0000 (SDS_SUCCESS)
+------------------------------------
+</pre></font>
+<br/></p><p><font color="blue"><pre>---- 22:53:18.296 ------------------
+DM_HCI_READ_INQUIRY_RESPONSE_TX_POWER_LEVEL_CFM
+    type = 0x0e58 (3672)
+    phandle = 0x0010 (16)
+    status = 0x00 (0)
+    tx_power = 0x04 (4)
+------------------------------------
+</pre></font>
+<br/></p><p><font color="#119933"><pre>---- 22:53:18.332 ------------------
+DM_HCI_READ_LOCAL_NAME_REQ
+    op_code = 0x0c14 (3092)
+    cmd_parameter_length = 0x02 (2)
+------------------------------------
+</pre></font>
+<br/></p><p><font color="blue"><pre>---- 22:53:18.334 ------------------
+DM_HCI_READ_LOCAL_NAME_CFM
+    type = 0x0e14 (3604)
+    phandle = 0x0010 (16)
+    status = 0x00 (0)
+    name_part = CSR - bc7
+------------------------------------
+</pre></font>
+<br/></p><p><font color="#119933"><pre>---- 22:53:18.361 ------------------
+DM_HCI_READ_LOCAL_NAME_REQ
+    op_code = 0x0c14 (3092)
+    cmd_parameter_length = 0x02 (2)
+------------------------------------
+</pre></font>
+<br/></p><p><font color="blue"><pre>---- 22:53:18.362 ------------------
+DM_HCI_READ_LOCAL_NAME_CFM
+    type = 0x0e14 (3604)
+    phandle = 0x0010 (16)
+    status = 0x00 (0)
+    name_part = CSR - bc7
+------------------------------------
+</pre></font>
+<br/></p><p><font color="#119933"><pre>---- 22:53:18.388 ------------------
+DM_HCI_WRITE_EXTENDED_INQUIRY_RESPONSE_DATA_REQ
+    op_code = 0x0c52 (3154)
+    cmd_parameter_length = 0x0b (11)
+    fec_required = 0x00 (0)
+    eir_data_part =
+        0x02, 0x0a, 0x04, 0x0f, 0x02, 0x0d, 0x11, 0x0b, ........
+        0x11, 0x0e, 0x11, 0x0f, 0x11, 0x30, 0x11, 0x2e, .....0..
+        0x11, 0x1e, 0x11, 0x0a, 0x09, 0x43, 0x53, 0x52, .....CSR
+        0x20, 0x2d, 0x20, 0x62, 0x63, 0x37, 0x00, 0x00   - bc7..
+------------------------------------
+</pre></font>
+<br/></p><p><font color="blue"><pre>---- 22:53:18.388 ------------------
+DM_HCI_WRITE_EXTENDED_INQUIRY_RESPONSE_DATA_CFM
+    type = 0x0e52 (3666)
+    phandle = 0x0010 (16)
+    status = 0x00 (0)
+------------------------------------
+</pre></font>
+<br/></p><p><font color="#119933"><pre>---- 22:53:18.416 ------------------
+DM_HCI_WRITE_EXTENDED_INQUIRY_RESPONSE_DATA_REQ
+    op_code = 0x0c52 (3154)
+    cmd_parameter_length = 0x0b (11)
+    fec_required = 0x00 (0)
+    eir_data_part =
+        0x02, 0x0a, 0x04, 0x0f, 0x02, 0x0d, 0x11, 0x0b, ........
+        0x11, 0x0e, 0x11, 0x0f, 0x11, 0x30, 0x11, 0x2e, .....0..
+        0x11, 0x1e, 0x11, 0x0a, 0x09, 0x43, 0x53, 0x52, .....CSR
+        0x20, 0x2d, 0x20, 0x62, 0x63, 0x37, 0x00, 0x00   - bc7..
+------------------------------------
+</pre></font>
+<br/></p><p><font color="blue"><pre>---- 22:53:18.417 ------------------
+DM_HCI_WRITE_EXTENDED_INQUIRY_RESPONSE_DATA_CFM
+    type = 0x0e52 (3666)
+    phandle = 0x0010 (16)
+    status = 0x00 (0)
+------------------------------------
+</pre></font>
+<br/></p><p><font color="#119933"><pre>---- 22:53:19.124 ------------------
+DM_HCI_WRITE_PAGESCAN_ACTIVITY_REQ
+    op_code = 0x0c1c (3100)
+    cmd_parameter_length = 0x04 (4)
+    pagescan_interval = 0x0800 (2048)
+    pagescan_window = 0x0012 (18)
+------------------------------------
+</pre></font>
+<br/></p><p><font color="#119933"><pre>---- 22:53:19.125 ------------------
+DM_HCI_WRITE_SCAN_ENABLE_REQ
+    op_code = 0x0312 (786)
+    cmd_parameter_length = 0x03 (3)
+    scan_enable = 0x02 (2)
+------------------------------------
+</pre></font>
+<br/></p><p><font color="blue"><pre>---- 22:53:19.126 ------------------
+DM_HCI_WRITE_PAGESCAN_ACTIVITY_CFM
+    type = 0x0e1c (3612)
+    phandle = 0x0010 (16)
+    status = 0x00 (0)
+------------------------------------
+</pre></font>
+<br/></p><p><font color="blue"><pre>---- 22:53:19.126 ------------------
+DM_HCI_WRITE_SCAN_ENABLE_CFM
+    type = 0x0e1a (3610)
+    phandle = 0x0010 (16)
+    status = 0x00 (0)
+------------------------------------
+</pre></font>
+<br/></p><p><font color="#119933"><pre>---- 22:53:19.185 ------------------
+DM_HCI_WRITE_PAGESCAN_ACTIVITY_REQ
+    op_code = 0x0c1c (3100)
+    cmd_parameter_length = 0x04 (4)
+    pagescan_interval = 0x0800 (2048)
+    pagescan_window = 0x0012 (18)
+------------------------------------
+</pre></font>
+<br/></p><p><font color="blue"><pre>---- 22:53:19.186 ------------------
+DM_HCI_WRITE_PAGESCAN_ACTIVITY_CFM
+    type = 0x0e1c (3612)
+    phandle = 0x0010 (16)
+    status = 0x00 (0)
+------------------------------------
+</pre></font>
+<br/></p><p><font color="#119933"><pre>---- 22:53:19.399 ------------------
+DM_HCI_WRITE_SCAN_ENABLE_REQ
+    op_code = 0x0312 (786)
+    cmd_parameter_length = 0x03 (3)
+    scan_enable = 0x02 (2)
+------------------------------------
+</pre></font>
+<br/></p><p><font color="blue"><pre>---- 22:53:19.400 ------------------
+DM_HCI_WRITE_SCAN_ENABLE_CFM
+    type = 0x0e1a (3610)
+    phandle = 0x0010 (16)
+    status = 0x00 (0)
+------------------------------------
+</pre></font>
+<br/></p><p><font color="#119933"><pre>---- 22:57:21.601 ------------------
+DM_HCI_ULP_SET_ADVERTISING_PARAMETERS_REQ
+    op_code = 0x0314 (788)
+    cmd_parameter_length = 0x0d (13)
+    adv_interval_min = 0x0020 (32)
+    adv_interval_max = 0x0030 (48)
+    advertising_type = 0x00 (0)
+    own_address_type = 0x00 (0)
+    direct_address_type = 0x00 (0)
+    direct_address =
+        lap = 0x000000 (0)
+        uap = 0x00 (0)
+        nap = 0x0000 (0)
+    advertising_channel_map = 0x07 (7)
+    advertising_filter_policy = 0x00 (0)
+------------------------------------
+</pre></font>
+<br/></p><p><font color="blue"><pre>---- 22:57:21.602 ------------------
+DM_HCI_ULP_SET_ADVERTISING_PARAMETERS_CFM
+    type = 0x2206 (8710)
+    phandle = 0x0010 (16)
+    status = 0x00 (0)
+------------------------------------
+</pre></font>
+<br/></p><p><font color="blue"><pre>---- 22:57:21.602 ------------------
+DM_ULP_ADV_PARAM_UPDATE_IND
+    type = 0x0357 (855)
+    phandle = 0x0010 (16)
+    adv_interval_min = 0x0020 (32)
+    adv_interval_max = 0x0030 (48)
+    advertising_type = 0x00 (0)
+    own_address_type = 0x00 (0)
+    direct_address_type = 0x00 (0)
+    direct_address =
+        lap = 0x000000 (0)
+        uap = 0x00 (0)
+        nap = 0x0000 (0)
+    advertising_channel_map = 0x07 (7)
+    advertising_filter_policy = 0x00 (0)
+------------------------------------
+</pre></font>
+<br/></p><p><font color="#119933"><pre>---- 22:57:21.731 ------------------
+ATT_CONNECT_REQ
+    type = 0x0905 (2309)
+    phandle = 0x000d (13)
+    addrt =
+        type = 0xff (255) (Invalid Type)
+        lap = 0x000000 (0)
+        uap = 0x00 (0)
+        nap = 0x0000 (0)
+    flags = 0x0018 (24)
+------------------------------------
+</pre></font>
+<br/></p><p><font color="blue"><pre>---- 22:57:21.732 ------------------
+ATT_CONNECT_CFM
+    type = 0x0985 (2437)
+    phandle = 0x0010 (16)
+    addrt =
+        type = 0x00 (0) (Public)
+        lap = 0x000000 (0)
+        uap = 0x00 (0)
+        nap = 0x0000 (0)
+    flags = 0x0018 (24)
+    cid = 0x0080 (128)
+    mtu = 0x0017 (23)
+    result = 0x0817 (L2CA_CONNECT_INITIATING)
+------------------------------------
+</pre></font>
+<br/></p><p><font color="blue"><pre>---- 22:57:21.732 ------------------
+DM_ULP_ADV_PARAM_UPDATE_IND
+    type = 0x0357 (855)
+    phandle = 0x0010 (16)
+    adv_interval_min = 0x0020 (32)
+    adv_interval_max = 0x0030 (48)
+    advertising_type = 0x00 (0)
+    own_address_type = 0x00 (0)
+    direct_address_type = 0x00 (0)
+    direct_address =
+        lap = 0x000000 (0)
+        uap = 0x00 (0)
+        nap = 0x0000 (0)
+    advertising_channel_map = 0x07 (7)
+    advertising_filter_policy = 0x00 (0)
+------------------------------------
+</pre></font>
+<br/></p><p><font color="#119933"><pre>---- 22:57:51.601 ------------------
+ATT_DISCONNECT_REQ
+    type = 0x0906 (2310)
+    phandle = 0x0000 (0)
+    cid = 0x0080 (128)
+------------------------------------
+</pre></font>
+<br/></p><p><font color="blue"><pre>---- 22:57:51.602 ------------------
+DM_ACL_OPENED_IND
+    type = 0x0347 (839)
+    phandle = 0x0010 (16)
+    addrt =
+        type = 0x00 (0) (Public)
+        lap = 0x000000 (0)
+        uap = 0x00 (0)
+        nap = 0x0000 (0)
+    flags = 0x0008 (8)
+    dev_class = 0x000000 (0)
+    status = 0x16 (22)
+    conn_interval = 0x0000 (0)
+    conn_latency = 0x0000 (0)
+    supervision_timeout = 0x0000 (0)
+    clock_accuracy = 0x00 (0)
+------------------------------------
+</pre></font>
+<br/></p><p><font color="blue"><pre>---- 22:57:51.603 ------------------
+ATT_CONNECT_CFM
+    type = 0x0985 (2437)
+    phandle = 0x0010 (16)
+    addrt =
+        type = 0x00 (0) (Public)
+        lap = 0x000000 (0)
+        uap = 0x00 (0)
+        nap = 0x0000 (0)
+    flags = 0x0018 (24)
+    cid = 0x0080 (128)
+    mtu = 0x0017 (23)
+    result = 0x0801 (L2CA_CONNECT_FAILED)
+------------------------------------
+</pre></font>
+<br/></p><p><font color="#119933"><pre>---- 22:57:51.729 ------------------
+DM_HCI_READ_LOCAL_NAME_REQ
+    op_code = 0x0c14 (3092)
+    cmd_parameter_length = 0x02 (2)
+------------------------------------
+</pre></font>
+<br/></p><p><font color="blue"><pre>---- 22:57:51.729 ------------------
+DM_HCI_READ_LOCAL_NAME_CFM
+    type = 0x0e14 (3604)
+    phandle = 0x0010 (16)
+    status = 0x00 (0)
+    name_part = CSR - bc7
+------------------------------------
+</pre></font>
+<br/></p><p><font color="#119933"><pre>---- 22:57:51.759 ------------------
+DM_HCI_ULP_SET_ADVERTISING_DATA_REQ
+    op_code = 0x2008 (8200)
+    cmd_parameter_length = 0x22 (34)
+    advertising_data_len = 0x0b (11)
+    advertising_data =
+        0x0a, 0x09, 0x43, 0x53, 0x52, 0x20, 0x2d, 0x20, ..CSR - 
+        0x62, 0x63, 0x37                                bc7
+------------------------------------
+</pre></font>
+<br/></p><p><font color="blue"><pre>---- 22:57:51.760 ------------------
+DM_HCI_ULP_SET_ADVERTISING_DATA_CFM
+    type = 0x2208 (8712)
+    phandle = 0x0010 (16)
+    status = 0x00 (0)
+------------------------------------
+</pre></font>
+<br/></p><p><font color="#119933"><pre>---- 22:57:51.782 ------------------
+DM_HCI_ULP_SET_ADVERTISING_PARAMETERS_REQ
+    op_code = 0x0314 (788)
+    cmd_parameter_length = 0x0d (13)
+    adv_interval_min = 0x03e8 (1000)
+    adv_interval_max = 0x04b0 (1200)
+    advertising_type = 0x00 (0)
+    own_address_type = 0x00 (0)
+    direct_address_type = 0x00 (0)
+    direct_address =
+        lap = 0x000000 (0)
+        uap = 0x00 (0)
+        nap = 0x0000 (0)
+    advertising_channel_map = 0x07 (7)
+    advertising_filter_policy = 0x00 (0)
+------------------------------------
+</pre></font>
+<br/></p><p><font color="blue"><pre>---- 22:57:51.783 ------------------
+DM_HCI_ULP_SET_ADVERTISING_PARAMETERS_CFM
+    type = 0x2206 (8710)
+    phandle = 0x0010 (16)
+    status = 0x00 (0)
+------------------------------------
+</pre></font>
+<br/></p><p><font color="blue"><pre>---- 22:57:51.783 ------------------
+DM_ULP_ADV_PARAM_UPDATE_IND
+    type = 0x0357 (855)
+    phandle = 0x0010 (16)
+    adv_interval_min = 0x03e8 (1000)
+    adv_interval_max = 0x04b0 (1200)
+    advertising_type = 0x00 (0)
+    own_address_type = 0x00 (0)
+    direct_address_type = 0x00 (0)
+    direct_address =
+        lap = 0x000000 (0)
+        uap = 0x00 (0)
+        nap = 0x0000 (0)
+    advertising_channel_map = 0x07 (7)
+    advertising_filter_policy = 0x00 (0)
+------------------------------------
+</pre></font>
+<br/></p><p><font color="#119933"><pre>---- 22:57:51.796 ------------------
+ATT_CONNECT_REQ
+    type = 0x0905 (2309)
+    phandle = 0x16ed (5869)
+    addrt =
+        type = 0xff (255) (Invalid Type)
+        lap = 0x000000 (0)
+        uap = 0x00 (0)
+        nap = 0x0000 (0)
+    flags = 0x0018 (24)
+------------------------------------
+</pre></font>
+<br/></p><p><font color="blue"><pre>---- 22:57:51.798 ------------------
+ATT_CONNECT_CFM
+    type = 0x0985 (2437)
+    phandle = 0x0010 (16)
+    addrt =
+        type = 0x00 (0) (Public)
+        lap = 0x000000 (0)
+        uap = 0x00 (0)
+        nap = 0x0000 (0)
+    flags = 0x0018 (24)
+    cid = 0x00c0 (192)
+    mtu = 0x0017 (23)
+    result = 0x0817 (L2CA_CONNECT_INITIATING)
+------------------------------------
+</pre></font>
+<br/></p><p><font color="blue"><pre>---- 22:57:51.798 ------------------
+DM_ULP_ADV_PARAM_UPDATE_IND
+    type = 0x0357 (855)
+    phandle = 0x0010 (16)
+    adv_interval_min = 0x03e8 (1000)
+    adv_interval_max = 0x04b0 (1200)
+    advertising_type = 0x00 (0)
+    own_address_type = 0x00 (0)
+    direct_address_type = 0x00 (0)
+    direct_address =
+        lap = 0x000000 (0)
+        uap = 0x00 (0)
+        nap = 0x0000 (0)
+    advertising_channel_map = 0x07 (7)
+    advertising_filter_policy = 0x00 (0)
+------------------------------------
+</pre></font>
+<br/></p>

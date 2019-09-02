@@ -1,0 +1,144 @@
+
+; Installation inf for the CSR Casira Bluetooth Module
+;
+; Copyright © 2006-2013 Cambridge Silicon Radio Ltd.
+;
+
+
+[Version]
+Signature="$Windows NT$"
+Class=USB
+ClassGUID={36fc9e60-c465-11cf-8056-444553540000}
+Provider=%CSR%
+DriverVer=03/27/2013,3.0.0.2
+CatalogFile=usbspi.cat
+
+
+
+[Manufacturer]
+%MfgName%=CSR, NTx86.5.1,NTamd64...1
+
+[SourceDisksNames]
+1 = %CSR.Disk.Name%,,,
+
+[SourceDisksFiles]
+usbspi.sys = 1
+
+
+[DestinationDirs]
+DefaultDestDir = 10,System32\Drivers
+USBSPI.NTamd64...1 = 10, System32\Drivers
+USBSPI.NTx86.5.1 = 10, System32\Drivers
+USBSPI.NTx86 = 10, System32\Drivers
+
+
+;
+; Windows 2000
+;
+[CSR]
+%UbSpi.DeviceDesc%=USBSPI.Inst,        USB\VID_0A12&PID_0042		        ; CSR ...sira
+%UbSpiSonic.DeviceDesc% =USBSPI.Inst, USB\VID_0A12&PID_2009
+%UbSpiSonic.DeviceDesc% =USBSPI.Inst, USB\VID_0A12&PID_2009&MI_00
+%UbSpiSonic.DeviceDesc% =USBSPI.Inst, USB\VID_0A12&PID_2009&MI_01
+%UbSpiSonic.DeviceDesc% =USBSPI.Inst, USB\VID_0A12&PID_2009&MI_02
+
+[USBSPI.Inst.NTx86]
+CopyFiles=USBSPI.NTx86
+AddReg=USBSPI.AddReg.NTx86
+
+[USBSPI.Inst.NTx86.Services]
+Addservice = USBSPI, 0x00000002, USBSPI.AddService.NTx86
+
+[USBSPI.AddService.NTx86]
+DisplayName    = %USBSPI.SvcDesc%
+ServiceType    = 1                  ; SERVICE_KERNEL_DRIVER
+StartType      = 3                  ; SERVICE_DEMAND_START
+ErrorControl   = 1                  ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %10%\System32\Drivers\usbspi.sys
+LoadOrderGroup = Base
+AddReg=USBSPI_Service.AddReg.NTx86
+
+[USBSPI_Service.AddReg.NTx86]
+HKR,"Parameters","FDName",0x00000,"USBSPI"
+
+[USBSPI.AddReg.NTx86]
+HKR,,DevLoader,,"*ntkern"
+HKR,,NTMPDriver,,"usbspi.sys"
+
+[USBSPI.NTx86]
+usbspi.sys
+
+
+;
+; Windows XP and later
+;
+[CSR.NTx86.5.1]
+%UbSpi.DeviceDesc%=USBSPI.Inst.NTx86.5.1,        USB\VID_0A12&PID_0042                 ; CSR ...sira
+%UbSpiSonic.DeviceDesc%=USBSPI.Inst.NTx86.5.1,   USB\VID_0A12&PID_2009&REV_0000&MI_02  ; CSR ...Sonic
+
+[USBSPI.Inst.NTx86.5.1]
+CopyFiles=USBSPI.NTx86.5.1
+AddReg=USBSPI.AddReg.NTx86.5.1
+
+[USBSPI.Inst.NTx86.5.1.Services]
+Addservice = USBSPI, 0x00000002, USBSPI.AddService.NTx86.5.1
+
+[USBSPI.AddService.NTx86.5.1]
+DisplayName    = %USBSPI.SvcDesc%
+ServiceType    = 1                  ; SERVICE_KERNEL_DRIVER
+StartType      = 3                  ; SERVICE_DEMAND_START
+ErrorControl   = 1                  ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %10%\System32\Drivers\usbspi.sys
+LoadOrderGroup = Base
+AddReg=USBSPI_Service.AddReg.NTx86.5.1
+
+[USBSPI_Service.AddReg.NTx86.5.1]
+HKR,"Parameters","FDName",0x00000,"USBSPI"
+
+[USBSPI.AddReg.NTx86.5.1]
+HKR,,DevLoader,,"*ntkern"
+HKR,,NTMPDriver,,"usbspi.sys"
+
+[USBSPI.NTx86.5.1]
+usbspi.sys
+
+;
+; 64-bit Windows XP and later
+;
+[CSR.NTamd64...1]
+%UbSpi.DeviceDesc%=USBSPI.Inst.NTamd64...1,        USB\VID_0A12&PID_0042                 ; CSR ...sira
+%UbSpiSonic.DeviceDesc%=USBSPI.Inst.NTamd64...1,   USB\VID_0A12&PID_2009&REV_0000&MI_02  ; CSR ...Sonic
+
+[USBSPI.Inst.NTamd64...1]
+CopyFiles=USBSPI.NTamd64...1
+AddReg=USBSPI.AddReg.NTamd64...1
+
+[USBSPI.Inst.NTamd64...1.Services]
+Addservice = USBSPI, 0x00000002, USBSPI.AddService.NTamd64...1
+
+[USBSPI.AddService.NTamd64...1]
+DisplayName    = %USBSPI.SvcDesc%
+ServiceType    = 1                  ; SERVICE_KERNEL_DRIVER
+StartType      = 3                  ; SERVICE_DEMAND_START
+ErrorControl   = 1                  ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %10%\System32\Drivers\usbspi.sys
+LoadOrderGroup = Base
+AddReg=USBSPI_Service.AddReg.NTamd64...1
+
+[USBSPI_Service.AddReg.NTamd64...1]
+HKR,"Parameters","FDName",0x00000,"USBSPI"
+
+[USBSPI.AddReg.NTamd64...1]
+HKR,,DevLoader,,"*ntkern"
+HKR,,NTMPDriver,,"usbspi.sys"
+
+[USBSPI.NTamd64...1]
+usbspi.sys
+
+[Strings]
+CSR="Cambridge Silicon Radio Ltd."
+MfgName="CSR"
+UbSpi.DeviceDesc="CSR USB<>SPI converter"
+CSR.Disk.Name="CSR USB<>SPI converter Installation Disk"
+USBSPI.SvcDesc="CSR USB<>SPI converter driver"
+UbSpiSonic.DeviceDesc="CSR Sonic USB<>SPI converter driver"

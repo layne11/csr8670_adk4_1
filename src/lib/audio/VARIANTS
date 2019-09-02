@@ -1,0 +1,8 @@
+
+VARIANTS := no_ap
+
+# Include DEBUG
+CFLAGS_debug := -DDEBUG_PRINT_ENABLED
+
+# Exclude Audio Prompts
+CFLAGS_no_ap := -DEXCLUDE_AP

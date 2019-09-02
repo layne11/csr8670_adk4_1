@@ -1,0 +1,30 @@
+asm_files = dtmf.asm
+
+header_files = dtmf.h
+
+$(eval $(call header_rules,$(header_files)))
+
+$(eval $(call rules,$(asm_files)))
+
+# one line per variant...
+$(eval $(call rules_variant,debug,$(FL_DEBUG),$(asm_files)))
+
+# external versions
+$(eval $(call rules_variant,external,           -DRESAMPLER_USE_EXTERNAL_MEMORY            ,$(asm_files)))
+$(eval $(call rules_variant,external_patch_libs,-DRESAMPLER_USE_EXTERNAL_MEMORY $(FL_PATCH),$(asm_files)))
+
+# base register versions
+$(foreach hw,$(KAL_BASE_REG_CORES), \
+  $(eval $(call rules_variant_core,base_regs,                    $(FL_BASE_REG)                                            ,$(asm_files),$(hw))) \
+  $(eval $(call rules_variant_core,external_base_regs,           $(FL_BASE_REG) -DRESAMPLER_USE_EXTERNAL_MEMORY            ,$(asm_files),$(hw))) \
+  $(eval $(call rules_variant_core,external_base_regs_patch_libs,$(FL_BASE_REG) -DRESAMPLER_USE_EXTERNAL_MEMORY $(FL_PATCH),$(asm_files),$(hw))) \
+)
+
+
+
+
+
+
+
+
+

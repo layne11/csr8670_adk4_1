@@ -1,0 +1,17 @@
+asm_files = sbadpcm_library.asm
+
+header_files = sbadpcm.h
+
+
+$(eval $(call header_rules,$(header_files)))
+
+$(eval $(call rules,$(asm_files)))
+
+# one line per variant...
+$(eval $(call rules_variant,debug,$(FL_DEBUG),$(asm_files)))
+
+# some base register variants
+$(foreach hw,$(KAL_BASE_REG_CORES), \
+  $(eval $(call rules_variant_core,base_regs,$(FL_BASE_REG),$(asm_files),$(hw))) \
+)
+

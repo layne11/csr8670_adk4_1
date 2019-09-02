@@ -1,0 +1,1 @@
+file="C:\devp4\dev_desktop\depot\bg\main\tools\SampleAudioPrompts\8kHz_16bit\565_Prompts_USB_8k.wav",compression=ADPCM,rate=8000,channels=Mono

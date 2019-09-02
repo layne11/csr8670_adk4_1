@@ -1,0 +1,6 @@
+SUPPORTED_EXECUTION_MODES += native
+native_stack_usage_supported = yes
+native_compile_flags         = -xap2+ -large -mbig-function-pointers -mleaf-optim -munderscore
+native_tool_basename         = xapnative-local-xapnative
+native_tool_path             = xapnative-local-xapnative
+native_link_flags            = -Wl,-I$(BLUELAB)/lib/gcc-lib/xapnative-local-xapnative/3.3.3/ -Xlinker -pass -Xlinker 250

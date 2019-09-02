@@ -1,0 +1,6 @@
+<workspace>
+ <project path="soundbar.xip" />
+ <project path="../../kalimba/apps/a2dp_sink/sbc_decoder.xip" />
+ <project path="../../kalimba/apps/a2dp_sink/spdif_sink.xip" />
+ <project path="../../kalimba/apps/a2dp_sink/faststream_decoder.xip" />
+</workspace>

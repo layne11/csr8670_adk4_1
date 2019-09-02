@@ -1,0 +1,15 @@
+<textformats>
+<section name="Source windows">
+<item name="Normal text" fontFamily="Courier" fontSize="10" fgColour="0" bgColour="ffffff"/>
+<item name="Comment" fontFamily="Courier" fontSize="10" fgColour="8000"/>
+<item name="Number" fontFamily="Courier" fontSize="10" fgColour="80" />
+<item name="String" fontFamily="Courier" fontSize="10" fgColour="804040" />
+<item name="Type" fontFamily="Courier" fontSize="10" fgColour="4080" />
+<item name="Keyword" fontFamily="Courier" fontSize="10" fgColour="80" />
+<item name="Pre-processor" fontFamily="Courier" fontSize="10" fgColour="80" />
+<item name="Label" fontFamily="Courier" fontSize="10" fgColour="800000" />
+</section>
+<section name="Output windows">
+<item name="Normal text" fontFamily="Courier" fontSize="10" fgColour="0" bgColour="ffffff"/>
+</section>
+</textformats>

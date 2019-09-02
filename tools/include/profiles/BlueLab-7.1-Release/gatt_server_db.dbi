@@ -1,0 +1,21 @@
+#ifndef __GATT_SERVER_DB_DBI__
+#define __GATT_SERVER_DB_DBI__
+
+#include "gatt_server_uuids.h"
+
+primary_service {
+    uuid : UUID_GATT,
+    name : "GATT_SERVICE",
+    characteristic {
+        uuid       : UUID_SERVICE_CHANGED,
+        name       : "GATT_SERVICE_CHANGED",
+        properties  : [ indicate ],
+        client_config
+        {
+            name  : "GATT_SERVICE_CHANGED_CLIENT_CONFIG",
+            flags : [ FLAG_IRQ ]
+        }
+    }
+},
+#endif /* __GATT_SERVER_DB_DBI__ */
+

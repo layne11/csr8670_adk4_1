@@ -1,0 +1,5 @@
+<template type="project">
+    <displayname>Kalasm 3</displayname>
+    <description>A Kalimba template for use with Kalasm 3</description>
+    <icon default="icon.png"/>
+</template>

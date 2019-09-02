@@ -1,0 +1,5 @@
+<template type="project">
+    <displayname>Blank VM Project</displayname>
+    <description>A blank Virtual Machine template</description>
+    <icon default="icon.png"/>
+</template>

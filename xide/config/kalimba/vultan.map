@@ -1,0 +1,22 @@
+<memory>
+    <mapping side="pm"  addr="000000" size="001000" type="ram"       name="Physical RAM PM"                 tag="CODE"></mapping>    
+    <mapping side="pm"  addr="001000" size="FFF000" type="rom"       name="Mapped Flash/ROM"                tag="CODE"></mapping>
+
+    <mapping side="dm1" addr="000000" size="001000" type="ram"       name="Physical RAM DM1"                tag="DATA"></mapping>
+    <mapping side="dm1" addr="020000" size="001000" type="ram"       name="Mapped PM MS 16 bits"            tag="DATA16"></mapping>
+    <mapping side="dm1" addr="030000" size="001000" type="ram"       name="Mapped PM LS 16 bits"            tag="DATA16"></mapping>
+    <mapping side="dm1" addr="040000" size="001000" type="ram"       name="Mapped PM 24 bits"               tag="DATA"></mapping>
+
+    <mapping side="dm2" addr="FF9000" size="002000" type="ram"       name="Physical RAM DM2"                tag="DATA"></mapping>
+    <mapping side="dm2" addr="FFB000" size="001000" type="rom"       name="Flash/ROM Access Window 1"       tag="DATA"></mapping>
+    <mapping side="dm2" addr="FFC000" size="001000" type="rom"       name="Flash/ROM Access Window 2"       tag="DATA"></mapping>
+    <mapping side="dm2" addr="FFD000" size="001000" type="rom"       name="Flash/ROM Access Window 3"       tag="DATA"></mapping>
+    <mapping side="dm2" addr="D00000" size="100000" type="rom"       name="Flash/ROM Access Window 1 Large" tag="DATA"></mapping>
+    <mapping side="dm2" addr="E00000" size="100000" type="rom"       name="Flash/ROM Access Window 2 Large" tag="DATA"></mapping>
+    <mapping side="dm2" addr="F00000" size="0D0000" type="rom"       name="Flash/ROM Access Window 3 Large" tag="DATA"></mapping>
+    <mapping side="dm2" addr="FFE000" size="001000" type="ram"       name="MCU Access Window 1"             tag="DATA"></mapping>
+    <mapping side="dm2" addr="FFF000" size="000E00" type="ram"       name="MCU Access Window 2"             tag="DATA"></mapping>
+    <mapping side="dm2" addr="FFFE00" size="000200" type="registers" name="Kalimba Memory Mapped Registers" tag="DATA"></mapping>
+
+    <mapping side="dm1" addr="7FFF00" size="100"    type="ram"       name="Kalsim control 24 bits"          tag="DATA"></mapping>
+</memory>

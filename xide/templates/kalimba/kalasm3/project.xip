@@ -1,0 +1,14 @@
+<project buildenvironment="{6907f3f0-0ed4-11d8-be02-0050dadfe87d}" 
+executionenvironment="{2ca81310-0ecd-11d8-be02-0050dadfe87d}" 
+executionenvironmentname="kalimba" 
+buildenvironmentoption="" 
+buildenvironmentname="kalimba" 
+executionenvironmentoption="binutils" >
+ <properties currentconfiguration="Release" >
+  <configuration name="Release">
+   <property key="buildMatch" >(?:(?:[a-zA-Z]:\\)?[^:]+\.o:)?(file):(line):</property>
+   <property key="debugtransport" >SPITRANS=KALSIM SPIPORT=1</property>
+   <property key="hardware" >0</property>
+  </configuration>
+ </properties>
+</project>

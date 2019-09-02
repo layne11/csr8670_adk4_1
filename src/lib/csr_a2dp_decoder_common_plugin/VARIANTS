@@ -1,0 +1,22 @@
+
+VARIANTS := debug stereo_tws_debug stereo_master stereo_bidir stereo_bidir_debug
+
+# Include all non-debug functionality
+CFLAGS_stereo_master := -DSHAREME_MASTER
+CFLAGS_stereo_anc := -DANC
+
+# TWS debug variant which uses share-me mode
+CFLAGS_stereo_tws_debug := -DTWS_DEBUG
+
+# Include all functionality (inc. debug)
+CFLAGS_debug := -DDEBUG_PRINT_ENABLED
+CFLAGS_stereo_anc_debug := -DDEBUG_PRINT_ENABLED -DANC
+
+# non debug version of aptx LL using sbc back channel
+CFLAGS_stereo_bidir := -DCVC_BACK_CHANNEL
+CFLAGS_stereo_bidir_debug := -DCVC_BACK_CHANNEL -DDEBUG_PRINT_ENABLED
+CFLAGS_stereo_bidir_anc := -DANC -DCVC_BACK_CHANNEL
+
+# debug version of aptx LL using sbc back channel
+CFLAGS_CONFIG_HYDRACORE:= -DFRAMEWORK_ENABLE_NOT_SUPPORTED
+CFLAGS_stereo_bidir_anc_debug := -DANC -DCVC_BACK_CHANNEL -DDEBUG_PRINT_ENABLED

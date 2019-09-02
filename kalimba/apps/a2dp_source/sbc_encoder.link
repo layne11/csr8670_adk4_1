@@ -1,0 +1,12 @@
+/* Linkscript for the a2dp_source application (sbc variant) */
+
+/* Application segments: put infrequently run modules into flash.code region */
+segment MAIN_PM                                          40          flash.code;
+segment CONFIG_INPUT_SCALING_PM                          40          flash.code;
+segment SET_INPUT_RATE_FROM_VM_PM                        40          flash.code;
+segment SET_CODEC_RATE_FROM_VM_PM                        40          flash.code;
+segment SET_INPUT_HANDLER_TIMER_PM                       40          flash.code;
+
+/* Library segment overrides: precede statement with "override" qualifier
+   to override a segment defined by a library */
+

@@ -1,0 +1,6 @@
+SUPPORTED_EXECUTION_MODES += vm
+vm_stack_usage_supported = yes
+vm_compile_flags         = -mno-leaf-optim  -mno-function-sizeof
+vm_tool_basename         = xap-local-xap
+vm_tool_path             = xap-local-xap
+vm_link_flags            =

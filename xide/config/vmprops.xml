@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<properties envId="{............}">
+    <propertygroup name="General">
+        <appliesto selector="c"/>
+        <property type="boolean" key="includeinbuild" name="Include in build" defaultvalue="1">
+            <description>
+            <![CDATA[
+            Select 'Yes' to include this file in the build.
+            ]]>
+            </description>
+        </property>
+    </propertygroup>
+
+    <group name="Debug Tracing">
+        <appliesto selector="project"/>
+        <propertygroup name="Features">
+            <property type="boolean" key="primitives" name="Primitives" defaultvalue="1">
+                <description>
+                <![CDATA[
+                        Select 'Yes' for primitives to be shown in debug output.
+                ]]>
+                </description>
+            </property>
+            <property type="boolean" key="timestamps" name="Timestamps" defaultvalue="1">
+                <description>
+                <![CDATA[
+                        Select 'Yes' for timestamps to be shown in debug output.
+                ]]>
+                </description>
+            </property>
+            <property type="boolean" key="characters" name="Characters" defaultvalue="1">
+                <description>
+                <![CDATA[
+                        Select 'Yes' for characters to be shown in debug output.
+                ]]>
+                </description>
+            </property>
+            <property type="boolean" key="messages" name="Messages" defaultvalue="1">
+                <description>
+                <![CDATA[
+                        Select 'Yes' for timestamps to be shown in debug output.
+                ]]>
+                </description>
+            </property>
+            <property type="boolean" key="pcvalue" name="Heap allocations" defaultvalue="1">
+                <description>
+                <![CDATA[
+                        Select 'Yes' for the PC value to be displayed.
+                ]]>
+                </description>
+            </property>
+            <property type="boolean" key="faultalerts" name="Fault Alerts" defaultvalue="1">
+                <description>
+                <![CDATA[
+                        Select 'Yes' for faults from the firmware to be displayed.
+                ]]>
+                </description>
+            </property>
+        </propertygroup>
+    </group>
+
+    <group name="Build System">
+        <propertygroup name="General">
+            <appliesto selector="project"/>
+            <property type="text" key="output" name="Output name" defaultvalue="">
+                <description>
+                <![CDATA[
+                Specify the name that you want to give the output file.
+                <p>If you leave this blank, then the project name will be used.
+                ]]>
+                </description>
+            </property>
+
+            <property type="list" key="execution_mode" internalkey="EXECUTION_MODE" format="passthrough" name="Execution mode" defaultvalue="0">
+                <option internalval="hw_default">Hardware Default</option>
+                <option internalval="vm">VM</option>
+                <option internalval="native">Native</option>
+                <option internalval="assisted">Assisted Native</option>
+                <description>
+                    <![CDATA[
+                    Specify the execution mode for this application. 
+
+                    VM mode is the traditional virtual machine from BlueLab3.
+
+                    Native mode is faster and supports more than 64Kw
+                    of code, but applications are typically over 50%
+                    larger than when built in VM mode.
+
+                    Assisted Native mode is a hardware assisted
+                    version of Native mode available on some BlueCore
+                    ICs. Assisted native offers the benefits of native
+                    execution with reduced application size overhead
+                    compared to Native mode. 
+
+                    Hardware Default will select the most appropriate mode 
+                    for the Hardware you have specified or can be detected.
+                    If this option is selected and no hardware is connected, 
+                    the default, Assisted Native, shall be used.
+                    ]]>
+                </description>
+            </property>
+
+
+            <property type="integer" key="stacksize" internalkey="STACKSIZE" format="passthrough" name="Stack size" defaultvalue="0" min="0" max="512">
+                <description>
+                <![CDATA[
+                Specify the size of stack that the application requires. If set to 0, this value will be automatically calculated.
+                ]]>
+                </description>
+            </property>
+
+            <property type="list" key="buildtransport" internalkey="TRANSPORT" format="passthrough" name="Transport" defaultvalue="0">
+                <option internalval="bcsp">BCSP</option>
+                <option internalval="raw">Raw</option>
+                <option internalval="h4">H4</option>
+                <option internalval="usb">USB</option>
+                <option internalval="none">None</option>
+                <option internalval="usb_vm">USB VM</option>
+                <description>
+                <![CDATA[
+                Select the host transport to configure in the persistent store. This is set whenever programming the application and firmware into your device.
+                ]]>
+                </description>
+            </property>
+
+            <property type="list" key="firmware" internalkey="FIRMWARE" format="passthrough" name="Firmware" defaultvalue="0">
+                <option internalval="unified">Unified</option>
+                <option internalval="compact">Compact (no loader and other restrictions)</option>
+                <description>
+                <![CDATA[
+                Specify the firmware variant to use.<br>
+                Unified firmware can be used as RFComm or HCI based on the setting of ONCHIP_HCI_CLIENT PS Key.<br>
+                Compact firmware is unified without a loader, suitable for prototyping ROM parts.<br>
+                ]]>
+                </description>
+            </property>
+
+<property type="list" key="hardware" internalkey="HARDWARE" format="passthrough" name="BlueCore hardware" defaultvalue="0">
+    <option fake ="">Query chip</option>
+    <option internalval="gemini">CSR8510</option>
+    <option internalval="dale">CSR8640</option>
+    <option internalval="gordon">CSR8670</option>
+    <option internalval="rick">CSR8675/CSR8676</option>
+		<description>
+            <![CDATA[
+            Specify the method used to set the BlueCore variant that will be targeted by the tool chain.
+            <p>
+            "Query chip" results in BlueLab automatically detecting the BlueCore variant that is currently
+            connected. If no chip is connected the tool chain will refuse to merge the VM application and 
+            the firmware.
+            <p>
+            Choosing a particular BlueCore will force the tool chain to build a merged application and
+            firmware image that targets that BlueCore.
+            ]]>
+            </description>
+            </property>
+
+            <property type="list" key="flashsize" internalkey="FLASHSIZE" format="passthrough" name="Flash/Rom size" defaultvalue="0">
+                <option fake ="">Query chip</option>
+                <option internalval="5120">5 Mbit</option>
+                <option internalval="6144">6 Mbit</option>
+                <option internalval="8192">8 Mbit</option>
+                <option internalval="10240">10 Mbit</option>
+                <option internalval="16384">16 Mbit</option>
+                <option internalval="32768">32 Mbit</option>
+                <description>
+                    <![CDATA[
+                    Specify the method used to detect the flash/rom size of the BlueCore variant that will be targeted by
+                    the tool chain.
+                    <p>
+                    "Query chip" results in BlueLab automatically detecting the flash/rom size of the BlueCore variant that
+                    is currently connected. If no chip is connected the tool chain will refuse to merge the VM application and 
+                    the firmware.
+                    <p>
+                    Choosing a particular size will force the tool chain to build a merged application and
+                    firmware image that targets a BlueCore with that flash/rom size.
+                ]]>
+                </description>
+            </property>
+
+            <property type = "list" key="build_merge" internalkey="BUILD_MERGE" format="passthrough" name="Build merge" defaultvalue="0">
+                <option fake="">No</option>
+                <option internalval="merge">Yes</option>
+                <description>
+                <![CDATA[
+                    Select 'Yes' to generate merge.xdv/xpv images on Build.
+                ]]>
+                </description>
+            </property>
+
+            <property type = "list" key="storage_type" internalkey="USE_ROM" format="passthrough" name="Storage type" defaultvalue="0">
+                <option fake="">Flash</option>
+                <option internalval="_rom">ROM</option>
+                <option internalval="SQIF">SQIF only</option>
+                <description>
+                    <![CDATA[
+                    Specify the storage type used by the chip. Used to select the firmware that is programmed to the chip.
+                    ]]>
+                </description>
+            </property>
+
+            <property type="list" key="panic" internalkey="PANIC_ON_PANIC" format="passthrough" name="Panic action" defaultvalue="0">
+                <option fake="">Stop application</option>
+                <option internalval="1">Panic entire chip</option>
+                <description>
+                    <![CDATA[
+                    Specify what the firmware should do if this application panics when xIDE is not running.
+                    ]]>
+                </description>
+            </property>
+
+            <property type="text" key="defines" name="Define symbols" defaultvalue="">
+                <description>
+                    <![CDATA[
+                    Specify preprocessor symbols to define. These are passed to GCC using the -D command
+                    line option.
+                    <p>Multiple symbols can be separated with a comma.
+                    ]]>
+                </description>
+            </property>
+
+            <property type="text" key="libs" name="Libraries" defaultvalue="">
+                <description>
+                    <![CDATA[
+                    Specify the libraries to be used in the project. These are passed to GCC using the -l command
+                    line option.
+                    <p>Multiple libraries can be separated with a comma.
+                    ]]>
+                </description>
+            </property>
+
+            <property type="text" key="SQIF_PARTITIONS" name="SQIF Partitions" defaultvalue="">
+                <description>
+                    <![CDATA[
+                    Specify the image directories for SQIF Partitions. 
+
+                    <p>Multiple directories can be separated with a comma.
+                    ]]>
+                </description>
+            </property>
+
+            <property type="text" key="firmwareimage" internalkey="FIRMWAREIMAGE" format="passthrough" name="Firmware Image" defaultvalue="">
+                <description>
+                <![CDATA[
+                A custom firmware path can be set here.  Enter the full path to the firmware, without the .xpv/.xdv/.xuv extension.  Leave blank to use the default BlueLab firmware.
+                ]]>
+                </description>
+            </property>
+
+            <property type="text" key="library_version" internalkey="LIBRARY_VERSION" format="passthrough" name="Library Version" defaultvalue="">
+                <description>
+                <![CDATA[
+                Which version of the libraries is being used. Set this to use a custom version of the libraries; otherwise the default is BlueLabX.X (the release number of your BlueLab installation).
+                ]]>
+                </description>
+            </property>
+
+            <property type="boolean" key="generate_map" internalkey="GENERATE_MAP" format="passthrough" name="Generate map file" defaultvalue="1">
+                <description>
+                <![CDATA[
+                Generate linker map file?
+                ]]>
+                </description>
+            </property>
+
+        </propertygroup>
+    </group>
+</properties>
