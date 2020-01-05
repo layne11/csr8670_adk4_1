@@ -377,7 +377,7 @@ void handleAvrcpVolumeChangedInd(const AVRCP_EVENT_VOLUME_CHANGED_IND_T *msg)
     }
     
     AVRCP_QUALIFICATION_DEBUG(("   volume changed ind [%x] volume[0x%x]\n", msg->response, msg->volume));
-    UartSendStr("VOLUME:");
+    UartSendStr("+AVRCPVOL:");
 	UartSendDigit(msg->volume);
 	UartSendStr("\r\n");
 		
@@ -418,7 +418,7 @@ void handleAvrcpSetAbsoluteVolumeCfm(const AVRCP_SET_ABSOLUTE_VOLUME_CFM_T *msg)
     }
                 
     AVRCP_QUALIFICATION_DEBUG(("   absolute value cfm [%x] [%x]\n", msg->status, msg->volume));
-    UartSendStr("VOLUME:");
+    UartSendStr("+AVRCPVOL:");
 	UartSendDigit(msg->volume);
 	UartSendStr("\r\n");
     if ((msg->status == avrcp_success) && sinkAvrcpGetIndexFromInstance(msg->avrcp, &Index))

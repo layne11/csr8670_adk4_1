@@ -122,7 +122,17 @@ RETURNS
     void
 */
 static void updateServicesAdData(uint8* ad_data_ptr, uint16 *counter_ptr , uint16 num_services)
-{ 
+{
+    if (num_services)
+    {
+        BLE_AD_INFO(("Custom Service"));
+        ad_data_ptr[*counter_ptr] = (0x00 & 0xFF);
+        (*counter_ptr)++;
+        ad_data_ptr[*counter_ptr] = (0xFF >> 8);
+        (*counter_ptr)++;
+        num_services--;
+    }
+	
     if (sinkGattBatteryServiceEnabled() && num_services)
     {
         BLE_AD_INFO(("Battery Service"));
@@ -230,6 +240,7 @@ static uint16 getNumberOfServersEnabled(void)
     {
         num_services++;
     }
+	num_services++;
 
     return num_services;
 }

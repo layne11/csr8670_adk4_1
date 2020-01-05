@@ -187,6 +187,45 @@ void gaia_send_sppdata(uint8 *payload, uint16 payload_length)
 
 }
 
+void gaia_send_gattdata(uint8 *payload, uint16 payload_length)
+{
+	gaia_transport_type type;
+	uint8 *packet;
+	uint8 flags;
+	uint16 len;
+	type = GaiaTransportGetType(gaia_data.gaia_transport);
+	flags = GaiaTransportGetFlags(gaia_data.gaia_transport);
+	GaiaTransportSetType(gaia_data.gaia_transport, gaia_transport_gatt);
+	/*gaia_send_packet(GAIA_VENDOR_CSR, GAIA_COMMAND_TYPE_DATA_TRANSFER, 0x7FFE, payload_length, payload);*//*0x7FFE,GAIA_STATUS_NONE*/
+	if (flags & GAIA_PROTOCOL_FLAG_CHECK){
+		len = payload_length +1;
+	}else{
+		len = payload_length;
+	}
+    packet = mallocPanic(len);
+    
+    if (packet)
+    {
+		memmove(packet, payload, payload_length);
+	}
+
+    /*  packet checksum  */
+	if (flags & GAIA_PROTOCOL_FLAG_CHECK)
+    {
+        uint8 check = 0;
+
+        while (--payload_length)
+            check ^= *packet++;
+
+        *(packet+payload_length) = check;
+    }
+	GaiaSendPacket(gaia_data.gaia_transport, len, packet);
+	/*free(packet);*/
+
+	GaiaTransportSetType(gaia_data.gaia_transport, type);
+
+}
+
 
 /*************************************************************************
 NAME    

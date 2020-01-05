@@ -456,5 +456,5 @@ void sinkBleGapSetCentralConnAttempt(bool conn_attempt, const typed_bdaddr *tp_a
 #define sinkBleGapSetCentralConnAttempt(conn_attempt, tp_addr, cid, index) (void(0))
 #endif
 
-void sink_custom_ble_adv(void);
+void sink_custom_ble_scan_adv(void);
 #endif /* _SINK_BLE_GAP_H_ */

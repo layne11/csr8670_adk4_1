@@ -40,9 +40,9 @@ DESCRIPTION
 
         /*The individual Debug enables*/
         /*The custom private log*/
-        #define DEBUG_CUSTOM
+        #define DEBUG_CUSTOMx
             /*The main system messages*/
-        #define DEBUG_MAIN
+        #define DEBUG_MAINx
             /* RSSI pairing */
         #define DEBUG_INQx
                 /*The button manager */

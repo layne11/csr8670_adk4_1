@@ -51,6 +51,7 @@ prefix Uart
 
 #avrcp at comand definition
 { AT+AVRCPGSTA\r\n } : handleAvrcpGetStatus
+{ AT+AVRCPGMDSTA\r\n } : handleA2dpGetMediaStatus
 { AT+AVRCPPLAY\r\n } : handleAvrcpPlay
 { AT+AVRCPPAUSE\r\n } : handleAvrcpPause
 { AT+AVRCPSTOP\r\n } : handleAvrcpStop
@@ -87,8 +88,9 @@ prefix Uart
 
 #gatt at comand definition
 { AT+GATTGSTA\r\n } : handleGattGetStatus
+{ AT+GATTADV=%d:enable\r\n } : handleGattAdv
 { AT+GATTCONN=%s:addr\r\n } : handleGattConn
 { AT+GATTDISC\r\n } : handleGattDisc
-{ AT+GATTSEND\r\n } : handleGattSendData
+{ AT+GATTSEND=%s:data\r\n } : handleGattSendData
 
 

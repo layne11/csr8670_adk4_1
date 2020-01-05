@@ -135,6 +135,9 @@ static void stateManagerSetState ( sinkState pNewState )
         }
    
         gTheSinkState = pNewState ;
+		UartSendStr("+HFSTA:");
+		UartSendDigit(gTheSinkState);
+		UartSendStr("\r\n");
 
     }
     else

@@ -452,7 +452,7 @@ void gaiaTransportProcessSource(gaia_transport *transport) {
 	}
 #endif
 	if(locals->data_length > 0){
-		UartSendStr("SPPDATA:");
+		UartSendStr("+SPPDATA:");
 		UartSendData(locals->data, locals->data_length);
 		UartSendStr("\r\n");
 	}

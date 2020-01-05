@@ -765,6 +765,7 @@ RETURNS
 */
 void inquiryHandleResult( CL_DM_INQUIRE_RESULT_T* result )
 {
+	return;
 #ifdef ENABLE_SUBWOOFER
     /* Is the inquiry action searching for a subwoofer device? */
     if (theSink.inquiry.action == rssi_subwoofer)
@@ -794,15 +795,14 @@ void inquiryHandleResult( CL_DM_INQUIRE_RESULT_T* result )
 		/*uint8 result_idx;
 		char *addr_buff = (char *)malloc(13);
 		memset(addr_buff,0,13);
-		UartSendStr("result:1\r\n");
+		UartSendStr("+INQRESULT\n\r");
 		for(result_idx=0; result_idx<NUM_INQ_RESULTS; result_idx++){
-			UartSendStr("result_idx:");
+			UartSendStr("+INQ:");
 			UartSendInt(result_idx);
-			UartSendStr(", addr:");
-			UartSendDigit(theSink.inquiry.results[result_idx].bd_addr.lap);
+			UartSendStr(",");
 			AddrToStr(addr_buff, &theSink.inquiry.results[result_idx].bd_addr);
 			UartSendStr(addr_buff);
-			UartSendStr(", RSSI:");
+			UartSendStr(",");
 			UartSendInt(theSink.inquiry.results[result_idx].rssi);
 			UartSendStr("\r\n");
 		}
@@ -886,4 +886,26 @@ void inquiryHandleResult( CL_DM_INQUIRE_RESULT_T* result )
             inquiryConnectFirst();
         }
     }
+}
+
+void inquiryCustomHandleResult(CL_DM_INQUIRE_RESULT_T *result)
+{
+    /* Check inquiry data is valid (if not we must have cancelled) */
+    if(theSink.inquiry.results)
+    {
+		if(result->status == inquiry_status_result)
+        {
+			char *addr_buff = (char *)malloc(13);
+			memset(addr_buff,0,13);
+			UartSendStr("+INQ:");
+			AddrToStr(addr_buff, &result->bd_addr);
+			UartSendStr(addr_buff);
+			UartSendStr(",");
+			UartSendInt(result->rssi);
+			UartSendStr("\r\n");
+
+			free(addr_buff);
+		}
+
+	}
 }

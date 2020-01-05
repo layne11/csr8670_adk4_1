@@ -10,7 +10,7 @@ Copyright (c) 2011 - 2015 Qualcomm Technologies International, Ltd.
 #ifdef GAIA_TRANSPORT_GATT
 
 #include "gaia_db.h"
-
+#include <uart.h>
 static void process_command(gaia_transport *transport, uint16 size_command, uint8 *command)
 {
 /*  Short packets are by definition badly framed and hence silently ignored  */
@@ -274,7 +274,7 @@ void gaiaHandleGattManagerAccessInd(GATT_MANAGER_SERVER_ACCESS_IND_T *ind)
         flags & ATT_ACCESS_WRITE            ? 'w' : '-',
         flags & ATT_ACCESS_READ             ? 'r' : '-',
         ind->offset, ind->size_value));
-
+	
     if (transport)
     {
         if (flags == (ATT_ACCESS_PERMISSION | ATT_ACCESS_WRITE_COMPLETE | ATT_ACCESS_WRITE))
@@ -320,7 +320,7 @@ void gaiaHandleGattManagerAccessInd(GATT_MANAGER_SERVER_ACCESS_IND_T *ind)
         {
             status = gatt_status_request_not_supported;
         }
-        
+        status = gatt_status_success;
         if (handle)
         {
         /*  Handle 0 is handled by the demultiplexer  */

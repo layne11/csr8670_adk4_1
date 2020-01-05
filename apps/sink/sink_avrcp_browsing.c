@@ -710,8 +710,8 @@ void sinkAvrcpBrowsingGetItemAttributesCfm(const AVRCP_BROWSE_GET_ITEM_ATTRIBUTE
                         
                 if ((attribute_length + header_end) > size_attr_list)
                     attribute_length = size_attr_list - header_end;
-				UartSendData((uint8 *)(lSource+8), attribute_length);
-                UartSendStr("\t");
+				/*UartSendData((uint8 *)(lSource+8), attribute_length);
+                UartSendStr(",");*/
 #ifdef DEBUG_AVRCP    
                 {
                     uint16 j;

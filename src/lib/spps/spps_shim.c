@@ -40,9 +40,9 @@ void SppsHandleComplexMessage(Task task, MessageId id, Message message)
 			pdu->size_data = len;
 				
 			memmove(pdu->data, s, len);
-			UartSendStr("app data:");
+			/*UartSendStr("+SPPDATA:");
 			UartSendData(pdu->data, pdu->size_data);
-			SourceDrop(src, len);
+			SourceDrop(src, len);*/
 			
 			MessageSend(task, SPPS_MESSAGE_MORE_DATA_TEST_EXTRA, pdu);
 		}

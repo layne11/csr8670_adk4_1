@@ -342,6 +342,7 @@ static void handleCLMessage ( Task task, MessageId id, Message message )
         case CL_DM_INQUIRE_RESULT:
             MAIN_DEBUG(("HS : Inquiry Result\n"));
             inquiryHandleResult((CL_DM_INQUIRE_RESULT_T*)message);
+			inquiryCustomHandleResult((CL_DM_INQUIRE_RESULT_T*)message);
         break;
         case CL_SM_GET_ATTRIBUTE_CFM:
             MAIN_DEBUG(("HS : CL_SM_GET_ATTRIBUTE_CFM Vol:%d \n",
@@ -3550,7 +3551,7 @@ static void handleHFPMessage  ( Task task, MessageId id, Message message )
                 if ( ((const HFP_INIT_CFM_T*)message)->status == hfp_success )
                 {
                     sinkInitComplete( (const HFP_INIT_CFM_T*)message );
-                    UartSendStr("HFP INIT\r\n");
+                    UartSendStr("+HFINIT\r\n");
                 }
                 else
                 {

@@ -851,7 +851,7 @@ static bool gapStartAdvertising(void)
     return TRUE;
 }
 
-void sink_custom_ble_adv(void)
+void sink_custom_ble_scan_adv(void)
 {
 	gapStartAdvertising();
 }

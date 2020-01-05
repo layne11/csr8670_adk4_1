@@ -1,0 +1,41 @@
+#ifndef __GATT_CUSTOM_SERVER_DB_DBI__
+#define __GATT_CUSTOM_SERVER_DB_DBI__
+
+#include "gatt_custom_server_uuids.h"
+
+primary_service {
+    uuid : UUID_CUSTOM_SERVICE,
+    name : "CUSTOM_FIRST_SERVICE",
+    characteristic {
+        uuid        : UUID_CUSTOM_CHARA_WRITE,
+        name        : "WRITE",
+        flags       : [ FLAG_IRQ ],
+        properties  : [ write_cmd ],
+        size_value       : 0x14
+    },
+    
+	characteristic {
+        uuid        : UUID_CUSTOM_CHARA_READ,
+        name        : "READ",
+        flags       : [ FLAG_IRQ ],
+        properties  : [ notify ],
+        size_value       : 0x14,
+        client_config
+        {
+            name  : "CUSTOM_CCC",
+            flags : [ FLAG_IRQ , FLAG_DYNLEN ]
+        }
+    },
+    
+	characteristic {
+        uuid        : UUID_CUSTOM_CHARA_FLOW_CTL,
+        name        : "FLOW_CTL",
+        flags       : [ FLAG_IRQ ],
+        properties  : [ notify ],
+        value       : 0x0
+    }
+},
+
+
+#endif /* GATT_CUSTOM_SERVER_DB_DBI__ */
+

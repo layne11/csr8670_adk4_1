@@ -34,6 +34,7 @@ NOTES
 #include <sink.h>
 #include <stream.h>
 #include <sdp_parse.h>
+#include <uart.h>
 
 /*****************************************************************************/
 
@@ -304,6 +305,7 @@ static bool completeSignalling (signalling_channel *signalling, uint16 connectio
             signalling->connection.active.sink = sink;
             signalling->connection.active.mtu = MIN(DEFAULT_L2CAP_LOCAL_MTU_MAXIMUM, mtu);
             signalling->status.connection_state = avdtp_connection_connected;
+			UartSendStr("+A2DPSTA:2\r\n");
             return TRUE;
         }
         
@@ -653,7 +655,7 @@ bool a2dpSignallingDisconnectPending (remote_device *device)
     {   /* Signalling channel disconnect is pending - do it now */
         device->signal_conn.status.connection_state = avdtp_connection_disconnecting;
         ConnectionL2capDisconnectRequest(&a2dp->task, device->signal_conn.connection.active.sink);
-        
+        UartSendStr("+A2DPSTA:0\r\n");
         return TRUE;
     }
     

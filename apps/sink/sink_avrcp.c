@@ -817,7 +817,7 @@ static void sinkAvrcpInitComplete(const AVRCP_INIT_CFM_T *msg)
     if(msg->status == avrcp_success)
     {
         AVRCP_DEBUG(("  AVRCP Init Success [SDP handle 0x%lx]\n", msg->sdp_handle));
-        UartSendStr("AVRCP INIT\r\n");
+        UartSendStr("+AVRCPINIT\r\n");
     }
     else
     {
@@ -1060,7 +1060,7 @@ static void handleAvrcpConnectInd(const AVRCP_CONNECT_IND_T *msg)
     if(accept)
     {
         AvrcpConnectResponse(&theSink.task, msg->connection_id, msg->signal_id, accept, &(theSink.avrcp_link_data->bd_addr[i]));
-		UartSendStr("AVRCP CONN");
+		UartSendStr("+AVRCPCONN\r\n");
 	}
     else
     {
@@ -1129,7 +1129,7 @@ static void handleAvrcpDisconnectInd(const AVRCP_DISCONNECT_IND_T *msg)
         
         sinkAvrcpUpdateActiveConnection();
 
-		UartSendStr("AVRCP DISCONN\r\n");
+		UartSendStr("+AVRCPDISC\r\n");
     }    
 }
 
@@ -1964,11 +1964,11 @@ static void handleAvrcpPlayStatusChangedInd(const AVRCP_EVENT_PLAYBACK_STATUS_CH
     {                   
         AVRCP_DEBUG(("   play status ind [%d] [%d] index[%d]\n", msg->response, msg->play_status, Index));
 	    if(avrcp_play_status_stopped == msg->play_status){
-			UartSendStr("A2DP STOP\r\n");
+			UartSendStr("+A2DPSTOP\r\n");
 		}else if(avrcp_play_status_playing == msg->play_status){
-			UartSendStr("A2DP PLAY\r\n");
+			UartSendStr("+A2DPPLAY\r\n");
 		}else if(avrcp_play_status_paused == msg->play_status){
-			UartSendStr("A2DP PAUSE\r\n");
+			UartSendStr("+A2DPPAUSE\r\n");
 		}
 		
 		if ((msg->response == avctp_response_changed) || (msg->response == avctp_response_interim))
@@ -2172,7 +2172,7 @@ static void handleAvrcpGetElementAttributesCfm(const AVRCP_GET_ELEMENT_ATTRIBUTE
         if ((lSource) && (msg->number_of_attributes > 0))
         {
             AVRCP_DEBUG(("   success; packet[%d] num_attr[%d] size_att[%d] size_source[%d]\n", msg->metadata_packet_type, msg->number_of_attributes, msg->size_attributes, source_size));                
-            UartSendStr("MUSCI INFO:");
+            UartSendStr("+AVRCPMEDIA:");
             header_end = i + AVRCP_GET_ELEMENT_ATTRIBUTES_CFM_HEADER_SIZE;
             while (size_attributes >= header_end) /* check there is room left for data to exist */
             {         
@@ -2188,7 +2188,7 @@ static void handleAvrcpGetElementAttributesCfm(const AVRCP_GET_ELEMENT_ATTRIBUTE
                     attribute_length = size_attributes - header_end;
 				/*UartSendStr("MUSCI INFO:");*/
 				UartSendData((uint8 *)(lSource+header_end), attribute_length);
-				UartSendStr("\t");
+				UartSendStr(",");
 #ifdef DEBUG_AVRCP    
                 {
                     uint16 j;

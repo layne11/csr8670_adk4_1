@@ -324,7 +324,7 @@ static void handlePbapInitCfm( PBAPC_INIT_CFM_T *pMsg)
 
         /* start initialising the configurable parameters*/
     	InitUserFeatures() ; 
-        UartSendStr("PBAP INIT\r\n");
+        UartSendStr("+PBAPINIT\r\n");
 	}
 	else
 	{ 
@@ -352,7 +352,7 @@ static void handlePbapConnectCfm(PBAPC_CONNECT_CFM_T *pMsg)
         {
             theSink.pbapc_data.pbap_active_link      = pMsg->device_id;
             theSink.pbapc_data.pbap_phone_repository = pMsg->repositories;
-                    
+            UartSendStr("+PBSTA:1\r\n");
             PBAP_DEBUG(("PBAPC_CONNECT_CFM, Set the active Pbap link as [%d]\n", theSink.pbapc_data.pbap_active_link));
         }
         
@@ -424,6 +424,7 @@ static void handlePbapDisconnectInd(PBAPC_DISCONNECT_IND_T *pMsg)
     theSink.pbapc_data.pbap_browsing_start_flag = 0;
     
     theSink.pbap_access = FALSE;
+	UartSendStr("+PBSTA:0\r\n");
 }
 
 static void handlePbapSetPhonebookCfm(PBAPC_SET_PHONEBOOK_CFM_T *pMsg)
@@ -848,12 +849,12 @@ static uint8 printVcardInfo(uint8 *start, uint8 *end)
             }
 
 			/*print vcard name and tel num*/
-			UartSendStr("DIAL:");
+			UartSendStr("+PB:");
 			if(pMetaData->nameLen>0)
 				UartSendData(pMetaData->pName,pMetaData->nameLen);
-			UartSendStr("\t");
+			UartSendStr(",");
 			UartSendData(pMetaData->pTel,pMetaData->telLen);
-			UartSendStr("\n");
+			UartSendStr("\r\n");
 
 			if(pMetaData)
 			{
@@ -882,7 +883,7 @@ static uint8 VcardConvertTel(const uint8* pVcard, const uint16 vcardLen)
 		end = end + strlen(gpbapend);
 		p_VcardDataBuff = (VcardDataBuff_info *)malloc((end - pVcard) + VcardDataBuff->buf_len+2);
 		if(NULL == p_VcardDataBuff){
-			UartSendStr("malloc error \r\n");
+			/*UartSendStr("malloc error \r\n");*/
 			free(VcardDataBuff);
 			return 0;
 		}
@@ -901,8 +902,7 @@ static uint8 VcardConvertTel(const uint8* pVcard, const uint16 vcardLen)
 	}else if(VcardDataBuff && !end && !start){/*有数据缓存，且找不到vCard头和尾*/
 		p_VcardDataBuff = (VcardDataBuff_info *)malloc(vcardLen + VcardDataBuff->buf_len+2);
 		if(NULL == p_VcardDataBuff){
-			UartSendStr("malloc error \r\n");
-			free(VcardDataBuff);
+			/*UartSendStr("malloc error \r\n");*/			free(VcardDataBuff);
 			return 0;
 		}
 		memcpy(p_VcardDataBuff->Buff, VcardDataBuff->Buff, VcardDataBuff->buf_len);
@@ -914,7 +914,7 @@ static uint8 VcardConvertTel(const uint8* pVcard, const uint16 vcardLen)
 		free(VcardDataBuff);
 		p_VcardDataBuff = (VcardDataBuff_info *)malloc(vcardLen + 2);
 		if(NULL == p_VcardDataBuff){
-			UartSendStr("malloc error \r\n");
+			/*UartSendStr("malloc error \r\n");*/
 			free(VcardDataBuff);
 			return 0;
 		}
@@ -928,7 +928,7 @@ static uint8 VcardConvertTel(const uint8* pVcard, const uint16 vcardLen)
 	if(!VcardDataBuff && (!start || !end)){/*没有数据缓存，且找不到vCard头和尾*/
 		p_VcardDataBuff = (VcardDataBuff_info *)malloc(vcardLen + 2);
 		if(NULL == p_VcardDataBuff){
-				UartSendStr("malloc error \r\n");
+				/*UartSendStr("malloc error \r\n");*/
 				return 0;
 		}
 		memcpy(p_VcardDataBuff->Buff, (uint8 *)pVcard, vcardLen);
@@ -960,7 +960,7 @@ static uint8 VcardConvertTel(const uint8* pVcard, const uint16 vcardLen)
 		if((!start || !end) && len > 0){
 			p_VcardDataBuff = (VcardDataBuff_info *)malloc(len+2);
 			if(NULL == p_VcardDataBuff){
-				UartSendStr("malloc error \r\n");
+				/*UartSendStr("malloc error \r\n");*/
 				return 0;
 			}
 			memcpy(p_VcardDataBuff->Buff,pVcard + vcardLen - len, len);
@@ -1088,11 +1088,11 @@ static bool handlePbapDialData(const uint8 *pVcard, const uint16 vcardLen)
     {
         PBAP_DEBUG(("handlePbapDial:dialling from PBAP Phonebook\n"));
 
-		UartSendStr("DIAL:");
+		/*UartSendStr("+PB:");
 		UartSendData(pMetaData->pName,pMetaData->nameLen);
-		UartSendStr("\t");
+		UartSendStr(",");
 		UartSendData(pMetaData->pTel,pMetaData->telLen);
-		UartSendStr("\r\n");
+		UartSendStr("\r\n");*/
         /* Display the name of tel of pbap dial entry.*/
         /* Audio Prompts can be used to play the caller ID */
 #ifdef DEBUG_PBAP

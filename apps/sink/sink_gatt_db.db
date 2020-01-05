@@ -1,6 +1,6 @@
 #include "gatt_server_db.dbi"
 #include "gatt_gap_server_db.dbi"
-/*#include "gatt_tmp_server_db.dbi"*/
+#include "gatt_custom_server_db.dbi"
 #ifdef GATT_BATTERY_SERVER
 #include "gatt_battery_server_db.dbi"
 #endif

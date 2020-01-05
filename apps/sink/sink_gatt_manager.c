@@ -47,7 +47,7 @@ DESCRIPTION
 #define GATT_MANAGER_ERROR(x)
 #endif
 
-
+static gatt_status_t custom_gatt_data_handle(void *msg);
 /*******************************************************************************
 NAME
     handleGattManagerRegistrationCfm
@@ -329,15 +329,18 @@ void sinkGattManagerMsgHandler( Task task, MessageId id, Message message )
         break;
         case GATT_MANAGER_SERVER_ACCESS_IND:
         {
+			gatt_status_t status = gatt_status_success;
             /* No server handle exists for this access request, so just reject. */
-            GattAccessResponse(((GATT_MANAGER_REMOTE_SERVER_INDICATION_IND_T*)message)->cid,
+			status = custom_gatt_data_handle((void *)message);
+
+			GattAccessResponse(((GATT_MANAGER_REMOTE_SERVER_INDICATION_IND_T*)message)->cid,
                                ((GATT_MANAGER_REMOTE_SERVER_INDICATION_IND_T*)message)->handle, 
-                               gatt_status_request_not_supported, 
+                               status/*gatt_status_request_not_supported*/, 
                                0, 
                                NULL);
-            
-            /* Inform the remote device that it has invalid handles, and should start a new discovery */
-            sinkGattServerSendServiceChanged(((GATT_MANAGER_REMOTE_SERVER_INDICATION_IND_T*)message)->cid);
+
+            /* Inform the remote device that it has invalid handles, and should start a new discovery 
+            sinkGattServerSendServiceChanged(((GATT_MANAGER_REMOTE_SERVER_INDICATION_IND_T*)message)->cid);*/
         }
         break;
         case GATT_MANAGER_REMOTE_CLIENT_NOTIFICATION_CFM:
@@ -362,5 +365,36 @@ void sinkGattManagerStartConnection(const typed_bdaddr *addr)
                         TRUE);
 }
 
+static gatt_status_t custom_gatt_data_handle(void *msg)
+{
+	uint16 flags,handle;
+	gatt_status_t status = gatt_status_success;
+	GATT_MANAGER_SERVER_ACCESS_IND_T *pMsg = (GATT_MANAGER_SERVER_ACCESS_IND_T *)msg;
+	flags = pMsg->flags;
+	handle = pMsg->handle;
+	if (flags == (ATT_ACCESS_PERMISSION | ATT_ACCESS_WRITE_COMPLETE | ATT_ACCESS_WRITE))
+    {
+        if (handle == HANDLE_WRITE)
+        {
+			UartSendStr("+GATTDATA:");
+			UartSendData(pMsg->value, pMsg->size_value);
+			UartSendStr("\r\n");
+		}
+        else if (handle == HANDLE_CUSTOM_CCC)
+        {
+		/*write ccc,do nothing*/
+		}
+        else
+        {
+            status = gatt_status_write_not_permitted;
+        }
+    }
+    else if (flags == (ATT_ACCESS_PERMISSION | ATT_ACCESS_READ))
+    {
+		/*no indicate and read,do nothing*/
+    }
+
+	return status;
+}
 
 #endif /* GATT_ENABLED */

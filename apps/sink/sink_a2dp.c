@@ -1882,7 +1882,7 @@ void sinkA2dpInitComplete(const A2DP_INIT_CFM_T *msg)
     if(msg->status == a2dp_success)
     {
         A2DP_DEBUG(("A2DP Init Success\n"));
-        UartSendStr("A2DP INIT\r\n");
+        UartSendStr("+A2DPINIT\r\n");
     }
     else
     {

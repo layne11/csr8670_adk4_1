@@ -221,7 +221,7 @@ RETURNS
     void
 */
 void inquiryHandleResult( CL_DM_INQUIRE_RESULT_T* result );
-
+void inquiryCustomHandleResult( CL_DM_INQUIRE_RESULT_T* result );
 
 /****************************************************************************
 NAME    

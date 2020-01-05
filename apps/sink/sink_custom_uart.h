@@ -10,9 +10,11 @@ typedef struct
 	TaskData task;
 	Task client;
 	Sink uart_sink;
-    unsigned uart_src_need_drop:1;
+    /*unsigned uart_src_need_drop:1;
 	uint8* pUartSrcStart;
 	uint8* pUartSrcEnd;
+	uint8 *fifo_buf;
+	uint16 fifo_len;*/
 }UARTStreamTaskData;
 
 extern UARTStreamTaskData theUARTTask;

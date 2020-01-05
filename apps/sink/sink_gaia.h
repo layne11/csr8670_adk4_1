@@ -175,6 +175,16 @@ void gaia_send_sppdata(uint8 *payload, uint16 payload_length);
 
 /*************************************************************************
 NAME    
+    gaia_send_gattdata
+    
+DESCRIPTION
+    Build and Send a Gaia custom gatt packet
+   
+*/ 
+void gaia_send_gattdata(uint8 *payload, uint16 payload_length);
+
+/*************************************************************************
+NAME    
     gaia_send_response_16
     
 DESCRIPTION

@@ -7,6 +7,7 @@
   <file path="sink_parse.parse" />
   <file path="sink_parse.c" />
   <file path="sink_parse.h" />
+  <file path="gatt_custom_server_uuids.h" />
  </folder>
  <folder name="C Files" >
   <extension name="c" />
@@ -204,6 +205,7 @@
  <folder name="GATT db files" >
   <extension name="db" />
   <file path="sink_gatt_db.db" />
+  <file path="gatt_custom_server_db.dbi" />
  </folder>
  <file path="speaker.mak" />
  <properties currentconfiguration="Speaker_with_TWS" >

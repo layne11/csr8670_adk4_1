@@ -10,6 +10,8 @@
 #include "sink_private.h"
 #include "sink_gaia.h"
 #include "sink_ble_gap.h"
+#include "sink_gatt_db.h"
+#include "sink_gatt_server.h"
 
 #ifdef DEBUG_CUSTOM
 #define CUSTOM_DEBUG(x) UartSendStr(x)
@@ -21,11 +23,12 @@ void custom_app_handle(Task task, MessageId id, Message message);
 
 #define MAX_G_BUFF_SIZE  32
 #define PS_VERSION_NUM                 13
-#define FIRMWARE_VERSION_NUM    "v0.0.2"
+#define FIRMWARE_VERSION_NUM    "0.0.2"
 
 #define PSKEY_BDADDR    0x0001
 #define PSKEY_LOCAL_DEVICE_NAME 0x0108
 #define PS_DEVICE_CLASS 0x0003
+#define PS_UART_BAUDRATE 0x01ea
 
 custom_task theCustomTask;
 /*= {
@@ -118,7 +121,7 @@ void handleGetVersion(Task t)
 	char at_buff[MAX_G_BUFF_SIZE] = "v0.0.1";
 	memset(at_buff, 0, MAX_G_BUFF_SIZE);*/
 		
-	UartSendStr("+GVER:");
+	UartSendStr("+VER:");
 	UartSendStr(FIRMWARE_VERSION_NUM);
 	UartSendStr("\r\n");		
 }
@@ -134,13 +137,13 @@ void handleGetLocalAddr(Task t)
         IntToStr(at_buff+6, local_addr.uap, 2);
         IntToStr(at_buff+8, local_addr.nap, 4);
         at_buff[12] = '\0';
-        UartSendStr("+BDADDR:");
+        UartSendStr("+ADDR:");
         UartSendStr(at_buff);
         UartSendStr("\r\n");
     }
     else
     {
-        UartSendStr("\r\nERROR\r\n");
+        UartSendStr("ERROR\r\n");
     }
      freePanic(at_buff);
     /*getLocalBdAddrFromPs*/
@@ -152,11 +155,11 @@ void handleSetLocalAddr(Task t, const struct SetLocalAddr *addr)
 
     if(4 == PsStore(PSKEY_BDADDR, (uint16 *)&local_addr, 4))
     {
-        UartSendStr("\r\nOK\r\n");
+        UartSendStr("OK\r\n");
     }
     else
     {
-        UartSendStr("\r\nERROR\r\n");
+        UartSendStr("ERROR\r\n");
     }
 }
 void handleGetLocalDevName(Task t)
@@ -180,7 +183,7 @@ void handleGetLocalDevName(Task t)
         }
         at_buff[j] = '\0';
         
-        UartSendStr("+LDNAME:");
+        UartSendStr("+NAME:");
         UartSendStr(at_buff);
         UartSendStr("\r\n");
     }else{
@@ -211,9 +214,9 @@ void handleSetLocalDevName(Task t , const struct SetLocalDevName * Name)
     }
 
     if(PsStore(PSKEY_LOCAL_DEVICE_NAME, retri_buff, i)){
-        UartSendStr("\r\nOK\r\n");
+        UartSendStr("OK\r\n");
     }else{
-        UartSendStr("\r\nERROR\r\n");
+        UartSendStr("ERROR\r\n");
     }
     
     freePanic(retri_buff);
@@ -229,11 +232,11 @@ void handleGetDevClass(Task t)
     {
         IntToStr(at_buff, device_class, 6);
         at_buff[6] = '\0';
-        UartSendStr("+DEVCLASS:");
+        UartSendStr("+CLASS:");
         UartSendStr(at_buff);
         UartSendStr("\r\n");
     }else{
-        UartSendStr("\r\nERROR\r\n");
+        UartSendStr("ERROR\r\n");
     }
 }
 void handleSetDevClass(Task t, const struct SetDevClass *dev_class)
@@ -241,35 +244,47 @@ void handleSetDevClass(Task t, const struct SetDevClass *dev_class)
     uint32 device_class = 0 ;
 
     if(6 != IntToStr((char *)dev_class->cls.data, device_class, 6));
-        UartSendStr("\r\nERROR\r\n");
+        UartSendStr("ERROR\r\n");
     if(2 == PsStore(PS_DEVICE_CLASS, (uint16 *)&device_class, 2))
     {
-        UartSendStr("\r\nOK\r\n");
+        UartSendStr("OK\r\n");
     }else{
-        UartSendStr("\r\nERROR\r\n");
+        UartSendStr("ERROR\r\n");
     }
 }
 void handlePairDev(Task t, const struct PairDev *dut_addr){}
 void handleEnterPair(Task t)
 {
     MessageSend(theCustomTask.clientTask, EventUsrEnterPairing, 0);
-    UartSendStr("\r\nOK\r\n");
+    UartSendStr("OK\r\n");
 }
 void handleSetScanMode(Task t, const struct SetScanMode *mode){}
-void handleGetUartBaudrate(Task t){}
+void handleGetUartBaudrate(Task t)
+{
+    uint32 baudrate = 0 ;
+
+    if(2 == PsFullRetrieve(PS_UART_BAUDRATE, (uint16 *)&baudrate, 2))
+    {
+        UartSendStr("+UART:");
+        UartSendDigit(baudrate);
+        UartSendStr("\r\n");
+    }else{
+        UartSendStr("ERROR\r\n");
+    }
+}
 void handleSetUartBaudrate(Task t, const struct SetUartBaudrate *baudrate){}
 void handleDiscoverNearDev(Task t, const struct DiscoverNearDev *mode)
 {
 	if(mode->start){
 		if(theSink.inquiry.action == rssi_none){
 			MessageSend(theCustomTask.clientTask, EventUsrRssiPair, 0);
-			UartSendStr("\r\nOK\r\n");
+			UartSendStr("OK\r\n");
 		}else{
-			UartSendStr("\r\nERROR\r\n");
+			UartSendStr("ERROR\r\n");
 		}
 	}else{
 		inquiryStop();
-		UartSendStr("\r\nOK\r\n");
+		UartSendStr("OK\r\n");
 	}
 }
 
@@ -288,19 +303,26 @@ void handleHfpConn(Task t, const struct HfpConn *dut_addr)
 void handleHfpDisc(Task t)
 {
 	HfpSlcDisconnectRequest(hfp_primary_link);
-	UartSendStr("\r\nOK\r\n");
+	UartSendStr("OK\r\n");
 }
-void handleHfpGetStatus(Task t){}
+void handleHfpGetStatus(Task t)
+{
+	sinkState sta = stateManagerGetState();
+
+	UartSendStr("+HFSTA:");
+	UartSendDigit(sta);
+	UartSendStr("\r\n");
+}
 void handleHfpMute(Task t, const struct HfpMute *mute)
 {
 	if(0 == mute->mute){
 		MessageSend(theCustomTask.clientTask, EventUsrMicrophoneMuteOff, 0);
-		UartSendStr("MUTE\r\n");
+		UartSendStr("+MUTE:1\r\n");
 	}else if(1 == mute->mute){
 		MessageSend(theCustomTask.clientTask, EventUsrMicrophoneMuteOn, 0);
-		UartSendStr("UNMUTE\r\n");
+		UartSendStr("+MUTE:0\r\n");
 	}else{
-		UartSendStr("\r\nERROR\r\n");
+		UartSendStr("ERROR\r\n");
 	}
 
 }
@@ -320,16 +342,16 @@ void handleHfpDial(Task t, const struct HfpDial *num)
         { 
             HfpDialNumberRequest(hfp_primary_link, num->num.length, phone_number_key);  
         }else{
-            UartSendStr("\r\nERROR\r\n");
+            UartSendStr("ERROR\r\n");
         }
     }
-    UartSendStr("\r\nOK\r\n");
+    UartSendStr("OK\r\n");
 }
 void handleHfpAnswer(Task t)
 {
     MessageSend(theCustomTask.clientTask, EventUsrAnswer, 0);
     
-    UartSendStr("\r\nOK\r\n");
+    UartSendStr("OK\r\n");
 }
 void handleHfpHangUp(Task t)
 {
@@ -342,37 +364,69 @@ void handleHfpHangUp(Task t)
     }else if(deviceIncomingCallEstablish == m_state || deviceActiveCallSCO == m_state){
         MessageSend(theCustomTask.clientTask, EventUsrCancelEnd, 0);
     }
-    UartSendStr("\r\nOK\r\n");
+    UartSendStr("OK\r\n");
 }
 void handleThreeWayReleaseAllHeld(Task t)
 {
     MessageSend(theCustomTask.clientTask, EventUsrThreeWayReleaseAllHeld, 0);
     
-    UartSendStr("\r\nOK\r\n");
+    UartSendStr("OK\r\n");
 }
 
 void handleThreeWayAddHeldTo3Way(Task t)
 {
     MessageSend(theCustomTask.clientTask, EventUsrThreeWayAddHeldTo3Way, 0);
     
-    UartSendStr("\r\nOK\r\n");
+    UartSendStr("OK\r\n");
 }
 
 void handleThreeWayAcceptWaitingHoldActive(Task t)
 {
     MessageSend(theCustomTask.clientTask, EventUsrThreeWayAcceptWaitingHoldActive, 0);
     
-    UartSendStr("\r\nOK\r\n");
+    UartSendStr("OK\r\n");
 }
 
 void handleThreeWayAcceptWaitingReleaseActive(Task t)
 {
     MessageSend(theCustomTask.clientTask, EventUsrThreeWayAcceptWaitingReleaseActive, 0);
     
-    UartSendStr("\r\nOK\r\n");
+    UartSendStr("OK\r\n");
 }
 /*a2dp at cmd functions*/
-void handleA2dpGetStatus(Task t){}
+void handleA2dpGetStatus(Task t)
+{
+	a2dp_signalling_state sta;
+
+	if(theSink.a2dp_link_data){
+		UartSendStr("OK\r\n");
+	}else{
+		UartSendStr("ERRORr\n");
+		return;
+	}
+	sta = A2dpSignallingGetState(0);
+
+	UartSendStr("+A2DPSTA:");
+	UartSendDigit(sta);
+	UartSendStr("\r\n");
+}
+
+void handleA2dpGetMediaStatus(Task t)
+{
+	a2dp_stream_state sta;
+
+	if(theSink.a2dp_link_data){
+		UartSendStr("OK\r\n");
+	}else{
+		UartSendStr("ERRORr\n");
+		return;
+	}
+	sta = A2dpMediaGetState(0,0);
+
+	UartSendStr("+A2DPMDSTA:");
+	UartSendDigit(sta);
+	UartSendStr("\r\n");
+}
 void handleA2dpConn(Task t, const struct A2dpConn *dut_addr)
 {
     bdaddr m_addr;
@@ -385,48 +439,59 @@ void handleA2dpDisc(Task t)
 }
 
 /*avrcp at cmd functions*/
-void handleAvrcpGetStatus(Task t){}
+void handleAvrcpGetStatus(Task t)
+{
+	if(theSink.avrcp_link_data)
+		UartSendStr("OK\r\n");
+	else
+		UartSendStr("ERRORr\n");
+	
+	if(theSink.avrcp_link_data->connected)
+		UartSendStr("+AVRCPSTA:1\r\n");
+	else
+		UartSendStr("+AVRCPSTA:0\r\n");
+}
 void handleAvrcpNext(Task t)
 {
 	MessageSend(theCustomTask.clientTask, EventUsrAvrcpSkipForward, 0);
     
-    UartSendStr("\r\nOK\r\n");
+    UartSendStr("OK\r\n");
 }
 void handleAvrcpPrev(Task t)
 {
 	MessageSend(theCustomTask.clientTask, EventUsrAvrcpSkipBackward, 0);
     
-    UartSendStr("\r\nOK\r\n");
+    UartSendStr("OK\r\n");
 }
 void handleAvrcpStop(Task t)
 {
 	MessageSend(theCustomTask.clientTask, EventUsrAvrcpStop, 0);
     
-    UartSendStr("\r\nOK\r\n");
+    UartSendStr("OK\r\n");
 }
 void handleAvrcpPlay(Task t)
 {
 	MessageSend(theCustomTask.clientTask, EventUsrAvrcpPlay, 0);
     
-    UartSendStr("\r\nOK\r\n");
+    UartSendStr("OK\r\n");
 }
 void handleAvrcpPause(Task t)
 {
 	MessageSend(theCustomTask.clientTask, EventUsrAvrcpPause, 0);
     
-    UartSendStr("\r\nOK\r\n");
+    UartSendStr("OK\r\n");
 }
 void handleAvrcpVolUp(Task t)
 {
 	MessageSend(theCustomTask.clientTask, EventUsrMainOutVolumeUp, 0);
     
-    UartSendStr("\r\nOK\r\n");
+    UartSendStr("OK\r\n");
 }
 void handleAvrcpVolDown(Task t)
 {
 	MessageSend(theCustomTask.clientTask, EventUsrMainOutVolumeDown, 0);
     
-    UartSendStr("\r\nOK\r\n");
+    UartSendStr("OK\r\n");
 }
 
 /*pbap at cmd functions*/
@@ -448,15 +513,15 @@ void handlePbapSetType(Task t, const struct PbapSetType *Type)
 		theSink.pbapc_data.pbap_active_pb = Type->type;
 		theSink.pbapc_data.pbap_phone_repository = 1;
 		/*MessageSend(theCustomTask.clientTask, EventUsrPbapSetPhonebook, 0);*/
-		UartSendStr("\r\nOK\r\n");
+		UartSendStr("OK\r\n");
 	}else{
-		UartSendStr("\r\nERROR\r\n");
+		UartSendStr("ERROR\r\n");
 	}
 }
 void handlePbapGetPhoneBook(Task t)
 {
 	MessageSend(theCustomTask.clientTask, EventUsrPbapDownloadPhonebook, 0);
-	UartSendStr("\r\nOK\r\n");
+	UartSendStr("OK\r\n");
 }
 
 /*map at cmd functions*/
@@ -480,27 +545,48 @@ void handleSppSendData(Task t, const struct SppSendData *send_data)
 {
 	if(stateManagerGetState() > deviceConnDiscoverable){
 		gaia_send_sppdata((uint8 *)send_data->data.data, send_data->data.length);
-		UartSendStr("\r\nOK\r\n");
+		UartSendStr("OK\r\n");
 	}else{
-		UartSendStr("\r\nERROR\r\n");
+		UartSendStr("ERROR\r\n");
 	}
 }
 
-
 /*gatt at cmd functions*/
-void handleGattDisc(Task t){}
-void handleGattGetStatus(Task t){}
-void handleGattSendData(Task t)
+void handleGattGetStatus(Task t)
 {
-	
+
+}
+void handleGattDisc(Task t)
+{
+	gattServerDisconnect(theSink.rundata->ble.gatt[0].cid);
+
+	UartSendStr("OK\r\n");
 }
 void handleGattConn(Task t, const struct GattConn *dut_addr)
 {
-	/*sink_custom_ble_adv();*/
-	MessageSend(theCustomTask.clientTask, EventUsrBleStartBonding, 0);
-
-	UartSendStr("\r\nOK\r\n");
+	
 }
+void handleGattAdv(Task t, const struct GattAdv *enable)
+{
+	/*sink_custom_ble_adv();*/
+	if(enable->enable)
+		MessageSend(theCustomTask.clientTask, EventUsrBleStartBonding, 0);
+	else
+		MessageSend(theCustomTask.clientTask, EventSysBleBondablePairingTimeout, 0);
 
-
+	UartSendStr("OK\r\n");    
+}
+void handleGattSendData(Task t, const struct GattSendData *send_data)
+{
+	uint16 index = 0;
+	uint16 custom_cid = theSink.rundata->ble.gatt[index].cid;
+	if(stateManagerGetState() > deviceConnDiscoverable){
+		GattNotificationRequest(sinkGetBleTask(), custom_cid, HANDLE_READ,\
+												send_data->data.length, send_data->data.data);
+		/*gaia_send_gattdata((uint8 *)send_data->data.data, send_data->data.length);*/
+		UartSendStr("OK\r\n");
+	}else{
+		UartSendStr("ERROR\r\n");
+	}
+}
 
